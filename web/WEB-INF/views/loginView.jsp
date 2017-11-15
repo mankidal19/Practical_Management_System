@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        
         </head>
         <body class="hold-transition login-page">
             <h1>Login Page</h1>
