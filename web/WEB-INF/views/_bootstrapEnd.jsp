@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-fsfsf
+
 <!-- jQuery 3 -->
 <script src="${pageContext.request.contextPath}/Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
