@@ -15,14 +15,14 @@ public class UserAccount {
     
    private String userName;
    private String password;
-   private String gender;
+   private String userGender;
 
     public String getGender() {
-        return gender;
+        return userGender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGender(String userGender) {
+        this.userGender = userGender;
     }
     
  
@@ -46,4 +46,6 @@ public class UserAccount {
    public void setPassword(String password) {
        this.password = password;
    }
+
+    
 }
