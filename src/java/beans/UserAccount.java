@@ -15,6 +15,15 @@ public class UserAccount {
     
    private String userName;
    private String password;
+   private String userGender;
+
+    public String getGender() {
+        return userGender;
+    }
+
+    public void setGender(String userGender) {
+        this.userGender = userGender;
+    }
     
  
    public UserAccount() {
@@ -37,4 +46,6 @@ public class UserAccount {
    public void setPassword(String password) {
        this.password = password;
    }
+
+    
 }
