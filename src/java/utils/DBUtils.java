@@ -24,20 +24,20 @@ public class DBUtils {
     public static UserAccount findUser(Connection conn, //
             String userName, String password) throws SQLException {
  
-        String sql = "Select a.User_Name, a.Password, a.Gender from User_Account a " //
-                + " where a.User_Name = ? and a.password= ?";
+        String sql = "SELECT admin_id,admin_pw  FROM admin WHERE admin_id=? AND admin_pw=?"
+                + "UNION SELECT std_id,std_pw FROM student WHERE std_id=? AND std_pw=?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
         pstm.setString(2, password);
+        pstm.setString(3, userName);
+        pstm.setString(4, password);
         ResultSet rs = pstm.executeQuery();
  
         if (rs.next()) {
-            String gender = rs.getString("Gender");
             UserAccount user = new UserAccount();
             user.setUserName(userName);
             user.setPassword(password);
-            user.setGender(gender);
             return user;
         }
         return null;
@@ -55,11 +55,9 @@ public class DBUtils {
  
         if (rs.next()) {
             String password = rs.getString("Password");
-            String gender = rs.getString("Gender");
             UserAccount user = new UserAccount();
             user.setUserName(userName);
             user.setPassword(password);
-            user.setGender(gender);
             return user;
         }
         return null;
