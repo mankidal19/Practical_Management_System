@@ -16,5 +16,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/dist/css/AdminLTE.min.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/plugins/iCheck/square/blue.css">
