@@ -10,105 +10,107 @@ package beans;
  * @author NURUL AIMAN
  */
 public class Student {
-    private String studentID;
-    private String studentPw;
-    private int studentLevel;
-    private String studentName;
-    private char studentGender;
-    private String studentContactNo;
-    private String studentEmail;
-    private String studentMatric;
-    private String studentCourse;
-    private float studentCGPA;
-    private char studentAppStatus;
+    private String std_id;
+    private String std_pw;
+    private int std_level;
+    private String std_name;
+    private char std_gender;
+    private String std_contact;
+    private String std_email;
+    private String std_matric;
+    private String std_course;
+    private float std_cgpa;
+    private char std_status;
 
-    public String getStudentID() {
-        return studentID;
+    public String getStd_id() {
+        return std_id;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setStd_id(String std_id) {
+        this.std_id = std_id;
     }
 
-    public String getStudentPw() {
-        return studentPw;
+    public String getStd_pw() {
+        return std_pw;
     }
 
-    public void setStudentPw(String studentPw) {
-        this.studentPw = studentPw;
+    public void setStd_pw(String std_pw) {
+        this.std_pw = std_pw;
     }
 
-    public int getStudentLevel() {
-        return studentLevel;
+    public int getStd_level() {
+        return std_level;
     }
 
-    public void setStudentLevel(int studentLevel) {
-        this.studentLevel = studentLevel;
+    public void setStd_level(int std_level) {
+        this.std_level = std_level;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getStd_name() {
+        return std_name;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStd_name(String std_name) {
+        this.std_name = std_name;
     }
 
-    public char getStudentGender() {
-        return studentGender;
+    public char getStd_gender() {
+        return std_gender;
     }
 
-    public void setStudentGender(char studentGender) {
-        this.studentGender = studentGender;
+    public void setStd_gender(char std_gender) {
+        this.std_gender = std_gender;
     }
 
-    public String getStudentContactNo() {
-        return studentContactNo;
+    public String getStd_contact() {
+        return std_contact;
     }
 
-    public void setStudentContactNo(String studentContactNo) {
-        this.studentContactNo = studentContactNo;
+    public void setStd_contact(String std_contact) {
+        this.std_contact = std_contact;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public String getStd_email() {
+        return std_email;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public void setStd_email(String std_email) {
+        this.std_email = std_email;
     }
 
-    public String getStudentMatric() {
-        return studentMatric;
+    public String getStd_matric() {
+        return std_matric;
     }
 
-    public void setStudentMatric(String studentMatric) {
-        this.studentMatric = studentMatric;
+    public void setStd_matric(String std_matric) {
+        this.std_matric = std_matric;
     }
 
-    public String getStudentCourse() {
-        return studentCourse;
+    public String getStd_course() {
+        return std_course;
     }
 
-    public void setStudentCourse(String studentCourse) {
-        this.studentCourse = studentCourse;
+    public void setStd_course(String std_course) {
+        this.std_course = std_course;
     }
 
-    public float getStudentCGPA() {
-        return studentCGPA;
+    public float getStd_cgpa() {
+        return std_cgpa;
     }
 
-    public void setStudentCGPA(float studentCGPA) {
-        this.studentCGPA = studentCGPA;
+    public void setStd_cgpa(float std_cgpa) {
+        this.std_cgpa = std_cgpa;
     }
 
-    public char getStudentAppStatus() {
-        return studentAppStatus;
+    public char getStd_status() {
+        return std_status;
     }
 
-    public void setStudentAppStatus(char studentAppStatus) {
-        this.studentAppStatus = studentAppStatus;
+    public void setStd_status(char std_status) {
+        this.std_status = std_status;
     }
+
+
    
 }
 
