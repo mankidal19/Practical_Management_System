@@ -9,7 +9,7 @@ package beans;
  *
  * @author NURUL AIMAN
  */
-public class Coordinator {
+public class Coordinator  extends UserAccount{
     private String coordinatorId;
     private String coordinatorPassword;
     private int coordinatorLevel;

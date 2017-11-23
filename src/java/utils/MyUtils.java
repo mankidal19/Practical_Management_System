@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
  
-import beans.UserAccount;
+import beans.*;
  
 public class MyUtils {
  
@@ -42,10 +42,46 @@ public class MyUtils {
         // On the JSP can access via ${loginedUser}
         session.setAttribute("loginedUser", loginedUser);
     }
+    
+    // Store user student info in Session.
+    public static void storeLoginedUser(HttpSession session, Student loginedUser) {
+        // On the JSP can access via ${loginedUser}
+        session.setAttribute("loginedUser", loginedUser);
+    }
+    
+    // Store user coordinator info in Session.
+    public static void storeLoginedUser(HttpSession session, Coordinator loginedUser) {
+        // On the JSP can access via ${loginedUser}
+        session.setAttribute("loginedUser", loginedUser);
+    }
+    
+    // Store user admin info in Session.
+    public static void storeLoginedUser(HttpSession session, Admin loginedUser) {
+        // On the JSP can access via ${loginedUser}
+        session.setAttribute("loginedUser", loginedUser);
+    }
  
     // Get the user information stored in the session.
     public static UserAccount getLoginedUser(HttpSession session) {
         UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
+        return loginedUser;
+    }
+    
+    // Get the user student information stored in the session.
+    public static Student getLoginedStudent(HttpSession session) {
+        Student loginedUser = (Student) session.getAttribute("loginedUser");
+        return loginedUser;
+    }
+    
+    // Get the user coordinator information stored in the session.
+    public static Coordinator getLoginedCoordinator(HttpSession session) {
+        Coordinator loginedUser = (Coordinator) session.getAttribute("loginedUser");
+        return loginedUser;
+    }
+    
+    // Get the user Admin information stored in the session.
+    public static Admin getLoginedAdmin(HttpSession session) {
+        Admin loginedUser = (Admin) session.getAttribute("loginedUser");
         return loginedUser;
     }
  

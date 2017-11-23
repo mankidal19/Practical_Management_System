@@ -9,7 +9,7 @@ package beans;
  *
  * @author NURUL AIMAN
  */
-public class Admin {
+public class Admin  extends UserAccount{
     private String adminId;
     private String adminPassword;
     private int adminLevel;

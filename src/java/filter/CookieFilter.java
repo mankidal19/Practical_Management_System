@@ -23,7 +23,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
  
-import beans.UserAccount;
+import beans.*;
 import utils.DBUtils;
 import utils.MyUtils;
  
@@ -50,6 +50,7 @@ public class CookieFilter implements Filter {
         HttpSession session = req.getSession();
  
         UserAccount userInSession = MyUtils.getLoginedUser(session);
+        
         // 
         if (userInSession != null) {
             session.setAttribute("COOKIE_CHECKED", "CHECKED");
@@ -65,8 +66,32 @@ public class CookieFilter implements Filter {
         if (checked == null && conn != null) {
             String userName = MyUtils.getUserNameInCookie(req);
             try {
-                UserAccount user = DBUtils.findUser(conn, userName);
-                MyUtils.storeLoginedUser(session, user);
+                //UserAccount user = DBUtils.findUser(conn, userName);
+                
+                Student userStudent = DBUtils.findStudent(conn, userName);
+                Coordinator userCoordinator = DBUtils.findCoordinator(conn, userName);
+                Admin userAdmin = DBUtils.findAdmin(conn, userName);
+                
+                if(userStudent!=null){
+                    MyUtils.storeLoginedUser(session, userStudent);
+                
+                }
+                
+                else if(userCoordinator!=null){
+                    MyUtils.storeLoginedUser(session, userCoordinator);
+                
+                }
+                
+                else if(userAdmin!=null){
+                    MyUtils.storeLoginedUser(session, userAdmin);
+                
+                }
+                
+                
+                
+                
+                
+                //MyUtils.storeLoginedUser(session, user);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
