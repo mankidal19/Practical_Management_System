@@ -309,5 +309,33 @@ public class DBUtils {
 
         pstm.executeUpdate();
     }
+    
+     public static List<Coordinator> queryCoordinator(Connection conn) throws SQLException {
+        String sql = "Select * from Coordinator ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        List<Coordinator> list = new ArrayList<Coordinator>();
+        while (rs.next()) {
+            //String code = rs.getString("Code");
+            //String name = rs.getString("Name");
+            //float price = rs.getFloat("Price");
+            
+            int level = rs.getInt("co_level");
+            String userName = rs.getString("co_id");
+            String name = rs.getString("co_name");
+            String password = rs.getString("co_pw");
+            String department = rs.getString("co_department");
+            String position = rs.getString("co_position");
+            
+           
+            Coordinator user = new Coordinator(userName, password, level, name, department, position);
+            
+            list.add(user);
+        }
+        return list;
+    }
+    
 
 }
