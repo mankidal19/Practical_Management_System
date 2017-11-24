@@ -323,6 +323,14 @@ tr:nth-child(even) {
     <th>Application Status</th>
     <td></td>
   </tr>
+  <tr>
+    <th>Coordinator ID</th>
+    <td></td>
+  </tr>
+   <tr>
+    <th>Application ID</th>
+    <td></td>
+  </tr>
     <tr>
     <td rowspan="2"></td>
     <td><input type="submit" value="Update" name="Update" /></td>
