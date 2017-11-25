@@ -3,8 +3,11 @@
     Created on : Nov 23, 2017, 1:00:16 AM
     Author     : Nurfarahin Nadhirah
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="beans.*"%>
 <!DOCTYPE html>
 <%-- 
     Document   : stdDashboard
@@ -49,7 +52,25 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 </style>
-
+<% 
+    
+    Student loginedUser = (Student) session.getAttribute("loginedUser");
+    out.print(loginedUser.getStd_name());
+    
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    
+    try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/astf", "guest", "123");
+        String view = "SELECT * FROM student";
+        Statement stmt = conn.createStatement();
+        rs = stmt.executeQuery(view);
+    }
+    catch(Exception e){
+        e.printStackTrace();
+    }
+    %>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -168,7 +189,7 @@ tr:nth-child(even) {
                                                 <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="post">
+                                            <form action="${pageContext.request.contextPath}/login" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
