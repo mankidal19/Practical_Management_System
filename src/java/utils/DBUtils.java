@@ -125,12 +125,12 @@ public class DBUtils {
             String course = rs.getString("std_course");
             float cgpa = rs.getFloat("std_cgpa");
             String status = rs.getString("std_status");
-            String coordinatorId = rs.getString("co_id");
-            String appId = rs.getString("app_id");
+            String co = rs.getString("co_id");
+            String app = rs.getString("app_id");
 
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, appId);
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;
@@ -211,6 +211,43 @@ public class DBUtils {
             list.add(product);
         }
         return list;
+    }
+    
+    public static Student displayStudent(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM Student";
+        
+        PreparedStatement pstm = conn.prepareCall(sql);
+        ResultSet rs = pstm.executeQuery();
+        
+        while (rs.next()){
+            String id = rs.getString("std_id");
+            
+            String name = rs.getString("std_name");
+            
+            String gender = rs.getString("std_gender");
+            String contact = rs.getString("std_contact");
+            String email = rs.getString("std_email");
+            String matric = rs.getString("std_matric");
+            String course = rs.getString("std_course");
+            float cgpa = rs.getFloat("std_cgpa");
+            String status = rs.getString("std_status");
+            String co = rs.getString("co_id");
+            String app = rs.getString("app_id");
+            
+            Student student = new Student();
+            student.setStd_id(id);
+            student.setStd_matric(matric);
+            student.setStd_name(name);
+            student.setStd_contact(contact);
+            student.setStd_email(email);
+            student.setStd_gender(gender);
+            student.setStd_course(course);
+            student.setStd_cgpa(cgpa);
+            student.setStd_status(status);
+            student.setCo_id(co);
+            student.setApp_id(app);
+        }
+        return null;
     }
     
     public static Admin findAdmin(Connection conn, String userName, String password) throws SQLException {
@@ -340,6 +377,5 @@ public class DBUtils {
         }
         return list;
     }
-    
 
 }
