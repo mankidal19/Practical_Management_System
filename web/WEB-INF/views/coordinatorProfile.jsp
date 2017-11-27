@@ -212,7 +212,7 @@ tr:nth-child(even) {
                             </a>
                             <ul class="treeview-menu">
                                 <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Students Application List</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> Students Application</a></li>
                             </ul>
                         </li>
 
