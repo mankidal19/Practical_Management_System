@@ -251,6 +251,33 @@ public class DBUtils {
         return student;
     }
     
+    public static Coordinator displayCoordinator(Connection conn, String userName) throws SQLException {
+        String sql = "SELECT * FROM Coordinator"+"where co_id=?";
+        
+        PreparedStatement pstm = conn.prepareCall(sql);
+        pstm.setString(1, userName);
+        
+        ResultSet rs = pstm.executeQuery();
+        Coordinator coordinator = new Coordinator();
+        
+        while (rs.next()){
+            String id = rs.getString("co_id");           
+            String name = rs.getString("co_name");           
+            String department = rs.getString("co_department");
+            String position = rs.getString("co_position");
+            
+            
+            
+            coordinator.setCoordinatorId(id);
+            coordinator.setCoordinatorName(name);
+            coordinator.setCoordinatorDepartment(department);
+            coordinator.setCoordinatorPosition(position);
+            
+
+        }
+        return coordinator;
+    }
+    
     public static Admin findAdmin(Connection conn, String userName, String password) throws SQLException {
 
         String sql = "Select * from Admin "//

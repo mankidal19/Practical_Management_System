@@ -1,20 +1,50 @@
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Coordinator Dashboard</title>
-        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
-        </head>
-        <body class="hold-transition skin-purple sidebar-mini">
-            <!-- Site wrapper -->
-            <div class="wrapper">
+        <title>Coordinator Profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        
+        
+        
+        <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
 
-                <header class="main-header">
-                    <!-- Logo -->
-                    <a href="${pageContext.request.contextPath}/" class="logo">
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+    </head>
+    <body class="hold-transition skin-purple sidebar-mini">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -91,7 +121,7 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs">Cordinator</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -99,7 +129,7 @@
                                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Alexander Pierce - Web Developer
+                                            Name - Software Engineering
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -149,7 +179,7 @@
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Coordinator</p>
+                            <p>Student</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -168,7 +198,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="studentMainView.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -230,13 +260,12 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Blank page
-                        <small>it all starts here</small>
+                        User Profile
+                        <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Examples</a></li>
-                        <li class="active">Blank page</li>
+                        <li><a href="#">Profile</a></li>
                     </ol>
                 </section>
 
@@ -246,7 +275,7 @@
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Coordinator Information</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -256,13 +285,36 @@
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
+                        <div class="box-body">                   
+                        <table>
+                            <c:forEach items="${coordinatorDisplay}" var="coordinator">
+  <tr>
+    <th>Coordinator ID</th>
+    <td>${displayCoordinator.co_id}</td>
+  </tr>
+  <tr>
+    <th>Coordinator Name</th>
+    <td>${displayCoordinator.co_name}</td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <td><input type="text" name="position" value="" size="25%"/>${displayCoordinator.co_position}</td>
+  </tr>
+  <tr>
+    <th>Department</th>
+    <td><input type="text" name="department" value="" size="25%"/>${displayCoordinator.co_department}</td>
+  </tr>
+    
+
+    <tr>
+    <td rowspan="2"></td>
+    <td><input type="submit" value="Update" name="Update" /></td>
+  </tr>
+</table>
+  </c:forEach>         
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
+
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -284,7 +336,27 @@
 
             <!-- ./wrapper -->
 
+            <!-- jQuery 3 -->
+            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- iCheck -->
+            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
+            <!-- DataTables -->
+            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="Source_Files/dist/js/adminlte.min.js"></script>
+
+            <script>
+                $(document).ready(function(){
+                    $('.sidebar-menu').tree();
+                });
+            </script>
     </body>
 </html>
