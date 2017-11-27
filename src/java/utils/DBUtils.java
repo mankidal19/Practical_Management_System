@@ -213,17 +213,17 @@ public class DBUtils {
         return list;
     }
     
-    public static Student displayStudent(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM Student";
+    public static Student displayStudent(Connection conn, String userName) throws SQLException {
+        String sql = "SELECT * FROM Student"+"where std_id=?";
         
         PreparedStatement pstm = conn.prepareCall(sql);
-        ResultSet rs = pstm.executeQuery();
+        pstm.setString(1, userName);
         
+        ResultSet rs = pstm.executeQuery();
+        Student student = new Student();
         while (rs.next()){
-            String id = rs.getString("std_id");
-            
-            String name = rs.getString("std_name");
-            
+            String id = rs.getString("std_id");           
+            String name = rs.getString("std_name");           
             String gender = rs.getString("std_gender");
             String contact = rs.getString("std_contact");
             String email = rs.getString("std_email");
@@ -234,7 +234,7 @@ public class DBUtils {
             String co = rs.getString("co_id");
             String app = rs.getString("app_id");
             
-            Student student = new Student();
+            
             student.setStd_id(id);
             student.setStd_matric(matric);
             student.setStd_name(name);
@@ -246,8 +246,9 @@ public class DBUtils {
             student.setStd_status(status);
             student.setCo_id(co);
             student.setApp_id(app);
+
         }
-        return null;
+        return student;
     }
     
     public static Admin findAdmin(Connection conn, String userName, String password) throws SQLException {
