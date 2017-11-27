@@ -142,7 +142,7 @@ and open the template in the editor.
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/ViewStudent" method="get">
+                                            <form action="${pageContext.request.contextPath}/studentDisplay" method="post">
                                                 <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">

@@ -4,10 +4,7 @@
     Author     : Nurfarahin Nadhirah
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.io.*"%>
-<%@ page import="java.util.*"%>
-<%@ page import="beans.*"%>
+
 <!DOCTYPE html>
 <%-- 
     Document   : stdDashboard
@@ -52,25 +49,6 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 </style>
-<% 
-    
-    Student loginedUser = (Student) session.getAttribute("loginedUser");
-    out.print(loginedUser.getStd_name());
-    
-    ResultSet rs = null;
-    ResultSet rs1 = null;
-    
-    try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/astf", "guest", "123");
-        String view = "SELECT * FROM student";
-        Statement stmt = conn.createStatement();
-        rs = stmt.executeQuery(view);
-    }
-    catch(Exception e){
-        e.printStackTrace();
-    }
-    %>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -245,9 +223,10 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+
                             </ul>
                         </li>
 
@@ -308,55 +287,46 @@ tr:nth-child(even) {
                         </div>
                         <div class="box-body">                   
                         <table>
+                            <c:forEach items="${studentDisplay}" var="student">
   <tr>
     <th>Student ID</th>
-    <td></td>
+    <td>${displayStudent.std_id}</td>
   </tr>
   <tr>
     <th>Matric Number</th>
-    <td></td>
+    <td>${displayStudent.std_matric}</td>
   </tr>
   <tr>
     <th>Contact Number</th>
-    <td><input type="text" name="contact" value="" size="25%"/></td>
+    <td><input type="text" name="contact" value="" size="25%"/>${displayStudent.std_contact}</td>
   </tr>
   <tr>
     <th>Contact Email</th>
-    <td><input type="mail" name="email" value="" size="25%" /></td>
+    <td><input type="mail" name="email" value="" size="25%" />${displayStudent.std_email}</td>
   </tr>
   <tr>
     <th>Student Name</th>
-    <td></td>
+    <td>${displayStudent.std_name}</td>
   </tr>
   <tr>
     <th>Gender</th>
-    <td></td>
+    <td>${displayStudent.std_gender}</td>
   </tr>
   <tr>
     <th>CGPA</th>
-    <td></td>
+    <td>${displayStudent.std_cgpa}</td>
   </tr>
     <tr>
     <th>Course</th>
-    <td></td>
+    <td>${displayStudent.std_course}</td>
   </tr>
-   <tr>
-    <th>Application Status</th>
-    <td></td>
-  </tr>
-  <tr>
-    <th>Coordinator ID</th>
-    <td></td>
-  </tr>
-   <tr>
-    <th>Application ID</th>
-    <td></td>
-  </tr>
+
     <tr>
     <td rowspan="2"></td>
     <td><input type="submit" value="Update" name="Update" /></td>
   </tr>
 </table>
+  </c:forEach>         
                         </div>
                         <!-- /.box-body -->
 
@@ -405,4 +375,3 @@ tr:nth-child(even) {
             </script>
     </body>
 </html>
-

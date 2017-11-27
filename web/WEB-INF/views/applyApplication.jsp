@@ -24,7 +24,67 @@
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        
+        <script type="text/javascript">
+function validateForm()
+{
+var x=document.forms["myForm"]["cname"].value;
+if (x==null || x=="")
+{
+alert("Company name must be filled out!");
+document.myForm.cname.focus();
+return false;
+}
+var a=document.forms["myForm"]["caddress"].value;
+if (a==null || a=="")
+{
+alert("Company address must be filled out!");
+document.myForm.caddress.focus();
+return false;
+}
+
+var c=document.forms["myForm"]["ccontact"].value;
+if (c==null || c=="")
+{
+alert("Company contact number must be filled out!");
+document.myForm.ccontact.focus();
+return false;
+}
+var s=document.forms["myForm"]["sname"].value;
+if (s==null || s=="")
+{
+alert("Student name must be filled out!");
+document.myForm.sname.focus();
+return false;
+}
+
+var e=document.forms["myForm"]["semail"].value;
+var atpos=e.indexOf("@");
+var dotpos=e.lastIndexOf(".");
+
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
+{
+alert("Enter a valid e-mail address!");
+document.myForm.semail.focus();
+return false;
+}
+
+var l=document.forms["myForm"]["job level"].value;
+if (l==null || l=="")
+{
+alert("Please choose one!");
+document.myForm.joblevel.focus();
+return false;
+}
+var t=document.forms["myForm"]["jobtitle"].value;
+if (t==null || t=="")
+{
+alert("Job title must be filled out");
+document.myForm.jobtitle.focus();
+return false;
+}
+}
+
+</script>
         
         
         <style>
@@ -218,7 +278,7 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="applyApplication.jsp"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="./applyApplicationServlet"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
@@ -258,8 +318,9 @@ tr:nth-child(even) {
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home </a></li>
+                        <li><a href="#">Practical Training</a></li>
+                        <li><a href="#">Apply New Application</a></li>
                     </ol>
                 </section>
 
@@ -280,34 +341,34 @@ tr:nth-child(even) {
                             </div>
                         </div>
                         <div class="box-body">                   
-                            <form name="applyNew" action="./applyApplicationServlet" method="post">
+                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
                                 <fieldset>
-                                    <legend><b>Form Application</b></legend>
+                                    
                                 <table cellpadding="5">
                                 <tr>
                                     <th>Company Name</th>
-                                    <td><input type="text" name="c_name" value="" size="25%"/></td>
+                                    <td><input type="text" name="cname" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Company Address</th>
-                                    <td><input type="textarea" name="address" value="" size="25%"/></td>
+                                    <td><input type="textarea" name="caddress" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Company Contact Number</th>
-                                    <td><input type="text" name="contact" value="" size="25%"/></td>
+                                    <td><input type="text" name="ccontact" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Student Name</th>
-                                    <td><input type="text" name="s_name" value="" size="25%"/></td>
+                                    <td><input type="text" name="sname" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Student Email</th>
-                                    <td><input type="mail" name="email" value="" size="25%" /></td>
+                                    <td><input type="mail" name="semail" value="" size="25%" /></td>
                                 </tr>
 
                                 <tr>
                                     <th>Job Level</th>
-                                    <td><select name="level" disabled="disabled">
+                                    <td><select name="joblevel" >
                                             <option value="one">1</option>
                                             <option value="two">2</option>
                                             <option value="three">3</option>
@@ -315,11 +376,11 @@ tr:nth-child(even) {
                                 </tr>
                                 <tr>
                                     <th>Job Title</th>
-                                    <td><input type="text" name="title" value="" size="25%" /></td>
+                                    <td><input type="text" name="jobtitle" value="" size="25%" /></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2"></td>
-                                    <td><input type="submit" name="submit" />Submit Form</td>
+                                    <td><input type="submit" name="submit" /></td>
                                 </tr>
                                 </fieldset>
                                 </table></form>

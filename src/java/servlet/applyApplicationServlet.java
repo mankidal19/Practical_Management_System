@@ -8,10 +8,13 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.annotation.WebServlet;
+import utils.MyUtils;
 
 /**
  *
@@ -19,24 +22,50 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/applyApplication"})
 public class applyApplicationServlet extends HttpServlet {
-  public void doPost(HttpServletRequest request,
+  public void doGet(HttpServletRequest request,
                      HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html");
+    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    if (request.getParameter("preview") != null) {
-      out.println("Unsuccessful! Try again in few moment.");
-    } else {
-      showConfirmation(request, out);
+    
+    String cname = request.getParameter("cname");
+    String caddress = request.getParameter("caddress");
+    String ccontact = request.getParameter("ccontact");
+    String sname = request.getParameter("sname");
+    String semail = request.getParameter("semail");
+    String joblevel = request.getParameter("joblevel");
+    String jobtitle = request.getParameter("jobtitle");
+    
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = MyUtils.getStoredConnection(request);
+        
+        PreparedStatement pstmt = conn.prepareStatement("insert into application values (?,?,?,?,?,?,?)");
+        
+        pstmt.setString(1, cname);
+        pstmt.setString(2, caddress);
+        pstmt.setString(3, ccontact);
+        pstmt.setString(4, sname);
+        pstmt.setString(5, semail);
+        pstmt.setString(6, joblevel);
+        pstmt.setString(7, jobtitle);
+        
+        pstmt.executeUpdate();
+        
     }
-  }
-private void showConfirmation(HttpServletRequest request,
-                                PrintWriter out) {
-    String title = "Submission Confirmed.";
-    out.println(ServletUtilities.headWithTitle(title) +
-                "<BODY>\n" +
-                "<H1>" + title + "</H1>\n" +
-                "Your project proposal has been submitted!\n" +
-                "</BODY></HTML>");
-  }
+    catch (Exception e) {
+        e.printStackTrace();
+    }
+    out.println("Your form has been submitted successfully!");
+    
+     RequestDispatcher dispatcher = request.getServletContext()
+                .getRequestDispatcher("/WEB-INF/views/applyApplication.jsp");
+        dispatcher.forward(request, response);
+    }
+  
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+                doGet(request, response);
+            } 
 }
