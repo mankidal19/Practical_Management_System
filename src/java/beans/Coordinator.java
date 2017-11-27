@@ -28,6 +28,7 @@ public class Coordinator  extends UserAccount{
         this.coordinatorDepartment = coordinatorDepartment;
         this.coordinatorPosition = coordinatorPosition;
     }
+    
 
     public String getCoordinatorId() {
         return coordinatorId;

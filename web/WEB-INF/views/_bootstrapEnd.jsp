@@ -23,6 +23,8 @@
 <script src="${pageContext.request.contextPath}/Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/Source_Files/dist/js/adminlte.min.js"></script>
+
+
 <script>
   $(function () {
     $('input').iCheck({
@@ -31,4 +33,6 @@
       increaseArea: '20%' // optional
     });
   });
+  
+
 </script>

@@ -18,6 +18,7 @@ import java.util.List;
 
 //import beans.Product;
 import beans.*;
+import static java.lang.System.out;
 
 public class DBUtils {
 
@@ -357,6 +358,26 @@ public class DBUtils {
         pstm.executeUpdate();
     }
 
+    public static void updateCoordinator(Connection conn, Coordinator co) throws SQLException {
+        String sql = "update coordinator set co_pw=?, co_level=?, co_name =?, co_department=?, co_position=? where co_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(3, co.getCoordinatorName());
+        pstm.setInt(2, co.getCoordinatorLevel());
+        pstm.setString(4, co.getCoordinatorDepartment());
+        pstm.setString(5, co.getCoordinatorPosition());
+        pstm.setString(1, co.getCoordinatorPassword());
+        pstm.setString(6, co.getCoordinatorId());
+        
+        pstm.executeUpdate();
+        
+        out.println(conn);
+        out.println(pstm);
+        
+    }
+
+    
     public static void insertProduct(Connection conn, Product product) throws SQLException {
         String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
 
