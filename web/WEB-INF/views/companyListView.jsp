@@ -200,7 +200,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Practical_Management_System//AddCompanyDisplayServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="/Practical_Management_System/AddCompanyDisplayServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
                                 <li><a href="/Practical_Management_System/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
@@ -265,8 +265,8 @@
                   <td>${company.applicationEmail}</td>
                   <td>${company.applicationJobTitle}</td>
                   <td>${company.applicationJob}</td>
-                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}">Edit</a></td>
-                  <td><button type="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</button></td>
+                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCompany?id=${company.applicationId}">Edit</a></td>
+                  <td><button type="button" class="btn btn-block btn-danger btn-xs" href="deleteCompany?id=${company.applicationId}">Delete</button></td>
                 </tr>
        </c:forEach>
                
