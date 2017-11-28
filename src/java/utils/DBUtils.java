@@ -389,6 +389,21 @@ public class DBUtils {
 
         pstm.executeUpdate();
     }
+    
+    public static void insertCoordinator(Connection conn, Coordinator co) throws SQLException {
+        String sql = "Insert into Coordinator(co_id, co_pw, co_level, co_name, co_department, co_position) values (?,?,?,?,?,?)";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(4, co.getCoordinatorName());
+        pstm.setInt(3, co.getCoordinatorLevel());
+        pstm.setString(5, co.getCoordinatorDepartment());
+        pstm.setString(6, co.getCoordinatorPosition());
+        pstm.setString(2, co.getCoordinatorPassword());
+        pstm.setString(1, co.getCoordinatorId());
+
+        pstm.executeUpdate();
+    }
 
     public static void deleteProduct(Connection conn, String code) throws SQLException {
         String sql = "Delete From Product where Code= ?";
@@ -426,5 +441,22 @@ public class DBUtils {
         }
         return list;
     }
+     
+     public static int getNumOfCoordinator(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from Coordinator ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
 
 }

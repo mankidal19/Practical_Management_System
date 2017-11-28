@@ -1,11 +1,11 @@
 <%-- 
-    Document   : adminCoordinatorListView
-    Created on : Nov 23, 2017, 9:39:31 AM
+    Document   : adminAddCoordinator
+    Created on : Nov 28, 2017, 8:23:01 AM
     Author     : NURUL AIMAN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
         <jsp:include page="_bootstrapHead.jsp"></jsp:include>
         </head>
         <body class="hold-transition skin-purple sidebar-mini">
-            
+
             <!-- Site wrapper -->
             <div class="wrapper">
 
@@ -200,8 +200,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=${pageContext.request.contextPath}/createCoordinator><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
-                                <li class="active"><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                                <li class="active"><a href=${pageContext.request.contextPath}/createCoordinator><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
                             </ul>
                         </li>
 
@@ -250,63 +250,101 @@
 
                     <!-- Default box -->
                     <div class="box">
-                        
-                        
-            <div class="box-header">
-              <h3 class="box-title">COORDINATORS LIST</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                <thead>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Coordinator ID</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 5%;">Level</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
-                </thead>
-                <tbody>
-              
-          <c:forEach items="${coordinatorList}" var="coordinator">
-           <tr role="row" class="odd">
-                  <td class="sorting_1">${coordinator.coordinatorId}</td>
-                  <td>${coordinator.coordinatorLevel}</td>
-                  <td>${coordinator.coordinatorName}</td>
-                  <td>${coordinator.coordinatorDepartment}</td>
-                  <td>${coordinator.coordinatorPosition}</td>
-                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}">Edit</a></td>
-                  <td><button type="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</button></td>
-                </tr>
-       </c:forEach>
-               
-                
-                <tfoot>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Car ID</th>
-                       <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 5%;">Level</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
-                </tfoot>
-              </table></div></div>
-                  <div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
-            </div>
-            <!-- /.box-body -->
-          
+
+
+                        <div class="box-header">
+                            <p style="color: red;">${errorString}</p>
+                            <h3 class="box-title">CREATE NEW COORDINATOR ACCOUNT</h3>
+                            <c:if test="${not empty newId}">
+
+                                <form method="POST" action="${pageContext.request.contextPath}/createCoordinator">
+                                    
+                                    <table border="0">
+                                        <tr>
+                                            <td>Coordinator's ID</td>
+                                            <td>
+                                                <input type="text" style="color:red;" readonly name="co_id" value="${newId}">
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Coordinator's Password (default password 123)</td>
+                                            <td> 
+                                        <input type="password" style="color:red;" readonly name="password" value="123">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Level</td>
+                                            <td>
+                                                <input type="number" name="level" min="1" max="2" step="1"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Name</td>
+                                            <td><input type="text" name="name" placeholder='Enter name' /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <!--<td><input type="text" name="department" placeholder='Enter department' /></td>-->
+                                            <td>
+                                                <select name='department'>
+                                                    <option value='SCSJ'>SCSJ</option>
+                                                    <option value='SCSR'>SCSR</option>
+                                                    <option value='SCSB'>SCSB</option>
+                                                    <option value='SCSV'>SCSV</option>
+                                                    <option value='SCSD'>SCSD</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Position</td>
+                                           <!-- <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>-->
+                                            <td>
+                                                <select name='position'>
+                                                    <option value='Lecturer'>Lecturer</option>
+                                                    <option value='Senior Lecturer'>Senior Lecturer</option>
+                                                    <option value='Associate Professor'>Associate Professor</option>
+                                                    <option value='Head of Department'>Head of Department</option>
+                                                    <option value='Deputy Dean'>Deputy Dean</option>
+                                                    <option value='Dean'>Dean</option>
+                                                </select>
+                                            </td> 
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td colspan = "2">
+                                                <input type="submit" value="Submit" />
+                                                <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </c:if>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <form>
+
+                            </form>
+
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                        <!-- /.box-footer-->
-                    
-                   
-                        
-                        
-                       
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        Footer
+                    </div>
+                    <!-- /.box-footer-->
+
+
+
+
+
                 </section>
                 <!-- /.content -->
             </div>
@@ -326,6 +364,6 @@
 
 
             <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
-           
+
     </body>
 </html>
