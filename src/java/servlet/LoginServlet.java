@@ -84,10 +84,13 @@ public class LoginServlet extends HttpServlet {
 
                 if (userType.equals("student")) {
                     userStudent = DBUtils.findStudent(conn, userName, password);
+                    user = userStudent;
                 } else if (userType.equals("coordinator")) {
                     userCoordinator = DBUtils.findCoordinator(conn, userName, password);
+                    user = userCoordinator;
                 } else if (userType.equals("admin")) {
                     userAdmin = DBUtils.findAdmin(conn, userName, password);
+                    user = userAdmin;
                 }
 
                 //user = DBUtils.findUser(conn, userName, password);
@@ -104,27 +107,27 @@ public class LoginServlet extends HttpServlet {
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
 
-            user = new UserAccount();
-
-            switch (userType) {
-                case "student":
-                    user = new Student();
-                    user.setUserName(userName);
-                    user.setPassword(password);
-                    break;
-                case "coordinator":
-                    user = new Coordinator();
-                    user.setUserName(userName);
-                    user.setPassword(password);
-                    break;
-                case "admin":
-                    user = new Admin();
-                    user.setUserName(userName);
-                    user.setPassword(password);
-                    break;
-                default:
-                    break;
-            }
+//            user = new UserAccount();
+//
+//            switch (userType) {
+//                case "student":
+//                    user = new Student();
+//                    user.setUserName(userName);
+//                    user.setPassword(password);
+//                    break;
+//                case "coordinator":
+//                    user = new Coordinator();
+//                    user.setUserName(userName);
+//                    user.setPassword(password);
+//                    break;
+//                case "admin":
+//                    user = new Admin();
+//                    user.setUserName(userName);
+//                    user.setPassword(password);
+//                    break;
+//                default:
+//                    break;
+//            }
 
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
