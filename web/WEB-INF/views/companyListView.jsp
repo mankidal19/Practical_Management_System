@@ -200,7 +200,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="/Practical_Management_System//AddCompanyDisplayServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
                                 <li><a href="/Practical_Management_System/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
