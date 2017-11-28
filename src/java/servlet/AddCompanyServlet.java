@@ -87,14 +87,14 @@ public class AddCompanyServlet extends HttpServlet {
 
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO APPLICATION VALUES (?,?,?,?,?,?,?,?)");
             
-            pstmt.setString(0, index);
-            pstmt.setString(1, cName);
-            pstmt.setString(2, cContact);
-            pstmt.setString(3, cAddress);
-            pstmt.setString(4, cPhone);
-            pstmt.setString(5, cEmail);
-            pstmt.setString(6, job);
-            pstmt.setString(7, jobtitle);
+            pstmt.setString(1, index);
+            pstmt.setString(2, cName);
+            pstmt.setString(3, cContact);
+            pstmt.setString(4, cAddress);
+            pstmt.setString(5, cPhone);
+            pstmt.setString(6, cEmail);
+            pstmt.setString(7, job);
+            pstmt.setString(8, jobtitle);
            
 
             pstmt.executeUpdate();
@@ -106,7 +106,7 @@ public class AddCompanyServlet extends HttpServlet {
         out.println("Your form has been submitted successfully!Directing you to Company List");
 
          RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/companyListServlet");
+                    .getRequestDispatcher("/companyListViewServlet");
             dispatcher.forward(request, response);
         }
     }
@@ -124,15 +124,5 @@ public class AddCompanyServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
