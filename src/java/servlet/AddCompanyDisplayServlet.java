@@ -51,6 +51,7 @@ public class AddCompanyDisplayServlet extends HttpServlet {
             errorString = e.getMessage();
         }
         
+        index = index.substring(2, 5);
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("companyLastIndex", index);
