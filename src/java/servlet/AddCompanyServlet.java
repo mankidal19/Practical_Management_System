@@ -81,31 +81,33 @@ public class AddCompanyServlet extends HttpServlet {
         dispatcher.forward(request, response);   
     }else{    
 
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection conn = MyUtils.getStoredConnection(request);
-//
-//            PreparedStatement pstmt = conn.prepareStatement("insert into application values (?,?,?,?,?,?,?)");
-//
-//            pstmt.setString(1, cname);
-//            pstmt.setString(2, caddress);
-//            pstmt.setString(3, ccontact);
-//            pstmt.setString(4, sname);
-//            pstmt.setString(5, semail);
-//            pstmt.setString(6, joblevel);
-//            pstmt.setString(7, jobtitle);
-//
-//            pstmt.executeUpdate();
-//
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        out.println("Your form has been submitted successfully!Directing you to Company List");
-//
-//         RequestDispatcher dispatcher = request.getServletContext()
-//                    .getRequestDispatcher("/WEB-INF/views/companyListServlet");
-//            dispatcher.forward(request, response);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = MyUtils.getStoredConnection(request);
+
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO APPLICATION VALUES (?,?,?,?,?,?,?,?)");
+            
+            pstmt.setString(0, index);
+            pstmt.setString(1, cName);
+            pstmt.setString(2, cContact);
+            pstmt.setString(3, cAddress);
+            pstmt.setString(4, cPhone);
+            pstmt.setString(5, cEmail);
+            pstmt.setString(6, job);
+            pstmt.setString(7, jobtitle);
+           
+
+            pstmt.executeUpdate();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        out.println("Your form has been submitted successfully!Directing you to Company List");
+
+         RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/views/companyListServlet");
+            dispatcher.forward(request, response);
         }
     }
 
