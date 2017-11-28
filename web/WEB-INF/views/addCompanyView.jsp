@@ -237,7 +237,7 @@
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Application Form</h3>
+                            <h3 class="box-title">New Company Form</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -248,42 +248,41 @@
                             </div>
                         </div>
                         <div class="box-body">                   
-                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
+                            <form name="myForm" action="./addCompanyServlet" method="post">
                                 <fieldset>
                                     
                                 <table cellpadding="5">
                                 <tr>
+                                    <td><input type="hidden" name="cId" value="${companyLastIndex + 1}" size="25%"/></td>
+                                </tr>
+                                <tr>
                                     <th>Company Name</th>
-                                    <td><input type="text" name="cname" value="" size="25%"/></td>
+                                    <td><input type="text" name="cName" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Company Address</th>
-                                    <td><input type="textarea" name="caddress" size="25%"/></td>
+                                    <td><input type="textarea" name="cAddress" size="25%"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Company Contact Number</th>
-                                    <td><input type="text" name="ccontact" value="" size="25%"/></td>
+                                    <th>Company Contact Person</th>
+                                    <td><input type="text" name="cContactName" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <td><input type="text" name="sname" value="" size="25%"/></td>
+                                    <th>Company Contact Phone No.</th>
+                                    <td><input type="text" name="cContactNumber" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Student Email</th>
-                                    <td><input type="mail" name="semail" value="" size="25%" /></td>
+                                    <th>Company Contact Email</th>
+                                    <td><input type="mail" name="cContactEmail" value="" size="25%" /></td>
                                 </tr>
 
                                 <tr>
-                                    <th>Job Level</th>
-                                    <td><select name="joblevel" >
-                                            <option value="one">1</option>
-                                            <option value="two">2</option>
-                                            <option value="three">3</option>
-                                        </select></td>
+                                    <th>Job Vacancy</th>
+                                    <td><input type="number" name="cJob" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
                                     <th>Job Title</th>
-                                    <td><input type="text" name="jobtitle" value="" size="25%" /></td>
+                                    <td><input type="text" name="cJobTitle" value="" size="25%" /></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2"></td>
