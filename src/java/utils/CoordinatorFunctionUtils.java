@@ -44,5 +44,18 @@ public class CoordinatorFunctionUtils {
         }
         return list;
     }
+
+    public static String queryCompanyIndex(Connection conn) throws SQLException {
+         String sql = "Select * from Application ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        String index = null;
+        while (rs.next()) {
+            index = rs.getString("app_id");
+        }
+        return index;
+    }
     
 }
