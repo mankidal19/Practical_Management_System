@@ -21,7 +21,7 @@ import java.util.List;
 public class CoordinatorFunctionUtils {
 
     public static List<Application> queryCompany(Connection conn) throws SQLException {
-        String sql = "Select * from Coordinator ";
+        String sql = "Select * from Application ";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
