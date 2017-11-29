@@ -6,7 +6,9 @@
 package servlet;
 
 import beans.Application;
+import beans.UserAccount;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.CoordinatorFunctionUtils;
 import utils.DBUtils;
 import utils.MyUtils;
@@ -44,24 +47,34 @@ public class CompanyListViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
-        Connection conn = MyUtils.getStoredConnection(request);
+        
+        UserAccount user = null;
+        HttpSession session = request.getSession();
+        user = MyUtils.getLoginedUser(session);
+        if(user.getUserLevel() == 2){
+            Connection conn = MyUtils.getStoredConnection(request);
+            String errorString = null;
+            List<Application> list = null;
+            try {
+                list = CoordinatorFunctionUtils.queryCompany(conn);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                errorString = e.getMessage();
+            }
+            // Store info in request attribute, before forward to views
+            request.setAttribute("errorString", errorString);
+            request.setAttribute("companyList", list);
 
-        String errorString = null;
-        List<Application> list = null;
-        try {
-            list = CoordinatorFunctionUtils.queryCompany(conn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            errorString = e.getMessage();
+           // Forward to /WEB-INF/views/productListView.jsp
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/views/companyListView.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            out.println("You do not have the authority");
         }
-        // Store info in request attribute, before forward to views
-        request.setAttribute("errorString", errorString);
-        request.setAttribute("companyList", list);
+        
 
-       // Forward to /WEB-INF/views/productListView.jsp
-        RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/companyListView.jsp");
-        dispatcher.forward(request, response);
+        
     }
 
     /**
