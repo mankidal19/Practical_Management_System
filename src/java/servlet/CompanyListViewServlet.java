@@ -51,7 +51,12 @@ public class CompanyListViewServlet extends HttpServlet {
         UserAccount user = null;
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
-        if(user.getUserLevel() == 2){
+        out.println(user.getUserLevel());
+        if(user.getUserLevel() == 3){
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/studentMain");
+            dispatcher.forward(request, response);
+        }else{
             Connection conn = MyUtils.getStoredConnection(request);
             String errorString = null;
             List<Application> list = null;
@@ -69,8 +74,7 @@ public class CompanyListViewServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getServletContext()
                     .getRequestDispatcher("/WEB-INF/views/companyListView.jsp");
             dispatcher.forward(request, response);
-        }else{
-            out.println("You do not have the authority");
+            
         }
         
 
