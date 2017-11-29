@@ -7,7 +7,7 @@ package servlet;
 
 /**
  *
- * @author NURUL AIMAN
+ * @author Yong Keong
  */
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,14 +41,33 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Forward to /WEB-INF/views/loginView.jsp
-        // (Users can not access directly into JSP pages placed in WEB-INF)
-        RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-
-        dispatcher.forward(request, response);
-
+        
+        UserAccount user = null;
+        HttpSession session = request.getSession();
+        user = MyUtils.getLoginedUser(session);
+        RequestDispatcher dispatcher = null;
+        if(user == null){
+            // Forward to /WEB-INF/views/loginView.jsp
+            // (Users can not access directly into JSP pages placed in WEB-INF)
+            dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            switch (user.getUserLevel()) {
+                case 1:
+                    response.sendRedirect(request.getContextPath() + "/adminMain");
+                    break;
+                case 2:
+                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    break;
+                case 3:
+                    response.sendRedirect(request.getContextPath() + "/studentMain");
+                    break;
+                default:
+                    dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+            }
+        }
     }
 
     // When the user enters userName & password, and click Submit.
@@ -69,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 
         boolean hasError = false;
         String errorString = null;
-
+       
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
             hasError = true;
             errorString = "Required username and password!";
@@ -85,15 +104,18 @@ public class LoginServlet extends HttpServlet {
                 if (userType.equals("student")) {
                     userStudent = DBUtils.findStudent(conn, userName, password);
                     user = userStudent;
-                    user.setUserLevel(userStudent.getStd_level());
+                    if(user != null)
+                        user.setUserLevel(userStudent.getStd_level());
                 } else if (userType.equals("coordinator")) {
                     userCoordinator = DBUtils.findCoordinator(conn, userName, password);
                     user = userCoordinator;
-                    user.setUserLevel(userCoordinator.getCoordinatorLevel());
+                    if(user != null)
+                        user.setUserLevel(userCoordinator.getCoordinatorLevel());
                 } else if (userType.equals("admin")) {
                     userAdmin = DBUtils.findAdmin(conn, userName, password);
                     user = userAdmin;
-                    user.setUserLevel(userAdmin.getAdminLevel());
+                    if(user != null)
+                        user.setUserLevel(userAdmin.getAdminLevel());
                 }
 
                 //user = DBUtils.findUser(conn, userName, password);
@@ -109,35 +131,9 @@ public class LoginServlet extends HttpServlet {
         }
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
-
-//            user = new UserAccount();
-//
-//            switch (userType) {
-//                case "student":
-//                    user = new Student();
-//                    user.setUserName(userName);
-//                    user.setPassword(password);
-//                    break;
-//                case "coordinator":
-//                    user = new Coordinator();
-//                    user.setUserName(userName);
-//                    user.setPassword(password);
-//                    break;
-//                case "admin":
-//                    user = new Admin();
-//                    user.setUserName(userName);
-//                    user.setPassword(password);
-//                    break;
-//                default:
-//                    break;
-//            }
-
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
-            request.setAttribute("user", user);
             
-            //debug error
-            out.print(errorString);
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
@@ -149,6 +145,7 @@ public class LoginServlet extends HttpServlet {
         else {
             HttpSession session = request.getSession();
             MyUtils.storeLoginedUser(session, user);
+            RequestDispatcher dispatcher = null;
 
             // If user checked "Remember me".
             if (remember) {
@@ -161,17 +158,32 @@ public class LoginServlet extends HttpServlet {
             // Redirect to userInfo page.
             //response.sendRedirect(request.getContextPath() + "/userInfo");
             
-            switch (userType) {
-                case "student":
-                    response.sendRedirect(request.getContextPath() + "/studentMain");
-                    break;
-                case "coordinator":
-                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
-                    break;
-                case "admin":
+//            switch (userType) {
+//                case "student":
+//                    response.sendRedirect(request.getContextPath() + "/studentMain");
+//                    break;
+//                case "coordinator":
+//                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+//                    break;
+//                case "admin":
+//                    response.sendRedirect(request.getContextPath() + "/adminMain");
+//                    break;
+//                default:
+//                    break;
+//            }
+            switch (user.getUserLevel()) {
+                case 1:
                     response.sendRedirect(request.getContextPath() + "/adminMain");
                     break;
+                case 2:
+                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    break;
+                case 3:
+                    response.sendRedirect(request.getContextPath() + "/studentMain");
+                    break;
                 default:
+                    dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                    dispatcher.forward(request, response);
                     break;
             }
         }
