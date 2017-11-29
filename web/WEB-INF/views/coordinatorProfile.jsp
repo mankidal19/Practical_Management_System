@@ -288,31 +288,31 @@ tr:nth-child(even) {
                         <div class="box-body">                   
                         <table>
                             <c:forEach items="${coordinatorDisplay}" var="coordinator">
-  <tr>
-    <th>Coordinator ID</th>
-    <td>${displayCoordinator.coordinatorId}</td>
-  </tr>
-  <tr>
-    <th>Coordinator Name</th>
-    <td>${displayCoordinator.coordinatorName}</td>
-  </tr>
-  <tr>
-    <th>Position</th>
-    <td><input type="text" name="position" value="${displayCoordinator.coordinatorPosition}" size="25%"/></td>
-  </tr> 
-  <tr>
-    <th>Department</th>
-    <td><input type="text" name="department" value="${displayCoordinator.coordinatorDepartment}" size="25%"/></td>
-  </tr>
+                                <tr>
+                                    <th>Coordinator ID</th>
+                                    <td>${displayCoordinator.coordinatorId}</td>
+                                </tr>
+                                <tr>
+                                    <th>Coordinator Name</th>
+                                    <td>${displayCoordinator.coordinatorName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Position</th>
+                                    <td><input type="text" name="position" value="${displayCoordinator.coordinatorPosition}" size="25%"/></td>
+                                </tr> 
+                                <tr>
+                                    <th>Department</th>
+                                    <td><input type="text" name="department" value="${displayCoordinator.coordinatorDepartment}" size="25%"/></td>
+                                </tr>
 
     
 
-    <tr>
-    <td rowspan="2"></td>
-    <td><input type="submit" value="Update" name="Update" /></td>
-  </tr>
-</table>
-  </c:forEach>         
+                                <tr>
+                                    <td rowspan="2"></td>
+                                    <td><input type="submit" value="Update" name="Update" /></td>
+                                </tr>
+                        </table>
+                            </c:forEach>         
                         </div>
                         <!-- /.box-body -->
 
