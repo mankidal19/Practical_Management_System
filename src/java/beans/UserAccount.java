@@ -15,6 +15,15 @@ public class UserAccount {
     
    private String userName;
    private String password;
+   private int userLevel;
+
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
+    }
    
     
  
