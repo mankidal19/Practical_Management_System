@@ -5,18 +5,22 @@
  */
 package servlet;
 
+import beans.Application;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.CoordinatorFunctionUtils;
 import utils.MyUtils;
 
 /**
@@ -39,7 +43,39 @@ public class AddCompanyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         Connection conn = MyUtils.getStoredConnection(request);
+        String errorString = null;
+        List<Application> list = null;
+        String index = null;
+        try {
+            index = CoordinatorFunctionUtils.queryCompanyIndex(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+        
+        index = index.substring(2, 5);
+        // Store info in request attribute, before forward to views
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("companyLastIndex", index);
+        
+        RequestDispatcher dispatcher = request.getServletContext()
+                .getRequestDispatcher("/WEB-INF/views/addCompanyView.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
     int cid = Integer.parseInt(request.getParameter("cId"));
@@ -109,20 +145,6 @@ public class AddCompanyServlet extends HttpServlet {
                     .getRequestDispatcher("/companyListViewServlet");
             dispatcher.forward(request, response);
         }
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
     }
 
 }
