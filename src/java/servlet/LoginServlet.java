@@ -85,12 +85,15 @@ public class LoginServlet extends HttpServlet {
                 if (userType.equals("student")) {
                     userStudent = DBUtils.findStudent(conn, userName, password);
                     user = userStudent;
+                    user.setUserLevel(userStudent.getStd_level());
                 } else if (userType.equals("coordinator")) {
                     userCoordinator = DBUtils.findCoordinator(conn, userName, password);
                     user = userCoordinator;
+                    user.setUserLevel(userCoordinator.getCoordinatorLevel());
                 } else if (userType.equals("admin")) {
                     userAdmin = DBUtils.findAdmin(conn, userName, password);
                     user = userAdmin;
+                    user.setUserLevel(userAdmin.getAdminLevel());
                 }
 
                 //user = DBUtils.findUser(conn, userName, password);
