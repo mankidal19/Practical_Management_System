@@ -28,7 +28,7 @@ import utils.*;
 import beans.*;
 import static java.lang.System.out;
 
-@WebServlet(urlPatterns = {"/login"})
+//@WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

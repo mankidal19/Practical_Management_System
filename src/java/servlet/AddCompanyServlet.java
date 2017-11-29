@@ -6,8 +6,10 @@
 package servlet;
 
 import beans.Application;
+import beans.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.CoordinatorFunctionUtils;
 import utils.MyUtils;
 
@@ -43,25 +46,36 @@ public class AddCompanyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Connection conn = MyUtils.getStoredConnection(request);
-        String errorString = null;
-        List<Application> list = null;
-        String index = null;
-        try {
-            index = CoordinatorFunctionUtils.queryCompanyIndex(conn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            errorString = e.getMessage();
+        
+        UserAccount user = null;
+        HttpSession session = request.getSession();
+        user = MyUtils.getLoginedUser(session);
+        out.println(user.getUserLevel());
+        if(user.getUserLevel() == 3){
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/studentMain");
+            dispatcher.forward(request, response);
+        }else{
+            Connection conn = MyUtils.getStoredConnection(request);
+           String errorString = null;
+           List<Application> list = null;
+           String index = null;
+           try {
+               index = CoordinatorFunctionUtils.queryCompanyIndex(conn);
+           } catch (SQLException e) {
+               e.printStackTrace();
+               errorString = e.getMessage();
+           }
+
+           index = index.substring(2, 5);
+           // Store info in request attribute, before forward to views
+           request.setAttribute("errorString", errorString);
+           request.setAttribute("companyLastIndex", index);
+
+           RequestDispatcher dispatcher = request.getServletContext()
+                   .getRequestDispatcher("/WEB-INF/views/addCompanyView.jsp");
+           dispatcher.forward(request, response);
         }
-        
-        index = index.substring(2, 5);
-        // Store info in request attribute, before forward to views
-        request.setAttribute("errorString", errorString);
-        request.setAttribute("companyLastIndex", index);
-        
-        RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/addCompanyView.jsp");
-        dispatcher.forward(request, response);
     }
 
     /**
