@@ -13,9 +13,9 @@ import beans.*;
  */
 public class UserAccount {
     
-   private String userName;
-   private String password;
-   private int userLevel;
+    private String userName;
+    private String password;
+    private int userLevel;
 
     public int getUserLevel() {
         return userLevel;
