@@ -288,30 +288,30 @@ tr:nth-child(even) {
                         <div class="box-body">                   
                         <table>
                             <c:forEach items="${coordinatorDisplay}" var="coordinator">
-  <tr>
-    <th>Coordinator ID</th>
-    <td>${displayCoordinator.co_id}</td>
-  </tr>
-  <tr>
-    <th>Coordinator Name</th>
-    <td>${displayCoordinator.co_name}</td>
-  </tr>
-  <tr>
-    <th>Position</th>
-    <td><input type="text" name="position" value="" size="25%"/>${displayCoordinator.co_position}</td>
-  </tr>
-  <tr>
-    <th>Department</th>
-    <td><input type="text" name="department" value="" size="25%"/>${displayCoordinator.co_department}</td>
-  </tr>
+                               <tr>
+                                    <th>Coordinator ID</th>
+                                    <td>${displayCoordinator.co_id}</td>
+                               </tr>
+                               <tr>
+                                    <th>Coordinator Name</th>
+                                    <td>${displayCoordinator.co_name}</td>
+                               </tr>
+                               <tr>
+                                    <th>Position</th>
+                                    <td><input type="text" name="position" value="" size="25%"/>${displayCoordinator.co_position}</td>
+                               </tr>
+                               <tr>
+                                    <th>Department</th>
+                                    <td><input type="text" name="department" value="" size="25%"/>${displayCoordinator.co_department}</td>
+                               </tr>
     
 
-    <tr>
-    <td rowspan="2"></td>
-    <td><input type="submit" value="Update" name="Update" /></td>
-  </tr>
-</table>
-  </c:forEach>         
+                               <tr>
+                                    <td rowspan="2"></td>
+                                    <td><input type="submit" value="Update" name="Update" /></td>
+                               </tr>
+                        </table>
+                            </c:forEach>         
                         </div>
                         <!-- /.box-body -->
 
