@@ -415,6 +415,16 @@ public class DBUtils {
         pstm.executeUpdate();
     }
     
+    public static void deleteCoordinator(Connection conn, String id) throws SQLException {
+        String sql = "Delete From Coordinator where co_id= ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, id);
+
+        pstm.executeUpdate();
+    }
+    
      public static List<Coordinator> queryCoordinator(Connection conn) throws SQLException {
         String sql = "Select * from Coordinator ";
 

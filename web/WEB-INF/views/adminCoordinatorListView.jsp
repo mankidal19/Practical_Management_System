@@ -277,13 +277,13 @@
                   <td>${coordinator.coordinatorDepartment}</td>
                   <td>${coordinator.coordinatorPosition}</td>
                   <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}">Edit</a></td>
-                  <td><button type="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</button></td>
+                  <td><a role="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</a></td>
                 </tr>
        </c:forEach>
                
                 
                 <tfoot>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Car ID</th>
+                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Coordinator ID</th>
                        <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 5%;">Level</th>
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
