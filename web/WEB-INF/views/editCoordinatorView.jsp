@@ -273,14 +273,11 @@
                                         <input type="text" style="color:red;" readonly name="password" value="${coordinator.coordinatorPassword}">
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <td>Level</td>
-                                            <td>
-                                                <input type="number" name="level" value="${coordinator.coordinatorLevel}" min="1" max="2" step="1"/>
-                                            </td>
-                                        </tr>
-
+                                        <div class="form-group" style="visibility: hidden;">
+                                            
+                                                <input type="number" name="level" value="${coordinator.coordinatorLevel}" value="2"/>
+                                            
+                                        </div>
                                         <tr>
                                             <td>Name</td>
                                             <td><input type="text" name="name" value="${coordinator.coordinatorName}" /></td>

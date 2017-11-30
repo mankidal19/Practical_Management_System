@@ -274,12 +274,11 @@
                                             </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>Level</td>
-                                            <td>
-                                                <input type="number" name="level" min="1" max="2" step="1"/>
-                                            </td>
-                                        </tr>
+                                        <div class="form-group" style="display:none;">
+                                            
+                                                <input type="number" name="level" value="2"/>
+                                            
+                                        </div>
 
                                         <tr>
                                             <td>Name</td>

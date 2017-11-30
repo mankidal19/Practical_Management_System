@@ -58,19 +58,31 @@ public class DeleteCoordinatorServlet extends HttpServlet {
         // The product does not exist to edit.
         // Redirect to productList page.
         if (errorString != null && co == null) {
-            response.sendRedirect(request.getServletPath() + "/coordinatorList");
-            return;
-        }
- 
-        // Store errorString in request attribute, before forward to views.
+            // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("coordinator", co);
+            response.sendRedirect(request.getContextPath() + "/coordinatorList");
+            return;
+        }
+        
+        else{
+            response.sendRedirect(request.getContextPath() + "/coordinatorList");
+        }
+ 
+        
  
         //RequestDispatcher dispatcher = request.getServletContext()
                // .getRequestDispatcher("/WEB-INF/views/adminDeleteCoordinatorView.jsp");
         //dispatcher.forward(request, response);
-        response.sendRedirect(request.getServletPath() + "/coordinatorList");
+        //response.sendRedirect(request.getServletPath() + "/coordinatorList");
+        //doGet(request, response);
  
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
     }
     
     
