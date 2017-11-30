@@ -3,7 +3,8 @@
     Created on : Nov 25, 2017, 8:33:24 PM
     Author     : Nurfarahin Nadhirah
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -27,52 +28,51 @@
         <script type="text/javascript">
 function validateForm()
 {
-var x=document.forms["myForm"]["cname"].value;
-if (x==null || x=="")
+var n=document.forms["myForm"]["name"].value;
+if (n==null || n=="")
 {
 alert("Company name must be filled out!");
-document.myForm.cname.focus();
+document.myForm.name.focus();
 return false;
 }
-var a=document.forms["myForm"]["caddress"].value;
+var a=document.forms["myForm"]["adress"].value;
 if (a==null || a=="")
 {
 alert("Company address must be filled out!");
-document.myForm.caddress.focus();
+document.myForm.address.focus();
 return false;
 }
 
-var c=document.forms["myForm"]["ccontact"].value;
-if (c==null || c=="")
+var p=document.forms["myForm"]["person"].value;
+if (p==null || p=="")
 {
-alert("Company contact number must be filled out!");
-document.myForm.ccontact.focus();
+alert("Company contact person must be filled out!");
+document.myForm.person.focus();
 return false;
 }
-var s=document.forms["myForm"]["sname"].value;
-if (s==null || s=="")
+var o=document.forms["myForm"]["phone"].value;
+if (o==null || o=="")
 {
-alert("Student name must be filled out!");
-document.myForm.sname.focus();
+alert("Company contact phone number must be filled out!");
+document.myForm.phone.focus();
 return false;
 }
 
-var e=document.forms["myForm"]["semail"].value;
+var e=document.forms["myForm"]["email"].value;
 var atpos=e.indexOf("@");
 var dotpos=e.lastIndexOf(".");
 
 if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
 {
 alert("Enter a valid e-mail address!");
-document.myForm.semail.focus();
+document.myForm.email.focus();
 return false;
 }
 
-var l=document.forms["myForm"]["job level"].value;
-if (l==null || l=="")
+var v=document.forms["myForm"]["vacancy"].value;
+if (v==null || v=="")
 {
-alert("Please choose one!");
-document.myForm.joblevel.focus();
+document.myForm.vacancy.focus();
 return false;
 }
 var t=document.forms["myForm"]["jobtitle"].value;
@@ -83,6 +83,7 @@ document.myForm.jobtitle.focus();
 return false;
 }
 }
+
 
 </script>
         
@@ -345,44 +346,70 @@ tr:nth-child(even) {
                                 <fieldset>
                                     
                                 <table cellpadding="5">
-                                <tr>
+                                
+                                    <tr>
                                     <th>Company Name</th>
-                                    <td><input type="text" name="cname" value="" size="25%"/></td>
+                                    
+                                    <td><select id="name">
+                                       <c:forEach items="${companyDisplay}" var="company">    
+                                            <option value="${company.applicationCompany}"><c:out value="${company.applicationCompany}" /></option>
+                                       </c:forEach>      
+                                    </select></td>
                                 </tr>
                                 <tr>
                                     <th>Company Address</th>
-                                    <td><input type="textarea" name="caddress" size="25%"/></td>
+                                 <td><select id="address">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.applicationAddress}"><c:out value="${company.applicationAddress}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
                                 <tr>
-                                    <th>Company Contact Number</th>
-                                    <td><input type="text" name="ccontact" value="" size="25%"/></td>
+                                    <th>Company Contact Person</th>
+                                 <td><select id="person">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.applicationName}"><c:out value="${company.applicationName}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <td><input type="text" name="sname" value="" size="25%"/></td>
+                                    <th>Company Contact Phone Number</th>
+                                 <td><select id="phone">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationNumber}"><c:out value="${company.appplicationNumber}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
                                 <tr>
-                                    <th>Student Email</th>
-                                    <td><input type="mail" name="semail" value="" size="25%" /></td>
+                                    <th>Company Contact Email</th>
+                                 <td><select id="email">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationEmail}"><c:out value="${company.appplicationEmail}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
-
                                 <tr>
-                                    <th>Job Level</th>
-                                    <td><select name="joblevel" >
-                                            <option value="one">1</option>
-                                            <option value="two">2</option>
-                                            <option value="three">3</option>
-                                        </select></td>
+                                    <th>Job Vacancy</th>
+                                 <td><select id="vacancy">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationJob}"><c:out value="${company.appplicationJob}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
                                 <tr>
                                     <th>Job Title</th>
-                                    <td><input type="text" name="jobtitle" value="" size="25%" /></td>
+                                 <td><select id="title">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationJobTitle}"><c:out value="${company.applicationJobTitle}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="2"></td>
                                     <td><input type="submit" name="submit" /></td>
                                 </tr>
                                 </fieldset>
+                                            
                                 </table></form>
                         </div>
                         <!-- /.box-body -->
