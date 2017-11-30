@@ -1,50 +1,27 @@
+<%-- 
+    Document   : addCompanyView
+    Created on : Nov 28, 2017, 3:25:17 PM
+    Author     : Yong Keong
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Coordinator Profile</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        
-        
-        
-        <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add Company View</title>
+        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        </head>
+        <body class="hold-transition skin-purple sidebar-mini">
+            
+            <!-- Site wrapper -->
+            <div class="wrapper">
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-    </head>
-    <body class="hold-transition skin-purple sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
-
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <header class="main-header">
+                    <!-- Logo -->
+                    <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -121,7 +98,7 @@ tr:nth-child(even) {
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Cordinator</span>
+                                    <span class="hidden-xs">Alexander Pierce</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -129,7 +106,7 @@ tr:nth-child(even) {
                                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
+                                            Alexander Pierce - Web Developer
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -151,11 +128,10 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="post">
-                                                <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
+                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -179,7 +155,7 @@ tr:nth-child(even) {
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Coordinator</p>
+                            <p>Alexander Pierce</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -198,7 +174,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="#">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -211,24 +187,10 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> Students Application</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
-
-                        <!--li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-files-o"></i>
-                                <span> Manage Coordinators</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
-                            </ul>
-                        </li-->
 
                         <li class="treeview">
                             <a href="#">
@@ -239,8 +201,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href="/Practical_Management_System/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="/Practical_Management_System/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -260,12 +222,13 @@ tr:nth-child(even) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        User Profile
-                        <small>Universiti Teknologi Malaysia</small>
+                        Manage Company
+                        <small>it all starts here</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Examples</a></li>
+                        <li class="active">Blank page</li>
                     </ol>
                 </section>
 
@@ -275,7 +238,7 @@ tr:nth-child(even) {
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Coordinator Information</h3>
+                            <h3 class="box-title">New Company Form</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -286,33 +249,48 @@ tr:nth-child(even) {
                             </div>
                         </div>
                         <div class="box-body">                   
-                        <table>
-                            <c:forEach items="${coordinatorDisplay}" var="coordinator">
+                            <form name="myForm" action="./addCompanyServlet" method="post">
+                                <fieldset>
+                                    
+                                <table cellpadding="5">
                                 <tr>
-                                    <th>Coordinator ID</th>
-                                    <td>${displayCoordinator.coordinatorId}</td>
+                                    <td><input type="hidden" name="cId" value="${companyLastIndex + 1}" size="25%"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Coordinator Name</th>
-                                    <td>${displayCoordinator.coordinatorName}</td>
+                                    <th>Company Name</th>
+                                    <td><input type="text" name="cName" value="" size="25%"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Position</th>
-                                    <td><input type="text" name="position" value="${displayCoordinator.coordinatorPosition}" size="25%"/></td>
-                                </tr> 
+                                    <th>Company Address</th>
+                                    <td><input type="textarea" name="cAddress" size="25%"/></td>
+                                </tr>
                                 <tr>
-                                    <th>Department</th>
-                                    <td><input type="text" name="department" value="${displayCoordinator.coordinatorDepartment}" size="25%"/></td>
+                                    <th>Company Contact Person</th>
+                                    <td><input type="text" name="cContactName" value="" size="25%"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Contact Phone No.</th>
+                                    <td><input type="text" name="cContactNumber" value="" size="25%"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Contact Email</th>
+                                    <td><input type="mail" name="cContactEmail" value="" size="25%" /></td>
                                 </tr>
 
-    
-
+                                <tr>
+                                    <th>Job Vacancy</th>
+                                    <td><input type="number" name="cJob" value="" size="25%"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <td><input type="text" name="cJobTitle" value="" size="25%" /></td>
+                                </tr>
                                 <tr>
                                     <td rowspan="2"></td>
-                                    <td><input type="submit" value="Update" name="Update" /></td>
+                                    <td><input type="submit" name="submit" /></td>
                                 </tr>
-                        </table>
-                            </c:forEach>         
+                                </fieldset>
+                                </table></form>
                         </div>
                         <!-- /.box-body -->
 
@@ -337,27 +315,8 @@ tr:nth-child(even) {
 
             <!-- ./wrapper -->
 
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
+            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
+           
     </body>
 </html>

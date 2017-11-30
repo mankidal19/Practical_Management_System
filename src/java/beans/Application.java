@@ -33,6 +33,16 @@ public class Application {
         this.applicationJobTitle = applicationJobTitle;
     }
 
+    public Application(String applicationCompany, String applicationAddress, String applicationName, String appplicationNumber, String applicationEmail, int applicationJob, String applicationJobTitle) {
+        this.applicationCompany = applicationCompany;
+        this.applicationAddress = applicationAddress;
+        this.applicationName = applicationName;
+        this.appplicationNumber = appplicationNumber;
+        this.applicationEmail = applicationEmail;
+        this.applicationJob = applicationJob;
+        this.applicationJobTitle = applicationJobTitle;
+    }
+
     public String getApplicationId() {
         return applicationId;
     }
