@@ -452,6 +452,42 @@ public class DBUtils {
         return list;
     }
      
+     public static List<Student> queryStudent(Connection conn) throws SQLException {
+        String sql = "Select * from Student ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        List<Student> list = new ArrayList<Student>();
+        while (rs.next()) {
+            //String code = rs.getString("Code");
+            //String name = rs.getString("Name");
+            //float price = rs.getFloat("Price");
+            
+            int level = rs.getInt("std_level");
+            float cgpa = rs.getFloat("std_cgpa");
+            String userName = rs.getString("std_id");
+            String name = rs.getString("std_name");
+            String password = rs.getString("std_pw");
+            String gender = rs.getString("std_gender");
+            String contact = rs.getString("std_contact");
+            String email = rs.getString("std_email");
+            String matric = rs.getString("std_matric");
+            String course = rs.getString("std_course");
+            String status = rs.getString("std_status");
+            String coordinatorId = rs.getString("co_id");
+            String applicationId = rs.getString("ap_id");
+            
+            
+            
+           
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, applicationId);
+            
+            list.add(user);
+        }
+        return list;
+    }
+     
      public static int getNumOfCoordinator(Connection conn) throws SQLException{
       String sql = "Select count(*) as total from Coordinator ";
 

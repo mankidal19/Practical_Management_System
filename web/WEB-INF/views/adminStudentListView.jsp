@@ -1,11 +1,11 @@
 <%-- 
-    Document   : editCoordinatorView
-    Created on : Nov 28, 2017, 4:14:44 AM
+    Document   : adminStudentListView
+    Created on : Dec 5, 2017, 8:22:38 AM
     Author     : NURUL AIMAN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
         <jsp:include page="_bootstrapHead.jsp"></jsp:include>
         </head>
         <body class="hold-transition skin-purple sidebar-mini">
-
+            
             <!-- Site wrapper -->
             <div class="wrapper">
 
@@ -186,8 +186,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <<li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li class="active"><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -200,8 +200,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/createCoordinator"><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
-                                <li class="active"><a href="${pageContext.request.contextPath}/coordinatorList"><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/createCoordinator><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
                             </ul>
                         </li>
 
@@ -250,79 +250,62 @@
 
                     <!-- Default box -->
                     <div class="box">
-
-
-                        <div class="box-header">
-                            <p style="color: red;">${errorString}</p>
-                            <h3 class="box-title">EDIT COORDINATOR'S DETAILS</h3>
-                            <c:if test="${not empty coordinator}">
-
-                                <form method="POST" action="${pageContext.request.contextPath}/editCoordinator">
-                                    
-                                    <table border="0">
-                                        <tr>
-                                            <td>Coordinator's ID</td>
-                                            <td>
-                                                <input type="text" style="color:red;" readonly name="co_id" value="${coordinator.coordinatorId}">
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr style="display: none;">
-                                            <td>Coordinator's Password</td>
-                                            <td> 
-                                        <input type="text" style="color:red;" readonly name="password" value="${coordinator.coordinatorPassword}">
-                                            </td>
-                                        </tr>
-                                        <div class="form-group" style="visibility: hidden;">
-                                            
-                                                <input type="number" name="level" value="${coordinator.coordinatorLevel}" value="2"/>
-                                            
-                                        </div>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td><input type="text" name="name" value="${coordinator.coordinatorName}" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Department</td>
-                                            <td><input type="text" name="department" value="${coordinator.coordinatorDepartment}" /></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>Position</td>
-                                            <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td colspan = "2">
-                                                <input type="submit" value="Submit" />
-                                                <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </form>
-                            </c:if>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                            <form>
-
-                            </form>
-
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">COORDINATORS LIST</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Student ID</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Student's Name</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
+                    
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
+                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 25%;">Action</th></tr>
+                </thead>
+                <tbody>
+              
+          <c:forEach items="${studentList}" var="student">
+           <tr role="row" class="odd">
+                  <td class="sorting_1">${student.std_id}</td>
+                  <td>${student.std_name}</td>
+                  <td>${student.std_matric}</td>
+                  <td>${student.std_course}</td>
+                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editStudent?id=${student.std_id}">Edit</a>
+                      <a role="button" class="btn btn-block btn-danger btn-xs" href="deleteStudent?id=${student.std_id}">Delete</a>
+                      <a role="button" class="btn btn-block btn-danger btn-xs" href="viewStudent?id=${student.std_id}">More Details</a>
+                  </td>
+                </tr>
+       </c:forEach>
+               
+                
+                <tfoot>
+                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Coordinator ID</th>
+                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
+                    
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
+                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
+                </tfoot>
+              </table></div></div>
+                  <div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+            </div>
+            <!-- /.box-body -->
+          
                         </div>
                         <!-- /.box-body -->
-
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        Footer
-                    </div>
-                    <!-- /.box-footer-->
-
-
-
-
-
+                        <div class="box-footer">
+                            Footer
+                        </div>
+                        <!-- /.box-footer-->
+                    
+                   
+                        
+                        
+                       
                 </section>
                 <!-- /.content -->
             </div>
@@ -342,7 +325,6 @@
 
 
             <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
-
+           
     </body>
 </html>
-

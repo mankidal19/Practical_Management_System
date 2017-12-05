@@ -186,8 +186,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -214,8 +214,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 

@@ -186,8 +186,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -214,8 +214,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -264,7 +264,7 @@
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
                     
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
+                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 25%;">Action</th></tr>
                 </thead>
                 <tbody>
               
@@ -274,8 +274,10 @@
                   <td>${coordinator.coordinatorName}</td>
                   <td>${coordinator.coordinatorDepartment}</td>
                   <td>${coordinator.coordinatorPosition}</td>
-                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}">Edit</a></td>
-                  <td><a role="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</a></td>
+                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}">Edit</a>
+                      <a role="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}">Delete</a>                      
+                      <a role="button" class="btn btn-block btn-danger btn-xs" href="viewCoordinator?id=${coordinator.coordinatorId}">More Details</a>
+                  </td>
                 </tr>
        </c:forEach>
                
