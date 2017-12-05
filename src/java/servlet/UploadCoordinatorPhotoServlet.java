@@ -58,9 +58,10 @@ public class UploadCoordinatorPhotoServlet extends HttpServlet {
         catch (Exception e) {
             errorString = e.getMessage();
         }
-         
+        byte[] imgData = CoordinatorFunctionUtils.queryCoordinatorPhoto(conn,coordinator.getCoordinatorId());
         request.setAttribute("errorString", errorString);
         request.setAttribute("coordinator", coordinator);
+        request.setAttribute("coordinatorPhoto", imgData);
        
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/coordinatorUploadView.jsp");

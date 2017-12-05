@@ -74,5 +74,11 @@ public class CoordinatorFunctionUtils {
             int row = statement.executeUpdate();
             System.out.println(statement);
             return row;
-    }    
+    } 
+
+    public static byte[] queryCoordinatorPhoto(Connection conn, String coordinatorId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

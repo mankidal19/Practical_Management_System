@@ -305,6 +305,10 @@ tr:nth-child(even) {
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
+                                            <td><img src=""></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Upload Photo</th>
                                             <td><input type="file" name="photo" size="50"/></td>
                                         </tr>
                                         <tr>
