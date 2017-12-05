@@ -1,16 +1,12 @@
 <%-- 
-    Document   : studentProfile
-    Created on : Nov 23, 2017, 1:00:16 AM
+    Document   : studentProfilePage
+    Created on : Dec 5, 2017, 11:15:05 PM
     Author     : Nurfarahin Nadhirah
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
-    Author     : Nurfarahin Nadhirah
---%>
 
 <html>
     <head>
@@ -163,7 +159,7 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/ViewStudent" method="post">
+                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
                                                 <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
@@ -285,48 +281,49 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
-                        <table>
-                            <c:forEach items="${studentDisplay}" var="student">
-  <tr>
-    <th>Student ID</th>
-    <td>${displayStudent.std_id}</td>
-  </tr>
-  <tr>
-    <th>Matric Number</th>
-    <td>${displayStudent.std_matric}</td>
-  </tr>
-  <tr>
-    <th>Contact Number</th>
-    <td><input type="text" name="contact" value="${displayStudent.std_contact}" size="25%"/></td>
-  </tr>
-  <tr>
-    <th>Contact Email</th>
-    <td><input type="mail" name="email" value="${displayStudent.std_email}" size="25%" /></td>
-  </tr>
-  <tr>
-    <th>Student Name</th>
-    <td>${displayStudent.std_name}</td>
-  </tr>
-  <tr>
-    <th>Gender</th>
-    <td>${displayStudent.std_gender}</td>
-  </tr>
-  <tr>
-    <th>CGPA</th>
-    <td>${displayStudent.std_cgpa}</td>
-  </tr>
-    <tr>
-    <th>Course</th>
-    <td>${displayStudent.std_course}</td>
-  </tr>
-
-    <tr>
-    <td rowspan="2"></td>
-    <td><input type="submit" value="Update" name="Update" /></td>
-  </tr>
-</table>
-  </c:forEach>         
+                        <div class="box-body">  
+                        <form name="updateForm" action="./profileStudent" method="post">
+                            <table>
+                                <c:forEach items="${profileStudent}" var="student">
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <td><input type="text" readonly="" name="id" value="" size="25%"/>${student.stdID}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Matric Number</th>
+                                        <td><input type="text" readonly="" name="matric" value="" size="25%"/>${student.stdMatric}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number</th>
+                                        <td><input type="text" readonly="" name="contact" value="${student.stdContact}" size="25%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Email</th>
+                                        <td><input type="email" readonly="" name="email" value="${student.stdEmail}" size="25%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <td><input type="text" readonly="" name="name" value="" size="25%"/>${student.stdName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <td><input type="text" readonly="" name="gender" value="" size="25%"/>${student.stdGender}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>CGPA</th>
+                                        <td><input type="text" readonly="" name="cgpa" value="" size="25%"/>${student.stdCGPA}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Course</th>
+                                        <td><input type="text" readonly="" name="course" value="" size="25%"/>${student.stdCourse}</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2"></td>
+                                        <td><input type="submit" value="Update" name="Update" /></td>
+                                    </tr>
+                                </c:forEach>
+                            </table> 
+                        </form>
                         </div>
                         <!-- /.box-body -->
 
@@ -375,3 +372,4 @@ tr:nth-child(even) {
             </script>
     </body>
 </html>
+
