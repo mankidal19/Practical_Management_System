@@ -8,6 +8,7 @@ package utils;
 import java.sql.*;
 import beans.Student;
 import beans.Application;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -38,18 +39,18 @@ public class StudentFunctionsUtils {
             String appID = rs.getString("app_id");
             
             
-            student.setStdID(stdID);
-            student.setStdPassword(stdPassword);
-            student.setStdName(stdName);
-            student.setStdGender(stdGender);
-            student.setStdContact(stdContact);
-            student.setStdEmail(stdEmail);
-            student.setStdMatric(stdMatric);
-            student.setStdCourse(stdCourse);
-            student.setStdCGPA(stdCGPA);
-            student.setStdStatus(stdStatus);
-            student.setCoID(coID);
-            student.setAppID(appID);
+            student.setStd_id(stdID);
+            student.setStd_pw(stdPassword);
+            student.setStd_name(stdName);
+            student.setStd_gender(stdGender);
+            student.setStd_contact(stdContact);
+            student.setStd_email(stdEmail);
+            student.setStd_matric(stdMatric);
+            student.setStd_course(stdCourse);
+            student.setStd_cgpa(stdCGPA);
+            student.setStd_status(stdStatus);
+            student.setCo_id(coID);
+            student.setApp_id(appID);
             
         }
         return student;
@@ -89,4 +90,26 @@ public class StudentFunctionsUtils {
         }
         return list;
     }
+        
+        public static int uploadStudentPhoto(Connection conn, String stdID, InputStream inputStream) throws SQLException{
+        // constructs SQL statement
+            String sql = "UPDATE student SET std_photo=? WHERE std_id=?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(2, stdID);
+             
+            if (inputStream != null) {
+                // fetches input stream of the upload file for the blob column
+                statement.setBlob(1, inputStream);
+            }
+ 
+            // sends the statement to the database server
+            int row = statement.executeUpdate();
+            System.out.println(statement);
+            return row;
+    } 
+
+    public static byte[] queryStudentPhoto(Connection conn, String stdId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+        
 }

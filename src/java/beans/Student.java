@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package beans;
-import java.sql.*;
+
 /**
  *
  * @author NURUL AIMAN
@@ -145,7 +145,5 @@ public class Student extends UserAccount{
 
     public void setStd_status(String std_status) {
         this.std_status = std_status;
-    }
-
-   
+    }   
 }

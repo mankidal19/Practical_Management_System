@@ -1,13 +1,12 @@
 <%-- 
-    Document   : studentProfilePage
-    Created on : Dec 5, 2017, 11:15:05 PM
+    Document   : studentUploadView
+    Created on : Dec 7, 2017, 8:02:39 PM
     Author     : Nurfarahin Nadhirah
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Student Profile</title>
@@ -201,6 +200,32 @@ tr:nth-child(even) {
                             </span>
                         </div>
                     </form>
+           <!-- =============================================== -->
+
+            <!-- Left side column. contains the sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>Student</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
@@ -248,7 +273,6 @@ tr:nth-child(even) {
                 </section>
                 <!-- /.sidebar -->
             </aside>
-
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
@@ -281,49 +305,33 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">  
-                        <form name="updateForm" action="./profileStudent" method="post">
-                            <table>
-                                <c:forEach items="${profileStudent}" var="student">
-                                    <tr>
-                                        <th>Student ID</th>
-                                        <td><input type="text" readonly="" name="id" value="" size="25%"/>${student.stdID}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Matric Number</th>
-                                        <td><input type="text" readonly="" name="matric" value="" size="25%"/>${student.stdMatric}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Number</th>
-                                        <td><input type="text" readonly="" name="contact" value="${student.stdContact}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Email</th>
-                                        <td><input type="email" readonly="" name="email" value="${student.stdEmail}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Student Name</th>
-                                        <td><input type="text" readonly="" name="name" value="" size="25%"/>${student.stdName}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gender</th>
-                                        <td><input type="text" readonly="" name="gender" value="" size="25%"/>${student.stdGender}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CGPA</th>
-                                        <td><input type="text" readonly="" name="cgpa" value="" size="25%"/>${student.stdCGPA}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Course</th>
-                                        <td><input type="text" readonly="" name="course" value="" size="25%"/>${student.stdCourse}</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2"></td>
-                                        <td><input type="submit" value="Update" name="Update" /></td>
-                                    </tr>
-                                </c:forEach>
-                            </table> 
-                        </form>
+                        <div class="box-body">
+                            <form method="post" action="./UploadStudentPhoto" enctype="multipart/form-data">
+                                <table>
+                                    <c:forEach items="${student}" var="student">
+                                        <tr>
+                                            <th>student ID</th>
+                                            <td>${student.stdID}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>student Name</th>
+                                            <td>${student.stdName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Portrait Photo</th>
+                                            <td><img src=""></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Upload Photo</th>
+                                            <td><input type="file" name="photo" size="50"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"></td>
+                                            <td><input type="submit" value="Upload" name="upload" /></td>
+                                        </tr>
+                                    </c:forEach> 
+                                </table>
+                            </form>              
                         </div>
                         <!-- /.box-body -->
 
@@ -372,4 +380,3 @@ tr:nth-child(even) {
             </script>
     </body>
 </html>
-

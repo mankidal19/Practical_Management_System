@@ -143,7 +143,7 @@ and open the template in the editor.
                                     <li class="user-footer">
                                         <div class="pull-left">
                                             <form action="${pageContext.request.contextPath}/studentProfile" method="post">
-                                                <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
+                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/login" method="get">

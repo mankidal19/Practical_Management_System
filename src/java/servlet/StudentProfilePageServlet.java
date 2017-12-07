@@ -82,7 +82,7 @@ public class StudentProfilePageServlet extends HttpServlet {
         }
  
         try {
-            StudentFunctionsUtils.updateStudent(conn, student.getStdID(), getStdContact, getStdEmail);
+            StudentFunctionsUtils.updateStudent(conn, student.getStd_id(), student.getStd_contact(), student.getStd_email());
         } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
