@@ -12,7 +12,7 @@ package beans;
 public class Report {
     private String reportId;
     private String reportName;
-    private String reportPath;
+    private String reportContent;
     private String studentId;
 
     public Report() {
@@ -21,7 +21,7 @@ public class Report {
     public Report(String reportId, String reportName, String reportPath, String studentId) {
         this.reportId = reportId;
         this.reportName = reportName;
-        this.reportPath = reportPath;
+        this.reportContent = reportContent;
         this.studentId = studentId;
     }
 
@@ -41,12 +41,12 @@ public class Report {
         this.reportName = reportName;
     }
 
-    public String getReportPath() {
-        return reportPath;
+    public String getReportContent() {
+        return reportContent;
     }
 
-    public void setReportPath(String reportPath) {
-        this.reportPath = reportPath;
+    public void setReportContent(String reportContent) {
+        this.reportContent = reportContent;
     }
 
     public String getStudentId() {

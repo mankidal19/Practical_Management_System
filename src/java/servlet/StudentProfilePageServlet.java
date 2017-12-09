@@ -33,9 +33,9 @@ public class StudentProfilePageServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+       
         Connection conn = MyUtils.getStoredConnection(request);
         
         String errorString = null;
@@ -45,6 +45,7 @@ public class StudentProfilePageServlet extends HttpServlet {
         
         try {
             student = MyUtils.getLoginedStudent(session);
+            student = StudentFunctionsUtils.getStudentDetail(conn, student.getStd_id());
             
         }
         catch (Exception e) {
@@ -65,7 +66,6 @@ public class StudentProfilePageServlet extends HttpServlet {
             throws ServletException, IOException {
         
         Connection conn = MyUtils.getStoredConnection(request);
-        String stdID = (String) request.getParameter("id");
         String stdContact = (String) request.getParameter("contact");
         String stdEmail = (String) request.getParameter("email");
         
@@ -82,14 +82,15 @@ public class StudentProfilePageServlet extends HttpServlet {
         }
  
         try {
-            StudentFunctionsUtils.updateStudent(conn, student.getStd_id(), student.getStd_contact(), student.getStd_email());
+            if(stdContact != null && stdEmail != null && student != null)
+                StudentFunctionsUtils.updateStudent(conn, student.getStd_id(), stdContact, stdEmail);
         } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("studentUpdate", student);
+//        request.setAttribute("studentUpdate", student);
  
         // If error, forward to Edit page.
         if (errorString != null) {
@@ -100,9 +101,10 @@ public class StudentProfilePageServlet extends HttpServlet {
         // If everything nice.
         // Redirect to the product listing page.
         else {
+            System.out.println("haha");
             response.sendRedirect(request.getContextPath() + "/studentProfile");
-        }
+   }
         
-        doGet(request, response);
+        
     }
 }

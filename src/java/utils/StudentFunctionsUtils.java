@@ -8,6 +8,7 @@ package utils;
 import java.sql.*;
 import beans.Student;
 import beans.Application;
+import beans.Report;
 import java.io.InputStream;
 import java.util.*;
 
@@ -56,9 +57,9 @@ public class StudentFunctionsUtils {
         return student;
     }
         
-        public static void updateStudent(Connection conn, String stdID, String contact, String email) throws SQLException {
+    public static void updateStudent(Connection conn, String stdID, String contact, String email) throws SQLException {
         String sql = "UPDATE student set std_contact=?, std_email=? where std_id=? ";
-
+        System.out.println("bubu");
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, contact);
@@ -66,6 +67,7 @@ public class StudentFunctionsUtils {
         pstm.setString(3, stdID);
         pstm.executeUpdate();
     }
+        
         
         public static List<Application> queryApplyCompany(Connection conn) throws SQLException {
         String sql = "Select * from Application";
@@ -111,5 +113,71 @@ public class StudentFunctionsUtils {
     public static byte[] queryStudentPhoto(Connection conn, String stdId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        
+
+    public static Student getStudentDetail(Connection conn, String std_id) throws SQLException {
+        String sql = "Select * from Student "//
+                + " where std_id = ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, std_id);
+
+        ResultSet rs = pstm.executeQuery();
+
+        if (rs.next()) {
+            int level = rs.getInt("std_level");
+            String name = rs.getString("std_name");
+            String password = rs.getString("std_pw");
+            
+            String gender = rs.getString("std_gender");
+            String contact = rs.getString("std_contact");
+            String email = rs.getString("std_email");
+            String matric = rs.getString("std_matric");
+            String course = rs.getString("std_course");
+            float cgpa = rs.getFloat("std_cgpa");
+            String status = rs.getString("std_status");
+            String co = rs.getString("co_id");
+            String app = rs.getString("app_id");
+
+            //String password = rs.getString("std_pw");
+            //String password = rs.getString("std_pw");
+            Student user = new Student(std_id, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app);
+            //user.setUserName(userName);
+            //user.setPassword(password);
+            return user;
+        }
+        return null;
+    }
+        public static String queryReportIndex(Connection conn) throws SQLException {
+        String sql = "Select * from Report";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        String index = null;
+        while (rs.next()) {
+            index = rs.getString("report_id");
+        }
+        return index;
+    }
+         
+      public static List<Report> queryReport(Connection conn) throws SQLException {
+        String sql = "Select * from Report ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        List<Report> list = new ArrayList<Report>();
+        while (rs.next()) {
+          
+            String reportID = rs.getString("report_id");
+            String reportName = rs.getString("report_name");
+            String reportContent = rs.getString("report_content");
+            String stdID = rs.getString("studentId");
+
+            Report logbook = new Report(reportID, reportName, reportContent, stdID);
+            
+            list.add(logbook);
+        }
+        return list;
+    }
 }

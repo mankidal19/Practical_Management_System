@@ -83,11 +83,7 @@ document.myForm.jobtitle.focus();
 return false;
 }
 }
-
-
 </script>
-        
-        
         <style>
 table {
     font-family: arial, sans-serif;
@@ -315,13 +311,13 @@ tr:nth-child(even) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        User Profile
+                        Application Form
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home </a></li>
+                        <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home </a></li>
                         <li><a href="#">Practical Training</a></li>
-                        <li><a href="#">Apply New Application</a></li>
+                        <li class="active">Apply New Application</a></li>
                     </ol>
                 </section>
 

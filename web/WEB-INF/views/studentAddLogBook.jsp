@@ -1,15 +1,18 @@
 <%-- 
-    Document   : studentProfilePage
-    Created on : Dec 5, 2017, 11:15:05 PM
+    Document   : studentAddLogBook
+    Created on : Dec 8, 2017, 10:19:53 PM
     Author     : Nurfarahin Nadhirah
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Student Profile</title>
+        <title>Add New Log Book</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -23,27 +26,7 @@
         <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        
-        
-        
-        <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
+        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">     
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -205,7 +188,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="#">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -221,7 +204,6 @@ tr:nth-child(even) {
                                 <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
-
                             </ul>
                         </li>
 
@@ -251,81 +233,67 @@ tr:nth-child(even) {
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1>
-                        User Profile
-                        <small>Universiti Teknologi Malaysia</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Profile</a></li>
-                    </ol>
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-
-                    <!-- Default box -->
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Student Information</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
+                        
+                        <!-- Content Wrapper. Contains page content -->
+                         <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+                            <section class="content-header">
+                                <h1>
+                                    Text Editors
+                                <small>Universiti Teknologi Malaysia</small>
+                                </h1>
+                                <ol class="breadcrumb">
+                                    <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home</a></li>
+                                    <li><a href="#">Log Book</a></li>
+                                    <li class="active">Add New Log Book</li>
+                                </ol>
+                            </section>
+    <!-- Main content -->
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box box-info">
+                                            <div class="box-header">
+                                                    <h3 class="box-title">Log Book Editor</h3>
+                      <!-- tools box -->
+                                                <div class="pull-right box-tools">
+                                                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                                    title="Collapse">
+                                                    <i class="fa fa-minus"></i></button>
+                                                    <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                                    title="Remove">
+                                                    <i class="fa fa-times"></i></button>
+                                                </div>
+                  <!-- /. tools -->
+                                            </div>
+                <!-- /.box-header -->
+                                            
+                                            <div class="box-body pad">
+                                                <form>
+                                                    <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
+                                                    Title: <input type="text" name="title" value="" size="25%"/></input>
+                                                    Student ID: <input type="text" name="stdid" value="" size="25%"/></input>
+                                                    <br><br>
+                                                    <textarea name="content" rows="10" cols="80">
+                                                    Start writing here...
+                                                    </textarea>
+                                                    <br>
+                                                    <input type="submit" value="Submit Report" name="submit" /></input>
+                                                </form>
+                                            </div>
+                                        </div>
+      <!-- /.box -->
+                                    </div>
+                                </div>
+<!-- ./row -->
+                            </section>
+    <!-- /.content -->
                         </div>
-                        <div class="box-body">  
-                            <form method="post" action="./studentProfile">
-                            <table>
-                                <c:forEach items="${profileStudent}" var="student">
-                                    <tr>
-                                        <th>Student ID</th>
-                                        <td>${profileStudent.std_id}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Matric Number</th>
-                                        <td>${profileStudent.std_matric}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Number</th>
-                                        <td><input type="text" name="contact" value="${profileStudent.std_contact}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Email</th>
-                                        <td><input type="email" name="email" value="${profileStudent.std_email}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Student Name</th>
-                                        <td>${profileStudent.std_name}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gender</th>
-                                        <td>${profileStudent.std_gender}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CGPA</th>
-                                        <td>${profileStudent.std_cgpa}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Course</th>
-                                        <td>${profileStudent.std_course}</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2"></td>
-                                        <td><input type="submit" value="Update" name="Update" /></td>
-                                    </tr>
-                                </c:forEach>
-                            </table> 
-                        </form>
-                        </div>
+                        
                         <!-- /.box-body -->
-
+                        <div class="box-footer">
+                            Footer
+                        </div>
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -334,7 +302,7 @@ tr:nth-child(even) {
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-
+            
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.4.0
@@ -363,6 +331,19 @@ tr:nth-child(even) {
             <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
             <!-- AdminLTE App -->
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
+            <!-- CK Editor -->
+            <script src="Source_Files/bower_components/ckeditor/ckeditor.js"></script>
+            <!-- Bootstrap WYSIHTML5 -->
+            <!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
+            <script>
+              $(function () {
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace('editor1')
+//                //bootstrap WYSIHTML5 - text editor
+//                $('.textarea').wysihtml5()
+              })
+            </script>
 
             <script>
                 $(document).ready(function(){
