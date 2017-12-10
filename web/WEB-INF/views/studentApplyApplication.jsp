@@ -215,8 +215,8 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/ViewStudent" method="post">
-                                                <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
+                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/login" method="get">
@@ -262,7 +262,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="#">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -275,7 +275,7 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="./applyApplicationServlet"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
@@ -290,8 +290,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 

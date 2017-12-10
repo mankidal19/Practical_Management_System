@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.sql.Date;
+
 /**
  *
  * @author NURUL AIMAN
@@ -14,16 +16,27 @@ public class Report {
     private String reportName;
     private String reportContent;
     private String studentId;
+    private Date date;
+    
 
     public Report() {
     }
 
-    public Report(String reportId, String reportName, String reportPath, String studentId) {
+    public Report(String reportId, String reportName, String reportContent, String studentId, Date date) {
         this.reportId = reportId;
         this.reportName = reportName;
         this.reportContent = reportContent;
         this.studentId = studentId;
+        this.date=date;
     }
+        public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
 
     public String getReportId() {
         return reportId;

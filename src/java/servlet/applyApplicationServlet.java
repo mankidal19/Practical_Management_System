@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import utils.MyUtils;
@@ -39,8 +37,8 @@ public class applyApplicationServlet extends HttpServlet {
       try {
           list = StudentFunctionsUtils.queryApplyCompany(conn);
           request.setAttribute("companyDisplay", list);
-      } catch (SQLException ex) {
-          
+      } catch (SQLException e) {
+          e.printStackTrace();
       }
     
      RequestDispatcher dispatcher = request.getServletContext()

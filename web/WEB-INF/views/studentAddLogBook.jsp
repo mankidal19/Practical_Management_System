@@ -201,7 +201,7 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
@@ -216,8 +216,8 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -269,12 +269,12 @@ and open the template in the editor.
                 <!-- /.box-header -->
                                             
                                             <div class="box-body pad">
-                                                <form>
+                                                <form action="./studentAddLogBook" method="post">
                                                     <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
                                                     Title: <input type="text" name="title" value="" size="25%"/></input>
-                                                    Student ID: <input type="text" name="stdid" value="" size="25%"/></input>
+                                                    Student ID: ${studentID}
                                                     <br><br>
-                                                    <textarea name="content" rows="10" cols="80">
+                                                    <textarea id="CKEditor" name="content" rows="10" cols="80">
                                                     Start writing here...
                                                     </textarea>
                                                     <br>
@@ -337,9 +337,9 @@ and open the template in the editor.
             <!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
             <script>
               $(function () {
-                // Replace the <textarea id="editor1"> with a CKEditor
+                // Replace the <textarea id="CKEditor"> with a CKEditor
                 // instance, using default configuration.
-                CKEDITOR.replace('editor1')
+                CKEDITOR.replace('content')
 //                //bootstrap WYSIHTML5 - text editor
 //                $('.textarea').wysihtml5()
               })

@@ -1,41 +1,27 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
+    Document   : studentViewLogBookList
+    Created on : Dec 10, 2017, 1:05:38 PM
     Author     : Nurfarahin Nadhirah
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Student Main View</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-    </head>
-    <body class="hold-transition skin-purple sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Book Log List View</title>
+        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        </head>
+        <body class="hold-transition skin-purple sidebar-mini">
+            
+            <!-- Site wrapper -->
+            <div class="wrapper">
 
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <header class="main-header">
+                    <!-- Logo -->
+                    <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -112,7 +98,7 @@ and open the template in the editor.
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <span class="hidden-xs">Alexander Pierce</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -120,7 +106,7 @@ and open the template in the editor.
                                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
+                                            Alexander Pierce - Web Developer
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -146,7 +132,7 @@ and open the template in the editor.
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -218,7 +204,7 @@ and open the template in the editor.
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -238,12 +224,13 @@ and open the template in the editor.
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        Report List
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Log Book</a></li>
+                        <li class="active">View Log Book List</li>
                     </ol>
                 </section>
 
@@ -252,28 +239,44 @@ and open the template in the editor.
 
                     <!-- Default box -->
                     <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">Log Book List</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 5%;">Bil.</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 30%;">Submission Date</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 30%;">Report Title</th>
+                </thead>
+                <tbody>
+              
+            <c:forEach items="${reportList}" var="report">
+           <tr role="row" class="odd">
+                  <td class="sorting_1">${report.index}</td>
+                  <td>${report.date}</td>
+                  <td><a href="">${report.reportName}</a></td>
+                </tr>
+            </c:forEach>
+              </table></div></div>
+                  <div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+            </div>
+            <!-- /.box-body -->
+          
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             Footer
                         </div>
                         <!-- /.box-footer-->
-                    </div>
-                    <!-- /.box -->
-
+                    
+                   
+                        
+                        
+                       
                 </section>
                 <!-- /.content -->
             </div>
@@ -291,27 +294,9 @@ and open the template in the editor.
 
             <!-- ./wrapper -->
 
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
+            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
+           
     </body>
 </html>
+

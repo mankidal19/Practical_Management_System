@@ -32,6 +32,9 @@ import utils.MyUtils;
 @WebServlet(urlPatterns = {"/studentAddLogBook"})
 public class studentAddLogBookServlet extends HttpServlet {
 
+    public studentAddLogBookServlet(){
+        super();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,8 +66,8 @@ public class studentAddLogBookServlet extends HttpServlet {
            
            // Store info in request attribute, before forward to views
            request.setAttribute("errorString", errorString);
+           request.setAttribute("studentID", student.getStd_id());
            request.setAttribute("reportLastIndex", index);
-
            RequestDispatcher dispatcher = request.getServletContext()
                    .getRequestDispatcher("/WEB-INF/views/studentAddLogBook.jsp");
            dispatcher.forward(request, response);
@@ -80,15 +83,15 @@ public class studentAddLogBookServlet extends HttpServlet {
     String index = "R" + String.format ("%03d", reportID);
     String reportName = request.getParameter("title");
     String reportContent = request.getParameter("content");
-    String stdID = request.getParameter("stdID");
-    
+    HttpSession session = request.getSession();
+    Student student = null; 
+    student = MyUtils.getLoginedStudent(session);
+    String stdID = student.getStd_id();
     ArrayList error  = new ArrayList();
     if(reportName == null || "".equals(reportName)){
         error.add("Report must have a title!");
     }
-    if(stdID == null || "".equals(stdID)){
-        error.add("Student ID is required!");
-    }
+
     if(reportContent == null || "".equals(reportContent)){
         error.add("Content is required!");
     }
@@ -120,11 +123,8 @@ public class studentAddLogBookServlet extends HttpServlet {
         out.println("Your form has been submitted successfully!Directing you to Log Book List");
 
          RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/viewLogBookList");
+                    .getRequestDispatcher("/studentViewLogBookList");
             dispatcher.forward(request, response);
         }
     }
-
-    
-    }
-    
+}
