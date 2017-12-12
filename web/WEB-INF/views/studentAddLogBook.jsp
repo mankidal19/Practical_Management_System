@@ -274,11 +274,10 @@ and open the template in the editor.
                                                     Title: <input type="text" name="title" value="" size="25%"/></input>
                                                     Student ID: ${studentID}
                                                     <br><br>
-                                                    <textarea id="CKEditor" name="content" rows="10" cols="80">
-                                                    Start writing here...
-                                                    </textarea>
+                                                    <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
                                                     <br>
-                                                    <input type="submit" value="Submit Report" name="submit" /></input>
+                                                    <input type="submit" value="Submit Report" name="submit" />
+                                                    <a href="${pageContext.request.contextPath}/studentViewLogBookList">Cancel</a>
                                                 </form>
                                             </div>
                                         </div>

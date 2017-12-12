@@ -54,10 +54,10 @@ public class UploadStudentPhotoServlet extends HttpServlet {
             errorString=e.getMessage();
         }
         
-        byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,student.getStd_id());
+        //byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,student.getStd_id());
         request.setAttribute("errorString", errorString);
         request.setAttribute("student", student);
-        request.setAttribute("studentPhoto", imgData);
+        //request.setAttribute("studentPhoto", imgData);
        
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/studentUploadView.jsp");

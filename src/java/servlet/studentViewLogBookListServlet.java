@@ -10,7 +10,10 @@ import beans.Student;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,20 +50,23 @@ public class studentViewLogBookListServlet extends HttpServlet {
             Student student = null;
             HttpSession session = request.getSession();
             student = MyUtils.getLoginedStudent(session);
-        
+            int index = 0;
+            
             Connection conn = MyUtils.getStoredConnection(request);
             String errorString = null;
             List<Report> list = null;
-                try {
-                    list = StudentFunctionsUtils.queryReport(conn);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    errorString = e.getMessage();
-                }
+          
+        try {
+            list = StudentFunctionsUtils.queryReport(conn);
+        } catch (SQLException ex) {
+            Logger.getLogger(studentViewLogBookListServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
             // Store info in request attribute, before forward to views
             request.setAttribute("errorString", errorString);
             request.setAttribute("reportList", list);
+            request.setAttribute("index", index);
 
            // Forward to /WEB-INF/views/productListView.jsp
             RequestDispatcher dispatcher = request.getServletContext()

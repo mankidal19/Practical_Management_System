@@ -10,9 +10,6 @@ import beans.Student;
 import beans.Application;
 import beans.Report;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -163,7 +160,7 @@ public class StudentFunctionsUtils {
         return index;
     }
          
-      public static List<Report> queryReport(Connection conn) throws SQLException, ParseException {
+      public static List<Report> queryReport(Connection conn) throws SQLException {
         String sql = "Select * from Report ";
 
         PreparedStatement pstm = conn.prepareStatement(sql);

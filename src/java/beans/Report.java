@@ -27,7 +27,7 @@ public class Report {
         this.reportName = reportName;
         this.reportContent = reportContent;
         this.studentId = studentId;
-        this.date=date;
+        this.date = date;
     }
         public Date getDate() {
         return date;
