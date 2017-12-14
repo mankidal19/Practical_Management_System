@@ -8,6 +8,7 @@ package utils;
 import beans.Application;
 import beans.Coordinator;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,8 +77,25 @@ public class CoordinatorFunctionUtils {
             return row;
     } 
 
-    public static byte[] queryCoordinatorPhoto(Connection conn, String coordinatorId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static byte[] queryCoordinatorPhoto(Connection conn, String coordinatorId) throws SQLException {
+        String sql = "Select * from coordinator WHERE co_id=? ";
+        Blob img;
+        byte[] imgData = null ;
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, coordinatorId);
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            img = rs.getBlob("co_photo");
+            imgData = img.getBytes(1,(int)img.length());
+        }
+
+//        rs.close();
+//        pstm.close();
+
+        return imgData ;
     }
     
     

@@ -305,7 +305,7 @@ tr:nth-child(even) {
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
-                                            <td><img src=""></td>
+                                            <td><img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" width="115" border="0"></td>
                                         </tr>
                                          <tr>
                                             <th>Upload Photo</th>
