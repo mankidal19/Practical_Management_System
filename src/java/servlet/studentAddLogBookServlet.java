@@ -53,6 +53,7 @@ public class studentAddLogBookServlet extends HttpServlet {
         Student student = null;
         HttpSession session = request.getSession();
         student = MyUtils.getLoginedStudent(session);
+        List<Report> list = null;
         String index = null;
         String errorString = null;
         try {

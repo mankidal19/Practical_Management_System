@@ -145,7 +145,7 @@ and open the template in the editor.
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -275,10 +275,11 @@ and open the template in the editor.
                                                     Student ID: ${studentID}
                                                     <br><br>
                                                     <textarea id="CKEditor" name="content" rows="10" cols="80">
-                                                    Start writing here...
+                                                    
                                                     </textarea>
                                                     <br>
                                                     <input type="submit" value="Submit Report" name="submit" /></input>
+                                                    <input type="submit" value="Cancel"><a href="${pageContext.request.contextPath}/studentViewLogBookList"></a></input>
                                                 </form>
                                             </div>
                                         </div>

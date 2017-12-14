@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utils.DBUtils;
 import utils.MyUtils;
+import utils.StudentFunctionsUtils;
 
 /**
  *
@@ -71,24 +72,16 @@ public class studentUpdateLogBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
-        
-        String id = (String) request.getParameter("id");
+
         String title = (String) request.getParameter("title");
         String content = (String) request.getParameter("content");
         
         String errorString = null;
+        Report report = null;
         
         try {
-            
+            report = StudentFunctionsUtils.updateReport(conn, report);
         } catch (Exception e) {
-            e.printStackTrace();
-            errorString = e.getMessage();
-        }
-        Report report = new Report(id, title, content);
- 
-        try {
-            DBUtils.updateProduct(conn, product);
-        } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }

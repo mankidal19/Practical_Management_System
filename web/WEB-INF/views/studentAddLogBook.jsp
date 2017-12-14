@@ -145,7 +145,7 @@ and open the template in the editor.
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -272,12 +272,11 @@ and open the template in the editor.
                                                 <form action="./studentAddLogBook" method="post">
                                                     <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
                                                     Title: <input type="text" name="title" value="" size="25%"/></input>
-                                                    Student ID: ${studentID}
+                                                    &nbsp;&nbsp;&nbsp;Student ID: ${studentID}
                                                     <br><br>
                                                     <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
                                                     <br>
                                                     <input type="submit" value="Submit Report" name="submit" />
-                                                    <a href="${pageContext.request.contextPath}/studentViewLogBookList">Cancel</a>
                                                 </form>
                                             </div>
                                         </div>

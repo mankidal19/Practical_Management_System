@@ -6,9 +6,7 @@
 package utils;
 
 import java.sql.*;
-import beans.Student;
-import beans.Application;
-import beans.Report;
+import beans.*;
 import java.io.InputStream;
 import java.util.*;
 
@@ -67,10 +65,20 @@ public class StudentFunctionsUtils {
         pstm.setString(3, stdID);
         pstm.executeUpdate();
     }
-        
-        
+    
+    public static void updateReport(Connection conn, Report report) throws SQLException {
+        String sql = "Update Report set report_name=?, report_content=? where report_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, report.getReportName());
+        pstm.setString(2, report.getReportContent());
+        pstm.setString(3, report.getReportId());
+        pstm.executeUpdate();
+    }    
+    
         public static List<Application> queryApplyCompany(Connection conn) throws SQLException {
-        String sql = "Select * from Application";
+        String sql = "Select * from Application where app_id=?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -151,7 +159,7 @@ public class StudentFunctionsUtils {
         String sql = "Select * from Report";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-
+        
         ResultSet rs = pstm.executeQuery();
         String index = null;
         while (rs.next()) {
@@ -161,23 +169,34 @@ public class StudentFunctionsUtils {
     }
          
       public static List<Report> queryReport(Connection conn) throws SQLException {
-        String sql = "Select * from Report ";
+        String sql = "Select * from Report where student_id";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-
+        
         ResultSet rs = pstm.executeQuery();
         List<Report> list = new ArrayList<Report>();
         while (rs.next()) {
-          
+            
             String reportID = rs.getString("report_id");
             String reportName = rs.getString("report_name");
             String reportContent = rs.getString("report_content");
-            String stdID = rs.getString("student_id");
             java.sql.Date date = rs.getDate("report_date");
+            
+            String stdID = rs.getString("student_id");
             Report logbook = new Report(reportID, reportName, reportContent, stdID, date);
             
             list.add(logbook);
         }
         return list;
+    }
+      
+        public static void deleteReport(Connection conn, String id) throws SQLException {
+        String sql = "Delete From Report where report_id= ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, id);
+
+        pstm.executeUpdate();
     }
 }

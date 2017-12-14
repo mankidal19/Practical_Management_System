@@ -354,7 +354,8 @@ public class DBUtils {
         pstm.setString(3, product.getCode());
         pstm.executeUpdate();
     }
-
+    
+    
     public static void updateCoordinator(Connection conn, Coordinator co) throws SQLException {
         String sql = "update coordinator set co_pw=?, co_level=?, co_name =?, co_department=?, co_position=? where co_id=? ";
 
@@ -373,7 +374,6 @@ public class DBUtils {
         out.println(pstm);
         
     }
-
     
     public static void insertProduct(Connection conn, Product product) throws SQLException {
         String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
