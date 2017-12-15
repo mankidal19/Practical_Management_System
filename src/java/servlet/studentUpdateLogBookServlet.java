@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 import utils.MyUtils;
 import utils.StudentFunctionsUtils;
@@ -34,16 +35,15 @@ public class studentUpdateLogBookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
-        
-        String stdID = (String) request.getParameter("id");
-        
-        Student student = null;
- 
+
+        String reportID = (String) request.getParameter("id");
+        Report report = null;
+
         String errorString = null;
  
         try {
-            student = DBUtils.findStudent(conn, stdID);
-        } catch (SQLException e) {
+            report = StudentFunctionsUtils.findReport(conn, reportID);
+        } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
@@ -51,14 +51,14 @@ public class studentUpdateLogBookServlet extends HttpServlet {
         // If no error.
         // The product does not exist to edit.
         // Redirect to productList page.
-        if (errorString != null && student == null) {
+        if (errorString != null && report == null) {
             response.sendRedirect(request.getServletPath() + "/studentViewLogBookList");
             return;
         }
  
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("student", student);
+        request.setAttribute("report", report);
  
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/studentUpdateLogBook.jsp");
@@ -73,21 +73,30 @@ public class studentUpdateLogBookServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
 
+        String reportID = (String) request.getParameter("id");
         String title = (String) request.getParameter("title");
         String content = (String) request.getParameter("content");
-        
+//        HttpSession session = request.getSession();
         String errorString = null;
-        Report report = null;
+        
+        
+//        try {
+//            report = MyUtils.getLoginedStudent(session);
+//            
+//        }
+//        catch (Exception e) {
+//            errorString = e.getMessage();
+//        }
         
         try {
-            report = StudentFunctionsUtils.updateReport(conn, report);
+            if(title != null && content != null )
+            StudentFunctionsUtils.updateReport(conn, reportID, title, content);
         } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("report", report);
  
         // If error, forward to Edit page.
         if (errorString != null) {

@@ -51,8 +51,11 @@ public class studentViewLogBookListServlet extends HttpServlet {
             List<Report> list = null;
             Student student = null;
             
+        HttpSession session = request.getSession();
+        student = MyUtils.getLoginedStudent(session);
+            
         try {
-            list = StudentFunctionsUtils.queryReport(conn);
+            list = StudentFunctionsUtils.queryReport(conn, student.getStd_id());
         } catch (SQLException ex) {
             ex.printStackTrace();
             errorString = ex.getMessage();

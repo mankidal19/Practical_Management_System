@@ -57,7 +57,7 @@ public class StudentFunctionsUtils {
         
     public static void updateStudent(Connection conn, String stdID, String contact, String email) throws SQLException {
         String sql = "UPDATE student set std_contact=?, std_email=? where std_id=? ";
-        System.out.println("bubu");
+
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, contact);
@@ -66,19 +66,29 @@ public class StudentFunctionsUtils {
         pstm.executeUpdate();
     }
     
-    public static void updateReport(Connection conn, Report report) throws SQLException {
+    public static void updateReport(Connection conn, String reportID, String title, String content) throws SQLException {
         String sql = "Update Report set report_name=?, report_content=? where report_id=? ";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
-        pstm.setString(1, report.getReportName());
-        pstm.setString(2, report.getReportContent());
-        pstm.setString(3, report.getReportId());
+        pstm.setString(1, title);
+        pstm.setString(2, content);
+        pstm.setString(3, reportID);
         pstm.executeUpdate();
     }    
     
+    public static void updateStudent(Connection conn, String appID, String stdID) throws SQLException {
+        String sql = "Update Student set app_id=? where std_id=? ";
+        System.out.println("bubu");
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, appID);
+        pstm.setString(2, stdID);
+        pstm.executeUpdate();
+    } 
+    
         public static List<Application> queryApplyCompany(Connection conn) throws SQLException {
-        String sql = "Select * from Application where app_id=?";
+        String sql = "Select * from Application";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -168,10 +178,11 @@ public class StudentFunctionsUtils {
         return index;
     }
          
-      public static List<Report> queryReport(Connection conn) throws SQLException {
-        String sql = "Select * from Report where student_id";
+      public static List<Report> queryReport(Connection conn, String studentID) throws SQLException {
+        String sql = "Select * from Report where student_id=?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, studentID);
         
         ResultSet rs = pstm.executeQuery();
         List<Report> list = new ArrayList<Report>();
@@ -199,4 +210,23 @@ public class StudentFunctionsUtils {
 
         pstm.executeUpdate();
     }
+    
+        public static Report findReport(Connection conn, String reportID) throws SQLException {
+        String sql = "Select * from Report where report_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, reportID);
+
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            String title = rs.getString("report_name");
+            String content = rs.getString("report_content");
+            String stdID = rs.getString("student_id");
+            java.sql.Date date = rs.getDate("report_date");
+            Report report = new Report(reportID, title, content, stdID, date);
+            return report;
+        }
+        return null;
+    }    
 }

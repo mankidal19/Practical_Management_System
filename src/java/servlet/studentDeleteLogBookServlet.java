@@ -33,7 +33,7 @@ public class studentDeleteLogBookServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
-        String reportID = (String) request.getParameter("reportID");
+        String reportID = (String) request.getParameter("id");
  
         Report report = null;
  
