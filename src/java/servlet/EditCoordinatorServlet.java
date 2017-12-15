@@ -66,6 +66,9 @@ public class EditCoordinatorServlet  extends HttpServlet{
  
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/editCoordinatorView.jsp");
+            
+     //     RequestDispatcher dispatcher = request.getServletContext()
+     //           .getRequestDispatcher("/WEB-INF/views/adminCoordinatorListView.jsp#modal-edit");
         dispatcher.forward(request, response);
  
     }
@@ -110,9 +113,9 @@ public class EditCoordinatorServlet  extends HttpServlet{
  
         // If error, forward to Edit page.
         if (errorString != null) {
-            RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/editCoordinatorView.jsp");
-            dispatcher.forward(request, response);
+            //RequestDispatcher dispatcher = request.getServletContext()
+                    //.getRequestDispatcher("/WEB-INF/views/editCoordinatorView.jsp");
+            //dispatcher.forward(request, response);
         }
         // If everything nice.
         // Redirect to the product listing page.

@@ -236,7 +236,7 @@
                 <section class="content-header">
                     <h1>
                         Manage Coordinator
-                        <small>it all starts here</small>
+                        <small>Manage coordinator of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -255,6 +255,11 @@
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
                             <h3 class="box-title">CREATE NEW COORDINATOR ACCOUNT</h3>
+                            
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
                             <c:if test="${not empty newId}">
 
                                 <form method="POST" action="${pageContext.request.contextPath}/createCoordinator">
@@ -322,13 +327,6 @@
                                     </table>
                                 </form>
                             </c:if>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                            <form>
-
-                            </form>
 
                         </div>
                         <!-- /.box-body -->
@@ -336,7 +334,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        Footer
+                        
                     </div>
                     <!-- /.box-footer-->
 

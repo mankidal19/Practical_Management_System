@@ -19,3 +19,5 @@
    <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/Source_Files/plugins/iCheck/square/blue.css">
+  <link href="${pageContext.request.contextPath}/Source_Files/bower_components/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="${pageContext.request.contextPath}/Source_Files/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>

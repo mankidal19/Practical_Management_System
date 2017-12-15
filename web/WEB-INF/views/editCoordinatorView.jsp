@@ -255,6 +255,11 @@
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
                             <h3 class="box-title">EDIT COORDINATOR'S DETAILS</h3>
+                            
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
                             <c:if test="${not empty coordinator}">
 
                                 <form method="POST" action="${pageContext.request.contextPath}/editCoordinator">
@@ -301,13 +306,6 @@
                                     </table>
                                 </form>
                             </c:if>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                            <form>
-
-                            </form>
 
                         </div>
                         <!-- /.box-body -->
@@ -315,7 +313,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        Footer
+                        
                     </div>
                     <!-- /.box-footer-->
 
