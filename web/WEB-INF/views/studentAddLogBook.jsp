@@ -1,9 +1,8 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
+    Document   : studentAddLogBook
+    Created on : Dec 8, 2017, 10:19:53 PM
     Author     : Nurfarahin Nadhirah
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -13,7 +12,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Student Main View</title>
+        <title>Add New Log Book</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -27,7 +26,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">     
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -217,7 +216,7 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
                                 <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
@@ -234,38 +233,62 @@ and open the template in the editor.
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1>
-                        Dashboard
-                        <small>Universiti Teknologi Malaysia</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
-                    </ol>
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-
-                    <!-- Default box -->
-                    <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
+                        
+                        <!-- Content Wrapper. Contains page content -->
+                         <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+                            <section class="content-header">
+                                <h1>
+                                    Text Editors
+                                <small>Universiti Teknologi Malaysia</small>
+                                </h1>
+                                <ol class="breadcrumb">
+                                    <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home</a></li>
+                                    <li><a href="#">Log Book</a></li>
+                                    <li class="active">Add New Log Book</li>
+                                </ol>
+                            </section>
+    <!-- Main content -->
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box box-info">
+                                            <div class="box-header">
+                                                    <h3 class="box-title">Log Book Editor</h3>
+                      <!-- tools box -->
+                                                <div class="pull-right box-tools">
+                                                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                                    title="Collapse">
+                                                    <i class="fa fa-minus"></i></button>
+                                                    <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                                    title="Remove">
+                                                    <i class="fa fa-times"></i></button>
+                                                </div>
+                  <!-- /. tools -->
+                                            </div>
+                <!-- /.box-header -->
+                                            
+                                            <div class="box-body pad">
+                                                <form action="./studentAddLogBook" method="post">
+                                                    <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
+                                                    Title: <input type="text" name="title" value="" size="25%"/></input>
+                                                    Student ID: ${studentID}
+                                                    <br><br>
+                                                    <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
+                                                    <br>
+                                                    <input type="submit" value="Submit Report" name="submit" />
+                                                    <a href="${pageContext.request.contextPath}/studentViewLogBookList">Cancel</a>
+                                                </form>
+                                            </div>
+                                        </div>
+      <!-- /.box -->
+                                    </div>
+                                </div>
+<!-- ./row -->
+                            </section>
+    <!-- /.content -->
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
-                        </div>
+                        
                         <!-- /.box-body -->
                         <div class="box-footer">
                             Footer
@@ -278,7 +301,7 @@ and open the template in the editor.
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-
+            
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.4.0
@@ -307,6 +330,19 @@ and open the template in the editor.
             <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
             <!-- AdminLTE App -->
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
+            <!-- CK Editor -->
+            <script src="Source_Files/bower_components/ckeditor/ckeditor.js"></script>
+            <!-- Bootstrap WYSIHTML5 -->
+            <!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
+            <script>
+              $(function () {
+                // Replace the <textarea id="CKEditor"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace('content')
+//                //bootstrap WYSIHTML5 - text editor
+//                $('.textarea').wysihtml5()
+              })
+            </script>
 
             <script>
                 $(document).ready(function(){
@@ -315,3 +351,4 @@ and open the template in the editor.
             </script>
     </body>
 </html>
+

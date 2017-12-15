@@ -1,19 +1,14 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
-    Author     : Nurfarahin Nadhirah
+    Document   : coordinatorUploadView
+    Created on : Dec 5, 2017, 8:15:06 AM
+    Author     : Yong Keong
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Student Main View</title>
+        <title>Coordinator Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -28,6 +23,26 @@ and open the template in the editor.
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        
+        
+        
+        <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -112,7 +127,7 @@ and open the template in the editor.
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <span class="hidden-xs">Cordinator</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -142,8 +157,8 @@ and open the template in the editor.
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
-                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="post">
+                                                <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/login" method="get">
@@ -170,7 +185,7 @@ and open the template in the editor.
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Student</p>
+                            <p>Coordinator</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -189,36 +204,49 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="studentMainView.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-user-circle"></i>
-                                <span> Practical Training </span>
+                                <span> Manage Students</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
+                                <li><a href=""><i class="fa fa-circle-o"></i> Students Application</a></li>
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                        <!--li class="treeview">
                             <a href="#">
                                 <i class="fa fa-files-o"></i>
-                                <span> Log Book</span>
+                                <span> Manage Coordinators</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                            </ul>
+                        </li-->
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-address-card"></i>
+                                <span> Manage Companies</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li-->
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -238,12 +266,12 @@ and open the template in the editor.
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        User Profile
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Profile</a></li>
                     </ol>
                 </section>
 
@@ -253,7 +281,7 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Coordinator Information</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -264,12 +292,35 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="box-body">
-                            Start creating your amazing application!
+                            <form method="post" action="./UploadCoordinatorPhotoServlet" enctype="multipart/form-data">
+                                <table>
+                                    <c:forEach items="${coordinator}" var="coordinator">
+                                        <tr>
+                                            <th>Coordinator ID</th>
+                                            <td>${coordinator.coordinatorId}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Coordinator Name</th>
+                                            <td>${coordinator.coordinatorName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Portrait Photo</th>
+                                            <td><img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" width="115" border="0"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Upload Photo</th>
+                                            <td><input type="file" name="photo" size="50"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"></td>
+                                            <td><input type="submit" value="Upload" name="upload" /></td>
+                                        </tr>
+                                    </c:forEach> 
+                                </table>
+                            </form>              
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
+
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->

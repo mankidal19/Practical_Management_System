@@ -1,15 +1,15 @@
 <%-- 
-    Document   : applyApplication
-    Created on : Nov 25, 2017, 8:33:24 PM
+    Document   : studentUploadView
+    Created on : Dec 7, 2017, 8:02:39 PM
     Author     : Nurfarahin Nadhirah
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Apply New Application</title>
+        <title>Student Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -24,67 +24,7 @@
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        <script type="text/javascript">
-function validateForm()
-{
-var x=document.forms["myForm"]["cname"].value;
-if (x==null || x=="")
-{
-alert("Company name must be filled out!");
-document.myForm.cname.focus();
-return false;
-}
-var a=document.forms["myForm"]["caddress"].value;
-if (a==null || a=="")
-{
-alert("Company address must be filled out!");
-document.myForm.caddress.focus();
-return false;
-}
-
-var c=document.forms["myForm"]["ccontact"].value;
-if (c==null || c=="")
-{
-alert("Company contact number must be filled out!");
-document.myForm.ccontact.focus();
-return false;
-}
-var s=document.forms["myForm"]["sname"].value;
-if (s==null || s=="")
-{
-alert("Student name must be filled out!");
-document.myForm.sname.focus();
-return false;
-}
-
-var e=document.forms["myForm"]["semail"].value;
-var atpos=e.indexOf("@");
-var dotpos=e.lastIndexOf(".");
-
-if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
-{
-alert("Enter a valid e-mail address!");
-document.myForm.semail.focus();
-return false;
-}
-
-var l=document.forms["myForm"]["job level"].value;
-if (l==null || l=="")
-{
-alert("Please choose one!");
-document.myForm.joblevel.focus();
-return false;
-}
-var t=document.forms["myForm"]["jobtitle"].value;
-if (t==null || t=="")
-{
-alert("Job title must be filled out");
-document.myForm.jobtitle.focus();
-return false;
-}
-}
-
-</script>
+        
         
         
         <style>
@@ -218,8 +158,8 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/ViewStudent" method="post">
-                                                <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
+                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/login" method="get">
@@ -235,6 +175,32 @@ tr:nth-child(even) {
             </header>
 
             <!-- =============================================== -->
+
+            <!-- Left side column. contains the sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>Student</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+           <!-- =============================================== -->
 
             <!-- Left side column. contains the sidebar -->
             <aside class="main-sidebar">
@@ -278,9 +244,10 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="./applyApplicationServlet"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+
                             </ul>
                         </li>
 
@@ -306,7 +273,6 @@ tr:nth-child(even) {
                 </section>
                 <!-- /.sidebar -->
             </aside>
-
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
@@ -318,9 +284,8 @@ tr:nth-child(even) {
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home </a></li>
-                        <li><a href="#">Practical Training</a></li>
-                        <li><a href="#">Apply New Application</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Profile</a></li>
                     </ol>
                 </section>
 
@@ -330,7 +295,7 @@ tr:nth-child(even) {
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Application Form</h3>
+                            <h3 class="box-title">Student Information</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -340,50 +305,33 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
-                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
-                                <fieldset>
-                                    
-                                <table cellpadding="5">
-                                <tr>
-                                    <th>Company Name</th>
-                                    <td><input type="text" name="cname" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Address</th>
-                                    <td><input type="textarea" name="caddress" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Contact Number</th>
-                                    <td><input type="text" name="ccontact" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <td><input type="text" name="sname" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Student Email</th>
-                                    <td><input type="mail" name="semail" value="" size="25%" /></td>
-                                </tr>
-
-                                <tr>
-                                    <th>Job Level</th>
-                                    <td><select name="joblevel" >
-                                            <option value="one">1</option>
-                                            <option value="two">2</option>
-                                            <option value="three">3</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Job Title</th>
-                                    <td><input type="text" name="jobtitle" value="" size="25%" /></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2"></td>
-                                    <td><input type="submit" name="submit" /></td>
-                                </tr>
-                                </fieldset>
-                                </table></form>
+                        <div class="box-body">
+                            <form method="post" action="./UploadStudentPhoto" enctype="multipart/form-data">
+                                <table>
+                                    <c:forEach items="${student}" var="student">
+                                        <tr>
+                                            <th>student ID</th>
+                                            <td>${student.stdID}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>student Name</th>
+                                            <td>${student.stdName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Portrait Photo</th>
+                                            <td><img src=""></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Upload Photo</th>
+                                            <td><input type="file" name="photo" size="50"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"></td>
+                                            <td><input type="submit" value="Upload" name="upload" /></td>
+                                        </tr>
+                                    </c:forEach> 
+                                </table>
+                            </form>              
                         </div>
                         <!-- /.box-body -->
 

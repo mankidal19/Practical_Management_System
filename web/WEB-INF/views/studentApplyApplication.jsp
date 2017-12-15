@@ -1,19 +1,16 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
+    Document   : applyApplication
+    Created on : Nov 25, 2017, 8:33:24 PM
     Author     : Nurfarahin Nadhirah
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
+
 <html>
     <head>
-        <title>Student Main View</title>
+        <title>Apply New Application</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -28,6 +25,82 @@ and open the template in the editor.
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        <script type="text/javascript">
+function validateForm()
+{
+var n=document.forms["myForm"]["name"].value;
+if (n==null || n=="")
+{
+alert("Company name must be filled out!");
+document.myForm.name.focus();
+return false;
+}
+var a=document.forms["myForm"]["adress"].value;
+if (a==null || a=="")
+{
+alert("Company address must be filled out!");
+document.myForm.address.focus();
+return false;
+}
+
+var p=document.forms["myForm"]["person"].value;
+if (p==null || p=="")
+{
+alert("Company contact person must be filled out!");
+document.myForm.person.focus();
+return false;
+}
+var o=document.forms["myForm"]["phone"].value;
+if (o==null || o=="")
+{
+alert("Company contact phone number must be filled out!");
+document.myForm.phone.focus();
+return false;
+}
+
+var e=document.forms["myForm"]["email"].value;
+var atpos=e.indexOf("@");
+var dotpos=e.lastIndexOf(".");
+
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
+{
+alert("Enter a valid e-mail address!");
+document.myForm.email.focus();
+return false;
+}
+
+var v=document.forms["myForm"]["vacancy"].value;
+if (v==null || v=="")
+{
+document.myForm.vacancy.focus();
+return false;
+}
+var t=document.forms["myForm"]["jobtitle"].value;
+if (t==null || t=="")
+{
+alert("Job title must be filled out");
+document.myForm.jobtitle.focus();
+return false;
+}
+}
+</script>
+        <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -202,7 +275,7 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
@@ -238,12 +311,13 @@ and open the template in the editor.
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        Application Form
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home </a></li>
+                        <li><a href="#">Practical Training</a></li>
+                        <li class="active">Apply New Application</a></li>
                     </ol>
                 </section>
 
@@ -253,7 +327,7 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Application Form</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -263,13 +337,79 @@ and open the template in the editor.
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
+                        <div class="box-body">                   
+                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
+                                <fieldset>
+                                    
+                                <table cellpadding="5">
+                                
+                                    <tr>
+                                    <th>Company Name</th>
+                                    
+                                    <td><select id="name">
+                                       <c:forEach items="${companyDisplay}" var="company">    
+                                            <option value="${company.applicationCompany}"><c:out value="${company.applicationCompany}" /></option>
+                                       </c:forEach>      
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Address</th>
+                                 <td><select id="address">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.applicationAddress}"><c:out value="${company.applicationAddress}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Contact Person</th>
+                                 <td><select id="person">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.applicationName}"><c:out value="${company.applicationName}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Contact Phone Number</th>
+                                 <td><select id="phone">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationNumber}"><c:out value="${company.appplicationNumber}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Contact Email</th>
+                                 <td><select id="email">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationEmail}"><c:out value="${company.appplicationEmail}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Job Vacancy</th>
+                                 <td><select id="vacancy">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationJob}"><c:out value="${company.appplicationJob}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <th>Job Title</th>
+                                 <td><select id="title">    
+                                        <c:forEach items="${companyDisplay}" var="company">   
+                                            <option value="${company.appplicationJobTitle}"><c:out value="${company.applicationJobTitle}" /></option>
+                                    </c:forEach> 
+                                     </select></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"></td>
+                                    <td><input type="submit" name="submit" /></td>
+                                </tr>
+                                </fieldset>
+                                            
+                                </table></form>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
+
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->

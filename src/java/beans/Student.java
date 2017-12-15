@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package beans;
-import java.sql.*;
+
 /**
  *
  * @author NURUL AIMAN
@@ -145,24 +145,5 @@ public class Student extends UserAccount{
 
     public void setStd_status(String std_status) {
         this.std_status = std_status;
-    }
-
-public Student (ResultSet resultSet) throws SQLException
-    {
-        this.std_id = resultSet.getString("std_id");
-        this.std_pw = resultSet.getString("std_pw");
-        this.std_level = resultSet.getInt("std_level");
-        this.std_name = resultSet.getString("std_name");
-        this.std_gender = resultSet.getString("std_gender");
-        this.std_contact = resultSet.getString("std_contact");
-        this.std_email = resultSet.getString("std_email");
-        this.std_matric = resultSet.getString("std_matric");
-        this.std_course = resultSet.getString("std_course");
-        this.std_cgpa = resultSet.getFloat("std_cgpa");
-        this.std_status = resultSet.getString("std_status");
-        this.co_id = resultSet.getString("co_id");
-        this.app_id = resultSet.getString("app_id");
-        
-    }
-   
+    }   
 }

@@ -224,7 +224,7 @@ tr:nth-child(even) {
                             </a>
                             <ul class="treeview-menu">
                                 <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
 
                             </ul>
@@ -298,11 +298,11 @@ tr:nth-child(even) {
   </tr>
   <tr>
     <th>Contact Number</th>
-    <td><input type="text" name="contact" value="" size="25%"/>${displayStudent.std_contact}</td>
+    <td><input type="text" name="contact" value="${displayStudent.std_contact}" size="25%"/></td>
   </tr>
   <tr>
     <th>Contact Email</th>
-    <td><input type="mail" name="email" value="" size="25%" />${displayStudent.std_email}</td>
+    <td><input type="mail" name="email" value="${displayStudent.std_email}" size="25%" /></td>
   </tr>
   <tr>
     <th>Student Name</th>

@@ -1,19 +1,15 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
+    Document   : studentProfilePage
+    Created on : Dec 5, 2017, 11:15:05 PM
     Author     : Nurfarahin Nadhirah
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>Student Main View</title>
+        <title>Student Profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -28,6 +24,26 @@ and open the template in the editor.
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        
+        
+        
+        <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -189,7 +205,7 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="studentMainView.jsp">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -202,9 +218,10 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+
                             </ul>
                         </li>
 
@@ -217,8 +234,8 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -238,12 +255,12 @@ and open the template in the editor.
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        User Profile
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Profile</a></li>
                     </ol>
                 </section>
 
@@ -253,7 +270,7 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Student Information</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -263,13 +280,52 @@ and open the template in the editor.
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
+                        <div class="box-body">  
+                            <form method="post" action="./studentProfile">
+                            <table>
+                                <c:forEach items="${profileStudent}" var="student">
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <td>${profileStudent.std_id}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Matric Number</th>
+                                        <td>${profileStudent.std_matric}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number</th>
+                                        <td><input type="text" name="contact" value="${profileStudent.std_contact}" size="25%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Email</th>
+                                        <td><input type="email" name="email" value="${profileStudent.std_email}" size="25%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <td>${profileStudent.std_name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <td>${profileStudent.std_gender}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>CGPA</th>
+                                        <td>${profileStudent.std_cgpa}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Course</th>
+                                        <td>${profileStudent.std_course}</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2"></td>
+                                        <td><input type="submit" value="Update" name="Update" /></td>
+                                    </tr>
+                                </c:forEach>
+                            </table> 
+                        </form>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
+
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -315,3 +371,4 @@ and open the template in the editor.
             </script>
     </body>
 </html>
+
