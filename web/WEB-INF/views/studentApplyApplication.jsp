@@ -219,7 +219,7 @@ tr:nth-child(even) {
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -345,59 +345,63 @@ tr:nth-child(even) {
                                 
                                     <tr>
                                     <th>Company Name</th>
-                                    
                                     <td><select id="name">
-                                       <c:forEach items="${companyDisplay}" var="company">    
-                                            <option value="${company.applicationCompany}"><c:out value="${company.applicationCompany}" /></option>
-                                       </c:forEach>      
+                                        <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationCompany}">${company.applicationCompany}</option>
+                                        </c:forEach>
                                     </select></td>
+                                </tr>
+                                <tr><select id="id">
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                        <option type="hidden" value="${company.applicationId}"/>${company.applicationId}</option>
+                                    </c:forEach></select>
                                 </tr>
                                 <tr>
                                     <th>Company Address</th>
-                                 <td><select id="address">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.applicationAddress}"><c:out value="${company.applicationAddress}" /></option>
-                                    </c:forEach> 
+                                    <td><select id="address" >    
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationAddress}">${company.applicationAddress}</option>
+                                        </c:forEach>    
                                      </select></td>
                                 </tr>
                                 <tr>
                                     <th>Company Contact Person</th>
                                  <td><select id="person">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.applicationName}"><c:out value="${company.applicationName}" /></option>
-                                    </c:forEach> 
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationName}">${company.applicationName}</option>
+                                        </c:forEach>    
                                      </select></td>
                                 </tr>
                                 <tr>
                                     <th>Company Contact Phone Number</th>
                                  <td><select id="phone">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.appplicationNumber}"><c:out value="${company.appplicationNumber}" /></option>
-                                    </c:forEach> 
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.appplicationNumber}">${company.appplicationNumber}</option>
+                                        </c:forEach>     
                                      </select></td>
                                 </tr>
                                 <tr>
                                     <th>Company Contact Email</th>
                                  <td><select id="email">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.appplicationEmail}"><c:out value="${company.appplicationEmail}" /></option>
-                                    </c:forEach> 
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationEmail}">${company.applicationEmail}</option>
+                                        </c:forEach>     
                                      </select></td>
                                 </tr>
                                 <tr>
                                     <th>Job Vacancy</th>
                                  <td><select id="vacancy">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.appplicationJob}"><c:out value="${company.appplicationJob}" /></option>
-                                    </c:forEach> 
+                                    <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationJob}">${company.applicationJob}</option>
+                                        </c:forEach>    
                                      </select></td>
                                 </tr>
                                 <tr>
                                     <th>Job Title</th>
                                  <td><select id="title">    
-                                        <c:forEach items="${companyDisplay}" var="company">   
-                                            <option value="${company.appplicationJobTitle}"><c:out value="${company.applicationJobTitle}" /></option>
-                                    </c:forEach> 
+                                     <c:forEach items="${companyDisplay}" var="company">
+                                            <option value="${company.applicationJobTitle}">${company.applicationJobTitle}</option>
+                                        </c:forEach>    
                                      </select></td>
                                 </tr>
                                 <tr>

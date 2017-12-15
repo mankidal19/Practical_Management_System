@@ -12,7 +12,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Add New Log Book</title>
+        <title>Edit Log Book</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -145,7 +145,7 @@ and open the template in the editor.
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -269,16 +269,17 @@ and open the template in the editor.
                 <!-- /.box-header -->
                                             
                                             <div class="box-body pad">
-                                                <form action="./studentAddLogBook" method="post">
-                                                    <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
-                                                    Title: <input type="text" name="title" value="" size="25%"/></input>
-                                                    Student ID: ${studentID}
+                                                <form action="./studentUpdateLogBook" method="post">
+                                                    <input type="hidden" name="id" value="${report.reportId}" size="25%"/><br>
+                                                    Title: <input type="text" name="title" value="${report.reportName}" size="25%"/></input>
+                                                    &nbsp;&nbsp;&nbsp;Student ID: ${report.studentId}
                                                     <br><br>
                                                     <textarea id="CKEditor" name="content" rows="10" cols="80">
-                                                    Start writing here...
+                                                    ${report.reportContent}
                                                     </textarea>
                                                     <br>
                                                     <input type="submit" value="Submit Report" name="submit" /></input>
+                                                    <input type="submit" value="Cancel"><a href="${pageContext.request.contextPath}/studentViewLogBookList"></a></input>
                                                 </form>
                                             </div>
                                         </div>

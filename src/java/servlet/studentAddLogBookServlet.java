@@ -53,6 +53,7 @@ public class studentAddLogBookServlet extends HttpServlet {
         Student student = null;
         HttpSession session = request.getSession();
         student = MyUtils.getLoginedStudent(session);
+        //List<Report> list = null;
         String index = null;
         String errorString = null;
         try {
@@ -107,13 +108,13 @@ public class studentAddLogBookServlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = MyUtils.getStoredConnection(request);
 
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO REPORT VALUES (?,?,?,?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO REPORT VALUES (?,?,?,?,?)");
             
             pstmt.setString(1, index);
             pstmt.setString(2, reportName);
             pstmt.setString(3, reportContent);
             pstmt.setString(4, stdID);
-
+            pstmt.setTimestamp(5, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
             pstmt.executeUpdate();
 
         }

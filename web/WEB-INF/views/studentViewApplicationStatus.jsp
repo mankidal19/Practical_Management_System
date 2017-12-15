@@ -1,40 +1,28 @@
 <%-- 
-    Document   : studentAddLogBook
-    Created on : Dec 8, 2017, 10:19:53 PM
+    Document   : studentViewApplicationStatus
+    Created on : Dec 15, 2017, 3:33:10 PM
     Author     : Nurfarahin Nadhirah
 --%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Add New Log Book</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">     
-    </head>
-    <body class="hold-transition skin-purple sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Application Status</title>
+        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        </head>
+        <body class="hold-transition skin-purple sidebar-mini">
+            
+            <!-- Site wrapper -->
+            <div class="wrapper">
 
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <header class="main-header">
+                    <!-- Logo -->
+                    <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -111,7 +99,7 @@ and open the template in the editor.
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <span class="hidden-xs">Alexander Pierce</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -119,7 +107,7 @@ and open the template in the editor.
                                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
+                                            Alexander Pierce - Web Developer
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -202,7 +190,7 @@ and open the template in the editor.
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
                                 <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
@@ -216,8 +204,8 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -233,74 +221,72 @@ and open the template in the editor.
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
-                        
-                        <!-- Content Wrapper. Contains page content -->
-                         <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-                            <section class="content-header">
-                                <h1>
-                                    Text Editors
-                                <small>Universiti Teknologi Malaysia</small>
-                                </h1>
-                                <ol class="breadcrumb">
-                                    <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home</a></li>
-                                    <li><a href="#">Log Book</a></li>
-                                    <li class="active">Add New Log Book</li>
-                                </ol>
-                            </section>
-    <!-- Main content -->
-                            <section class="content">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="box box-info">
-                                            <div class="box-header">
-                                                    <h3 class="box-title">Log Book Editor</h3>
-                      <!-- tools box -->
-                                                <div class="pull-right box-tools">
-                                                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-                                                    title="Collapse">
-                                                    <i class="fa fa-minus"></i></button>
-                                                    <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                                                    title="Remove">
-                                                    <i class="fa fa-times"></i></button>
-                                                </div>
-                  <!-- /. tools -->
-                                            </div>
-                <!-- /.box-header -->
-                                            
-                                            <div class="box-body pad">
-                                                <form action="./studentAddLogBook" method="post">
-                                                    <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
-                                                    Title: <input type="text" name="title" value="" size="25%"/></input>
-                                                    &nbsp;&nbsp;&nbsp;Student ID: ${studentID}
-                                                    <br><br>
-                                                    <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
-                                                    <br>
-                                                    <input type="submit" value="Submit Report" name="submit" />
-                                                </form>
-                                            </div>
-                                        </div>
-      <!-- /.box -->
-                                    </div>
-                                </div>
-<!-- ./row -->
-                            </section>
-    <!-- /.content -->
-                        </div>
-                        
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                        <!-- /.box-footer-->
-                    </div>
-                    <!-- /.box -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Application Status
+                        <small>Universiti Teknologi Malaysia</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Practical Training</a></li>
+                        <li class="active">View Application Status</li>
+                    </ol>
+                </section>
 
+                <!-- Main content -->
+                <section class="content">
+
+                    <!-- Default box -->
+                    <div class="box">
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">Application Status</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<!--                <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:&nbsp;&nbsp;<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12">-->
+                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+               
+                <thead>
+           <tr role="row">
+               <!--<th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 20%;">Application Date</th>-->
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 20%;">Student Name</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" a<ria-label="Car Model: activate to sort column ascending" style="width: 15%;">Matric No.</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 30%;">Company Name</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 20%;">Application Status</th>
+           </tr>
+                </thead>
+                <tbody>
+                <tr align="center" role="row" class="odd">
+               
+                  <td>${status[0]}</td>
+                  <td>${status[1]}</td>
+                  <td>${status[2]}</td>
+                  <td>
+                      <% List<String> status = new ArrayList();
+                      status = (List)request.getAttribute("status");
+                          if(status.get(3).equals("P")){
+                          out.println("Pending");}
+                          else if(status.get(3).equals("A")){
+                          out.println("Accepted");}
+                          else if(status.get(3).equals("R")){
+                          out.println("Rejected");}
+                      %></td>
+                </tr></tbody>
+              </table></div></div>
+                  
+            </div>
+            <!-- /.box-body -->
+          
+                        </div>       
                 </section>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            
+
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.4.0
@@ -313,41 +299,9 @@ and open the template in the editor.
 
             <!-- ./wrapper -->
 
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-            <!-- CK Editor -->
-            <script src="Source_Files/bower_components/ckeditor/ckeditor.js"></script>
-            <!-- Bootstrap WYSIHTML5 -->
-            <!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
-            <script>
-              $(function () {
-                // Replace the <textarea id="CKEditor"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace('content')
-//                //bootstrap WYSIHTML5 - text editor
-//                $('.textarea').wysihtml5()
-              })
-            </script>
-
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
+            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
+           
     </body>
 </html>
 

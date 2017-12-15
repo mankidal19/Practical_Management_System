@@ -162,7 +162,7 @@ tr:nth-child(even) {
                                                 <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -311,15 +311,15 @@ tr:nth-child(even) {
                                     <c:forEach items="${student}" var="student">
                                         <tr>
                                             <th>student ID</th>
-                                            <td>${student.stdID}</td>
+                                            <td>${student.std_id}</td>
                                         </tr>
                                         <tr>
                                             <th>student Name</th>
-                                            <td>${student.stdName}</td>
+                                            <td>${student.std_name}</td>
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
-                                            <td><img src=""></td>
+                                            <td><img src="studentPhoto.jsp?stdID=${student.std_id}" width="115" border="0"></td>
                                         </tr>
                                          <tr>
                                             <th>Upload Photo</th>

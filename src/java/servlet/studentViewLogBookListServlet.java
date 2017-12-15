@@ -12,8 +12,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,20 +44,21 @@ public class studentViewLogBookListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
-        
-            Student student = null;
-            HttpSession session = request.getSession();
-            student = MyUtils.getLoginedStudent(session);
-            int index = 0;
             
+            int index = 0;
             Connection conn = MyUtils.getStoredConnection(request);
             String errorString = null;
             List<Report> list = null;
-          
+            Student student = null;
+            
+        HttpSession session = request.getSession();
+        student = MyUtils.getLoginedStudent(session);
+            
         try {
-            list = StudentFunctionsUtils.queryReport(conn);
+            list = StudentFunctionsUtils.queryReport(conn, student.getStd_id());
         } catch (SQLException ex) {
-            Logger.getLogger(studentViewLogBookListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            errorString = ex.getMessage();
         }
 
 

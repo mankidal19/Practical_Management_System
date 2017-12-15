@@ -246,11 +246,12 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:&nbsp;&nbsp;<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 5%;">Bil.</th>
+                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 5%;">No.</th>
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 20%;">Submission Date</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 65%;">Report Title</th>
+                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 40%;">Report Title</th>
+                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
                 </thead>
                 <tbody>
               
@@ -258,7 +259,9 @@
            <tr role="row" class="odd">
                   <td class="sorting_1">${index = index +1}</td>
                   <td>${report.date}</td>
-                  <td><a href="">${report.reportName}</a></td>
+                  <td>${report.reportName}</td>
+                  <td style="width: 12.5%;"><a role="button" class="btn btn-block btn-primary btn-xs" href="studentUpdateLogBook?id=${report.reportId}">Edit</a></td>
+                  <td><a role="button" class="btn btn-block btn-danger btn-xs" href="studentDeleteLogBook?id=${report.reportId}">Delete</a></td>
                 </tr>
             </c:forEach>
               </table></div></div>
@@ -266,17 +269,7 @@
             </div>
             <!-- /.box-body -->
           
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                        <!-- /.box-footer-->
-                    
-                   
-                        
-                        
-                       
+                        </div>       
                 </section>
                 <!-- /.content -->
             </div>

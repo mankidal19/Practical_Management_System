@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Application;
+import beans.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.sql.*;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 import utils.MyUtils;
 import utils.StudentFunctionsUtils;
 
@@ -49,6 +51,24 @@ public class applyApplicationServlet extends HttpServlet {
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                doGet(request, response);
+//                doGet(request, response);
+            Connection conn = MyUtils.getStoredConnection(request);
+            String appID = request.getParameter("id");
+            
+            Student student = null;
+            HttpSession session = request.getSession();
+            student = MyUtils.getLoginedStudent(session);
+            String stdID = student.getStd_id();
+            
+            try{
+                StudentFunctionsUtils.updateStudent(conn, appID, stdID);
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/studentViewApplicationStatus");
+            dispatcher.forward(request, response);
             } 
 }

@@ -6,9 +6,7 @@
 package utils;
 
 import java.sql.*;
-import beans.Student;
-import beans.Application;
-import beans.Report;
+import beans.*;
 import java.io.InputStream;
 import java.util.*;
 
@@ -59,7 +57,7 @@ public class StudentFunctionsUtils {
         
     public static void updateStudent(Connection conn, String stdID, String contact, String email) throws SQLException {
         String sql = "UPDATE student set std_contact=?, std_email=? where std_id=? ";
-        System.out.println("bubu");
+
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, contact);
@@ -67,8 +65,28 @@ public class StudentFunctionsUtils {
         pstm.setString(3, stdID);
         pstm.executeUpdate();
     }
-        
-        
+    
+    public static void updateReport(Connection conn, String reportID, String title, String content) throws SQLException {
+        String sql = "Update Report set report_name=?, report_content=? where report_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, title);
+        pstm.setString(2, content);
+        pstm.setString(3, reportID);
+        pstm.executeUpdate();
+    }    
+    
+    public static void updateStudent(Connection conn, String appID, String stdID) throws SQLException {
+        String sql = "Insert into History values(?,?,?,?)";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, appID);
+        pstm.setString(2, stdID);
+        pstm.executeUpdate();
+    } 
+    
         public static List<Application> queryApplyCompany(Connection conn) throws SQLException {
         String sql = "Select * from Application";
 
@@ -110,9 +128,22 @@ public class StudentFunctionsUtils {
             return row;
     } 
 
-    public static byte[] queryStudentPhoto(Connection conn, String stdId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        public static byte[] queryStudentPhoto(Connection conn, String stdID) throws SQLException {
+        String sql = "Select * from student WHERE std_id=? ";
+        Blob img;
+        byte[] imgData = null ;
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, stdID);
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            img = rs.getBlob("std_photo");
+            imgData = img.getBytes(1,(int)img.length());
+            }
+        return imgData ;
+        }
 
     public static Student getStudentDetail(Connection conn, String std_id) throws SQLException {
         String sql = "Select * from Student "//
@@ -147,11 +178,25 @@ public class StudentFunctionsUtils {
         }
         return null;
     }
+    
+        public static String queryHistoryIndex(Connection conn) throws SQLException {
+        String sql = "Select * from History";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        
+        ResultSet rs = pstm.executeQuery();
+        String index = null;
+        while (rs.next()) {
+            index = rs.getString("history_id");
+        }
+        return index;
+        }
+        
         public static String queryReportIndex(Connection conn) throws SQLException {
         String sql = "Select * from Report";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-
+        
         ResultSet rs = pstm.executeQuery();
         String index = null;
         while (rs.next()) {
@@ -160,23 +205,83 @@ public class StudentFunctionsUtils {
         return index;
     }
          
-      public static List<Report> queryReport(Connection conn) throws SQLException {
-        String sql = "Select * from Report ";
+      public static List<Report> queryReport(Connection conn, String studentID) throws SQLException {
+        String sql = "Select * from Report where student_id=?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-
+        pstm.setString(1, studentID);
+        
         ResultSet rs = pstm.executeQuery();
         List<Report> list = new ArrayList<Report>();
         while (rs.next()) {
-          
+            
             String reportID = rs.getString("report_id");
             String reportName = rs.getString("report_name");
             String reportContent = rs.getString("report_content");
-            String stdID = rs.getString("student_id");
             java.sql.Date date = rs.getDate("report_date");
+            
+            String stdID = rs.getString("student_id");
             Report logbook = new Report(reportID, reportName, reportContent, stdID, date);
             
             list.add(logbook);
+        }
+        return list;
+    }
+        
+        public static void deleteReport(Connection conn, String id) throws SQLException {
+        String sql = "Delete From Report where report_id= ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, id);
+
+        pstm.executeUpdate();
+    }
+    
+        public static Report findReport(Connection conn, String reportID) throws SQLException {
+        String sql = "Select * from Report where report_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, reportID);
+
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            String title = rs.getString("report_name");
+            String content = rs.getString("report_content");
+            String stdID = rs.getString("student_id");
+            java.sql.Date date = rs.getDate("report_date");
+            Report report = new Report(reportID, title, content, stdID, date);
+            return report;
+        }
+        return null;
+        }
+        
+        public static List<String> queryApply(Connection conn, String studentID) throws SQLException {
+        String sql = "Select * from History join Application on history.app_id = application.app_id join student on student.std_id = history.std_id where student.std_id = ?;";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, studentID);
+        
+        ResultSet rs = pstm.executeQuery();
+        List<String> list = new ArrayList();
+        
+        while (rs.next()) {
+            if(rs.isLast()){
+                 String stdName = rs.getString("std_name");
+            String stdMatric = rs.getString("std_matric");
+            String companyName = rs.getString("app_company");
+            String stdStatus = rs.getString("std_status");
+            
+            list.add(stdName);
+            list.add(stdMatric);
+            list.add(companyName);
+            list.add(stdStatus);
+            }
+            
+           
+            
+            
         }
         return list;
     }
