@@ -253,7 +253,7 @@
                         
                         
             <div class="box-header">
-              <h3 class="box-title">COORDINATORS LIST</h3>
+              <h3 class="box-title">STUDENT LIST</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

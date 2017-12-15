@@ -476,7 +476,7 @@ public class DBUtils {
             String course = rs.getString("std_course");
             String status = rs.getString("std_status");
             String coordinatorId = rs.getString("co_id");
-            String applicationId = rs.getString("ap_id");
+            String applicationId = rs.getString("app_id");
             
             
             
