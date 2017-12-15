@@ -29,6 +29,7 @@ import utils.StudentFunctionsUtils;
  * @author Nurfarahin Nadhirah
  */
 @WebServlet(urlPatterns = {"/UploadStudentPhoto"})
+@MultipartConfig(maxFileSize = 16177215)
 public class UploadStudentPhotoServlet extends HttpServlet {
 
     /**
@@ -96,9 +97,9 @@ public class UploadStudentPhotoServlet extends HttpServlet {
             if (row > 0) {
                 message = "File uploaded and saved into database";
             }
-        } catch (SQLException ex) {
-            message = "ERROR: " + ex.getMessage();
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            message = "ERROR: " + e.getMessage();
+            e.printStackTrace();
         } 
         // sets the message in request scope
         request.setAttribute("Message", message);

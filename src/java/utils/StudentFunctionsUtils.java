@@ -128,9 +128,22 @@ public class StudentFunctionsUtils {
             return row;
     } 
 
-    public static byte[] queryStudentPhoto(Connection conn, String stdId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        public static byte[] queryStudentPhoto(Connection conn, String stdID) throws SQLException {
+        String sql = "Select * from student WHERE std_id=? ";
+        Blob img;
+        byte[] imgData = null ;
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, stdID);
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            img = rs.getBlob("std_photo");
+            imgData = img.getBytes(1,(int)img.length());
+            }
+        return imgData ;
+        }
 
     public static Student getStudentDetail(Connection conn, String std_id) throws SQLException {
         String sql = "Select * from Student "//
