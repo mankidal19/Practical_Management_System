@@ -44,8 +44,8 @@ public class studentViewLogBookListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
-            int index = 0;
             
+            int index = 0;
             Connection conn = MyUtils.getStoredConnection(request);
             String errorString = null;
             List<Report> list = null;

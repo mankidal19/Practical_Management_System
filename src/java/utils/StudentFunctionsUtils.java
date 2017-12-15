@@ -78,8 +78,8 @@ public class StudentFunctionsUtils {
     }    
     
     public static void updateStudent(Connection conn, String appID, String stdID) throws SQLException {
-        String sql = "Update Student set app_id=? where std_id=? ";
-        System.out.println("bubu");
+        String sql = "Insert into History values(?,?,?,?)";
+
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, appID);
@@ -178,6 +178,20 @@ public class StudentFunctionsUtils {
         }
         return null;
     }
+    
+        public static String queryHistoryIndex(Connection conn) throws SQLException {
+        String sql = "Select * from History";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        
+        ResultSet rs = pstm.executeQuery();
+        String index = null;
+        while (rs.next()) {
+            index = rs.getString("history_id");
+        }
+        return index;
+        }
+        
         public static String queryReportIndex(Connection conn) throws SQLException {
         String sql = "Select * from Report";
 
@@ -213,7 +227,7 @@ public class StudentFunctionsUtils {
         }
         return list;
     }
-      
+        
         public static void deleteReport(Connection conn, String id) throws SQLException {
         String sql = "Delete From Report where report_id= ?";
 
@@ -241,5 +255,34 @@ public class StudentFunctionsUtils {
             return report;
         }
         return null;
-    }    
+        }
+        
+        public static List<String> queryApply(Connection conn, String studentID) throws SQLException {
+        String sql = "Select * from History join Application on history.app_id = application.app_id join student on student.std_id = history.std_id where student.std_id = ?;";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, studentID);
+        
+        ResultSet rs = pstm.executeQuery();
+        List<String> list = new ArrayList();
+        
+        while (rs.next()) {
+            if(rs.isLast()){
+                 String stdName = rs.getString("std_name");
+            String stdMatric = rs.getString("std_matric");
+            String companyName = rs.getString("app_company");
+            String stdStatus = rs.getString("std_status");
+            
+            list.add(stdName);
+            list.add(stdMatric);
+            list.add(companyName);
+            list.add(stdStatus);
+            }
+            
+           
+            
+            
+        }
+        return list;
+    }
 }

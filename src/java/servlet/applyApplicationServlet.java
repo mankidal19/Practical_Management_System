@@ -58,7 +58,6 @@ public class applyApplicationServlet extends HttpServlet {
             Student student = null;
             HttpSession session = request.getSession();
             student = MyUtils.getLoginedStudent(session);
-            
             String stdID = student.getStd_id();
             
             try{
