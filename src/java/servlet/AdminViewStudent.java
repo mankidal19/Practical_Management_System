@@ -74,9 +74,10 @@ public class AdminViewStudent  extends HttpServlet{
             return;
         }
         
-        //set string gender and status
+        //set string gender,application and status
         String gender;
         String status;
+        String application;
         if(stu.getStd_gender().equals("F")){
             gender = "Female";
         }
@@ -95,13 +96,22 @@ public class AdminViewStudent  extends HttpServlet{
             status="Unavailable";
         }
         
+        if(stu.getApp_id()==null){
+            application="Unavailable";
+        }
+        else{
+            application=stu.getApp_id();
+        }
+        
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("student", stu);
         request.setAttribute("coordinator", co);
         request.setAttribute("status", status);
         request.setAttribute("gender", gender);
+        request.setAttribute("application", application);
  
+        
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/adminViewStudentView.jsp");
             

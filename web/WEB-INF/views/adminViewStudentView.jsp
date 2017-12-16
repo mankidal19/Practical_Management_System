@@ -175,7 +175,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/adminMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -271,7 +271,7 @@
                                         <row class='col-md-8'>
                                             
                                          <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
                   
                                         </row> 
                       
@@ -334,7 +334,10 @@
                                             <td>${status}</td>
                                         </tr>
                                         
-                                        
+                                        <tr>
+                                            <th>Application ID:</th>
+                                            <td>${application}</td>
+                                        </tr>
                                         
                                     </table>
                                 

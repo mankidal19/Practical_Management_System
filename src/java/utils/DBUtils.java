@@ -424,6 +424,33 @@ public class DBUtils {
         pstm.executeUpdate();
     }
 
+    public static void insertStudent(Connection conn, Student stu) throws SQLException {
+        String sql = "Insert into Student(std_id,std_pw, std_level, std_name,std_gender,std_contact,std_email,std_course,std_cgpa,std_status,co_id,app_id,std_matric) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, stu.getStd_id());
+        pstm.setString(2, stu.getStd_pw());
+        pstm.setInt(3, stu.getStd_level());
+        pstm.setString(4, stu.getStd_name());
+        pstm.setString(5, stu.getStd_gender());
+        pstm.setString(6, stu.getStd_contact());
+        pstm.setString(7, stu.getStd_email());
+        pstm.setString(8, stu.getStd_course());
+        pstm.setFloat(9, stu.getStd_cgpa());
+        pstm.setString(10, stu.getStd_status());
+        pstm.setString(11, stu.getCo_id());
+        pstm.setString(12, stu.getApp_id());
+        pstm.setString(13, stu.getStd_matric());
+        
+        
+        
+        
+        
+        pstm.executeUpdate();
+    }
+
+    
     public static void deleteProduct(Connection conn, String code) throws SQLException {
         String sql = "Delete From Product where Code= ?";
 
@@ -519,6 +546,23 @@ public class DBUtils {
      
      public static int getNumOfCoordinator(Connection conn) throws SQLException{
       String sql = "Select count(*) as total from Coordinator ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+     public static int getNumOfStudent(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from Student ";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 

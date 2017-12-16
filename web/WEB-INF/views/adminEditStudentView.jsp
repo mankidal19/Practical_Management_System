@@ -176,7 +176,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/adminMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -189,7 +189,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <<li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
                                 <li class="active"><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
@@ -257,7 +257,7 @@
 
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
-                            <h3 class="box-title">VIEW STUDENT'S DETAILS</h3>
+                            <h3 class="box-title">EDIT STUDENT'S DETAILS</h3>
                             
                         </div>
                         <!-- /.box-header -->
