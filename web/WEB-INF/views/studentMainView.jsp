@@ -35,7 +35,7 @@ and open the template in the editor.
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -171,7 +171,7 @@ and open the template in the editor.
                         </div>
                         <div class="pull-left info">
                             <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href=""><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
                     <!-- search form -->
@@ -189,7 +189,7 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -203,8 +203,8 @@ and open the template in the editor.
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
