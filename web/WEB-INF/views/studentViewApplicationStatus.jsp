@@ -4,6 +4,7 @@
     Author     : Nurfarahin Nadhirah
 --%>
 
+<%@page import="beans.History"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -191,7 +192,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -262,17 +263,17 @@
                 <tbody>
                 <tr align="center" role="row" class="odd">
                
-                  <td>${status[0]}</td>
-                  <td>${status[1]}</td>
-                  <td>${status[2]}</td>
+                  <td>${status[0].stdName}</td>
+                  <td>${status[0].stdMatric}</td>
+                  <td>${status[0].companyName}</td>
                   <td>
-                      <% List<String> status = new ArrayList();
+                      <% List<History> status = new ArrayList();
                       status = (List)request.getAttribute("status");
-                          if(status.get(3).equals("P")){
+                          if(status.get(1).getStdStatus().equals("P")){
                           out.println("Pending");}
-                          else if(status.get(3).equals("A")){
+                          else if(status.get(1).getStdStatus().equals("A")){
                           out.println("Accepted");}
-                          else if(status.get(3).equals("R")){
+                          else if(status.get(1).getStdStatus().equals("R")){
                           out.println("Rejected");}
                       %></td>
                 </tr></tbody>

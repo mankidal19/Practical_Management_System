@@ -311,15 +311,15 @@ tr:nth-child(even) {
                                     <c:forEach items="${student}" var="student">
                                         <tr>
                                             <th>student ID</th>
-                                            <td>${student.std_id}</td>
+                                            <td>${student.studendId}</td>
                                         </tr>
                                         <tr>
                                             <th>student Name</th>
-                                            <td>${student.std_name}</td>
+                                            <td>${student.studentName}</td>
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
-                                            <td><img src="studentPhoto.jsp?stdID=${student.std_id}" width="115" border="0"></td>
+                                            <td><img src="studentPhoto.jsp?stdID=${studendId.std_id}" width="115" border="0"></td>
                                         </tr>
                                          <tr>
                                             <th>Upload Photo</th>

@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import beans.History;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -52,7 +53,7 @@ public class studentViewApplicationStatusServlet extends HttpServlet {
         Student student = null;
         HttpSession session = request.getSession();
         student = MyUtils.getLoginedStudent(session);
-        List<String> list = new ArrayList();   
+        List<History> list = new ArrayList();   
         try{
             list = StudentFunctionsUtils.queryApply(conn, student.getStd_id());
         } catch (SQLException ex) {

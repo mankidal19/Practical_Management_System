@@ -128,14 +128,14 @@ public class StudentFunctionsUtils {
             return row;
     } 
 
-        public static byte[] queryStudentPhoto(Connection conn, String stdID) throws SQLException {
+        public static byte[] queryStudentPhoto(Connection conn, String studentId) throws SQLException {
         String sql = "Select * from student WHERE std_id=? ";
         Blob img;
         byte[] imgData = null ;
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
-        pstm.setString(1, stdID);
+        pstm.setString(1, studentId);
         ResultSet rs = pstm.executeQuery();
 
         while (rs.next()) {
@@ -257,31 +257,26 @@ public class StudentFunctionsUtils {
         return null;
         }
         
-        public static List<String> queryApply(Connection conn, String studentID) throws SQLException {
+        public static List<History> queryApply(Connection conn, String studentID) throws SQLException {
         String sql = "Select * from History join Application on history.app_id = application.app_id join student on student.std_id = history.std_id where student.std_id = ?;";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, studentID);
         
         ResultSet rs = pstm.executeQuery();
-        List<String> list = new ArrayList();
+        List<History> list = new ArrayList();
         
         while (rs.next()) {
             if(rs.isLast()){
-                 String stdName = rs.getString("std_name");
+            String stdName = rs.getString("std_name");
             String stdMatric = rs.getString("std_matric");
             String companyName = rs.getString("app_company");
             String stdStatus = rs.getString("std_status");
             
-            list.add(stdName);
-            list.add(stdMatric);
-            list.add(companyName);
-            list.add(stdStatus);
-            }
+            History history = new History(stdName, stdMatric, companyName, stdStatus);
             
-           
-            
-            
+            list.add(history);
+            }   
         }
         return list;
     }

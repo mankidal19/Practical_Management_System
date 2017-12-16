@@ -14,13 +14,13 @@
   
   if ( request.getParameter("stdID") != null )
   {
-    String stdID;
-    stdID = request.getParameter("stdID") ;   
+    String studentId;
+    studentId = request.getParameter("stdID") ;   
     try
     {  
        Connection conn = ConnectionUtils.getConnection();
        // get the image from the database
-       byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,stdID); 
+       byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,studentId); 
        // display the image
        response.setContentType("image/jpg");
        OutputStream o = response.getOutputStream();
