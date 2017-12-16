@@ -208,14 +208,14 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-address-card"></i>
-                                <span> Manage Companies</span>
+                                <span> Manage Application</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
 
@@ -266,16 +266,15 @@
                                     
                                     <table border="0">
                                         <tr>
-                                            <td>Coordinator's ID</td>
+                                            <th>Coordinator's ID: </th>
                                             <td>
-                                                <input type="text" style="color:red;" readonly name="co_id" value="${newId}">
+                                                <input type="text" style="color:red" readonly name="co_id" value="${newId}">
                                             </td>
                                         </tr>
-                                        
-                                        <tr>
+                                        <tr style="display: none;">
                                             <td>Coordinator's Password (default password 123)</td>
                                             <td> 
-                                        <input type="password" style="color:red;" readonly name="password" value="123">
+                                        <input type="password" style="color:red;"  readonly name="password" value="123">
                                             </td>
                                         </tr>
 
@@ -284,13 +283,14 @@
                                                 <input type="number" name="level" value="2"/>
                                             
                                         </div>
-
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
-                                            <td>Name</td>
+                                            <th>Name:</th>
                                             <td><input type="text" name="name" placeholder='Enter name' /></td>
                                         </tr>
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
-                                            <td>Department</td>
+                                            <th>Department: &nbsp;&nbsp;&nbsp;</th>
                                             <!--<td><input type="text" name="department" placeholder='Enter department' /></td>-->
                                             <td>
                                                 <select name='department'>
@@ -302,9 +302,9 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
-                                            <td>Position</td>
+                                            <th>Position:</th>
                                            <!-- <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>-->
                                             <td>
                                                 <select name='position'>
@@ -317,7 +317,7 @@
                                                 </select>
                                             </td> 
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <td colspan = "2">
                                                 <input type="submit" value="Submit" />

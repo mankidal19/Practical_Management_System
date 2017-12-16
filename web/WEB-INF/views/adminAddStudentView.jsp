@@ -212,14 +212,14 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-address-card"></i>
-                                <span> Manage Companies</span>
+                                <span> Manage Application</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
 
@@ -276,12 +276,12 @@
                                             </td>
                                         </tr>
                                         
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Name: </th>
                                             <td><input type="text" name="name" required/></td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Gender:</th>
                                             <td>
@@ -291,22 +291,22 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Contact Number:</th>
                                             <td><input type="text" name="contact" required/></td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Email:</th>
                                             <td><input type="text" name="email" required/></td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Matric Number:</th>
                                             <td><input type="text" name="matric" required/></td>
                                         </tr>
-                                         
+                                         <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Course:</th>
                                             <td>
@@ -319,28 +319,28 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>CGPA:</th>
                                             <td>
                                                 <input type="number" min='0' max='4' step='0.01' name="cgpa" required />
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Practical Year:</th>
                                             <td>
                                                 <input type="number" min='2016' max='2050' step='1' name="year" required />
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                          <tr>
                                              <th>Coordinator's ID: &nbsp;&nbsp;&nbsp;</th>
                                             <td><input type="text" name="coID" required /></td>
                                         </tr>
                                        
                                         
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                        <tr>
                                             <td colspan = "2">
                                                 <input type="submit" value="Submit" />

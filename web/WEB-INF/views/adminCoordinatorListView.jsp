@@ -210,14 +210,14 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-address-card"></i>
-                                <span> Manage Companies</span>
+                                <span> Manage Application</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
 
@@ -253,83 +253,7 @@
 
                 <!-- Main content -->
                 <section class="content">
-                    
-<!--edit coordinator modal-->   
-     <div class="modal modal-info fade" id="modal-edit">
-          <div class="modal-dialog">
-              
-            <div class="modal-content">
-              
-              <c:if test="${not empty coordinator}">
-
-                                <form method="POST" action="${pageContext.request.contextPath}/editCoordinator">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Edit Coordinator Details</h4>
-              </div>
-              <div class="modal-body">
-                <!-- form start -->
-              <div class="box-body">
-                  
-                                    
-                                    <table border="0">
-                                        <tr>
-                                            <td>Coordinator's ID</td>
-                                            <td>
-                                                <input type="text" style="color:red;" readonly name="co_id" value="${coordinator.coordinatorId}">
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr style="display: none;">
-                                            <td>Coordinator's Password</td>
-                                            <td> 
-                                        <input type="text" style="color:red;" readonly name="password" value="${coordinator.coordinatorPassword}">
-                                            </td>
-                                        </tr>
-                                        <div class="form-group" style="visibility: hidden;">
-                                            
-                                                <input type="number" name="level" value="${coordinator.coordinatorLevel}" value="2"/>
-                                            
-                                        </div>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td><input type="text" name="name" value="${coordinator.coordinatorName}" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Department</td>
-                                            <td><input type="text" name="department" value="${coordinator.coordinatorDepartment}" /></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>Position</td>
-                                            <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td colspan = "2">
-                                                <input type="submit" value="Submit" />
-                                                <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                
-                
-              </div>
-              <!-- /.box-body -->
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-outline">Update</button>
-              </div>
-            </form>
-                            </c:if>  
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
+ 
                     <!-- Default box -->
                     <div class="box">
                         

@@ -1,8 +1,9 @@
 <%-- 
-    Document   : adminStudentListView
-    Created on : Dec 5, 2017, 8:22:38 AM
+    Document   : adminAddApplicationView
+    Created on : Dec 16, 2017, 11:12:30 PM
     Author     : NURUL AIMAN
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
         <jsp:include page="_bootstrapHead.jsp"></jsp:include>
         </head>
         <body class="hold-transition skin-purple sidebar-mini">
-            
+
             <!-- Site wrapper -->
             <div class="wrapper">
 
@@ -187,7 +188,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li class="active"><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -214,7 +215,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
+                                <li class="active"><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
@@ -235,8 +236,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Manage Student
-                        <small>Manage student of UTM Practical Management System</small>
+                        Manage Application
+                        <small>Manage Application of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -250,75 +251,85 @@
 
                     <!-- Default box -->
                     <div class="box">
-                        
-                        
-            <div class="box-header">
-              <h3 class="box-title">STUDENT LIST</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div id="studentList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
-                  <div class="row"><div class="row">
-                              <div class="col-sm-12">
-                                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                  <thead>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Student ID</th>
-                    <th>Photo</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Student's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
-                    <th>Practical Year</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
-                </thead>
-                <tbody>
-              
-          <c:forEach items="${studentList}" var="student">
-           <tr role="row" class="odd">
-                  <td class="sorting_1">${student.std_id}</td>
-                  <td>
-                      <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
-                                 
-                  </td>
-                  <td>${student.std_name}</td>
-                  <td>${student.std_matric}</td>
-                  <td>${student.std_course}</td>
-                  <td>${student.std_year}</td>
-                  <td>
-                      
-                      <a role="button" class="btn btn-block bg-yellow btn-xs" href="viewStudent?id=${student.std_id}"><span class="fa fa-external-link"></span></a>
-                      <a role="button" class="btn btn-block btn-primary btn-xs" href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a role="button" class="btn btn-block btn-danger btn-xs" onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
-                </tr>
-       </c:forEach>
-               
-                
-                <tfoot>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Student ID</th>
-                    <th>Photo</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Student's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
-                    <th>Practical Year</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
-                </tfoot>
-              </table></div></div>
-                  </div>
-            <!-- /.box-body -->
-          
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
+
+
+                        <div class="box-header">
+                            <p style="color: red;">${errorString}</p>
+                            <h3 class="box-title">OPEN NEW APPLICATION</h3>
                             
                         </div>
-                        <!-- /.box-footer-->
-                    
-                   
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+
+                                <form method="POST" action="${pageContext.request.contextPath}/createApplication">
+                                    
+                                    <table>
+                                        <tr>
+                                    <td><input type="hidden" name="cId" value="${companyLastIndex + 1}" size="25%"/></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Company Name:</th>
+                                    <td><input type="text" name="cName" value="" size="25%"/></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Company Address:</th>
+                                    <td><input type="textarea" name="cAddress" size="25%"/></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Company Contact Person:</th>
+                                    <td><input type="text" name="cContactName" value="" size="25%"/></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Company Contact Phone No:&nbsp;&nbsp;&nbsp;</th>
+                                    <td><input type="text" name="cContactNumber" value="" size="25%"/></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Company Contact Email:</th>
+                                    <td><input type="mail" name="cContactEmail" value="" size="25%" /></td>
+                                </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Job Vacancy:</th>
+                                    <td><input type="number" name="cJob" value="" size="25%"/></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <th>Job Title:</th>
+                                    <td><input type="text" name="cJobTitle" value="" size="25%" /></td>
+                                </tr>
+                                <tr><td>&nbsp;</td></tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="submit" name="submit" />
+                                    <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
+                                    </td>
+                                    
+                                </tr>
+                                               
+                                        </tr>
+                                    </table>
+                                </form>
+
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
                         
-                        
-                       
+                    </div>
+                    <!-- /.box-footer-->
+
+
+
+
+
                 </section>
                 <!-- /.content -->
             </div>
@@ -338,6 +349,6 @@
 
 
             <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
-           
+
     </body>
 </html>

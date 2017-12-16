@@ -208,14 +208,14 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-address-card"></i>
-                                <span> Manage Companies</span>
+                                <span> Manage Application</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
 
@@ -271,7 +271,7 @@
                                                 <input type="text" style="color:red;" readonly name="co_id" value="${coordinator.coordinatorId}">
                                             </td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr style="display: none;">
                                             <td>Coordinator's Password</td>
                                             <td> 
@@ -287,11 +287,12 @@
                                             <th>Name:</th>
                                             <td><input type="text" name="name" value="${coordinator.coordinatorName}" /></td>
                                         </tr>
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Department:</th>
                                             <td><input type="text" name="department" value="${coordinator.coordinatorDepartment}" /></td>
                                         </tr>
-                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Position:</th>
                                             <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>

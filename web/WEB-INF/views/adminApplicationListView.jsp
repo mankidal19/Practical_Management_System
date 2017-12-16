@@ -1,11 +1,11 @@
 <%-- 
-    Document   : adminStudentListView
-    Created on : Dec 5, 2017, 8:22:38 AM
+    Document   : adminApplicationListView
+    Created on : Dec 16, 2017, 11:12:50 PM
     Author     : NURUL AIMAN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -168,6 +168,8 @@
                             </span>
                         </div>
                     </form>
+                    
+                    
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
@@ -187,7 +189,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li class="active"><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -215,7 +217,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
+                                <li class="active"><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
                             </ul>
                         </li>
 
@@ -231,12 +233,16 @@
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
+            
             <div class="content-wrapper">
+                
+                 
+                
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Manage Student
-                        <small>Manage student of UTM Practical Management System</small>
+                        Manage Application
+                        <small>Manage application of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -247,68 +253,68 @@
 
                 <!-- Main content -->
                 <section class="content">
-
+ 
                     <!-- Default box -->
                     <div class="box">
                         
                         
             <div class="box-header">
-              <h3 class="box-title">STUDENT LIST</h3>
+              <h3 class="box-title">APPLICATION LIST</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <div id="studentList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
+            <div class="box-body container-fluid">
+                 <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
                   <div class="row"><div class="row">
                               <div class="col-sm-12">
                                   <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                  <thead>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Student ID</th>
-                    <th>Photo</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Student's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
-                    <th>Practical Year</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
+                <thead>
+                <tr role="row">
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Contact Person</th>
+                    <th>Contact's Phone No</th>
+                    <th>Contact's Email</th>
+                    <th>Job Title</th>
+                    <th>No. of Job Vacancy</th>
+                    <th style="width: 5;">Action</th>
+                
+                
                 </thead>
                 <tbody>
               
-          <c:forEach items="${studentList}" var="student">
+          <c:forEach items="${companyList}" var="company">
            <tr role="row" class="odd">
-                  <td class="sorting_1">${student.std_id}</td>
+                  <td class="sorting_1">${company.applicationCompany}</td>
+                  <td>${company.applicationAddress}</td>
+                  <td>${company.applicationName}</td>
+                  <td>${company.appplicationNumber}</td>
+                  <td>${company.applicationEmail}</td>
+                  <td>${company.applicationJobTitle}</td>
+                  <td>${company.applicationJob}</td>
                   <td>
-                      <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
-                                 
-                  </td>
-                  <td>${student.std_name}</td>
-                  <td>${student.std_matric}</td>
-                  <td>${student.std_course}</td>
-                  <td>${student.std_year}</td>
-                  <td>
-                      
-                      <a role="button" class="btn btn-block bg-yellow btn-xs" href="viewStudent?id=${student.std_id}"><span class="fa fa-external-link"></span></a>
-                      <a role="button" class="btn btn-block btn-primary btn-xs" href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a role="button" class="btn btn-block btn-danger btn-xs" onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
-                  </td>
+                      <a role="button" class="btn btn-block btn-primary btn-xs" href="editApplication?id=${company.applicationId}"><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a role="button" class="btn btn-block btn-danger btn-xs"  onclick="confirm_decision_app('${company.applicationId}')"><span class="glyphicon glyphicon-trash"></span></a>                      
+                      </td>
                 </tr>
        </c:forEach>
                
                 
                 <tfoot>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Student ID</th>
-                    <th>Photo</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Student's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
-                    <th>Practical Year</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
+                <tr role="row"><th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Contact Person</th>
+                    <th>Contact's Phone No</th>
+                    <th>Contact's Email</th>
+                    <th>Job Title</th>
+                    <th>No. of Job Vacancy</th>
+                    <th>Action</th>
                 </tfoot>
               </table></div></div>
                   </div>
             <!-- /.box-body -->
           
                         </div>
+            </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             

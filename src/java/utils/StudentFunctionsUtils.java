@@ -168,10 +168,11 @@ public class StudentFunctionsUtils {
             String status = rs.getString("std_status");
             String co = rs.getString("co_id");
             String app = rs.getString("app_id");
+            int year = rs.getInt("std_year");
 
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Student user = new Student(std_id, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app);
+            Student user = new Student(std_id, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app,year);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;

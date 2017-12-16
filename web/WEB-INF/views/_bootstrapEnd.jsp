@@ -75,4 +75,15 @@ function confirm_decision_co(user_id){
     }
    return true;
  }
+ 
+ function confirm_decision_app(id){
+    if(confirm("Confirm delete the application with ID " + id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteApplication?id="+id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
 </script>
