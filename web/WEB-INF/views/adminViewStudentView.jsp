@@ -318,6 +318,11 @@
                                                 </td>
                                         </tr>
                                         
+                                        <tr>
+                                            <th>Practical Year:</th>
+                                            <td>${student.std_year}</td>
+                                        </tr>
+                                        
                                          <tr>
                                             <th>Coordinator's ID:</th>
                                             <td>${student.co_id}</td>

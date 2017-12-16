@@ -102,7 +102,8 @@ public class AdminCreateStudentServlet extends HttpServlet{
         String course = (String) request.getParameter("course");
         float cgpa = 0;
         String coId = (String) request.getParameter("coID");
-        
+        String yearStr =(String) request.getParameter("year");
+        int year=0;
         
         String errorString = null;
         
@@ -110,6 +111,12 @@ public class AdminCreateStudentServlet extends HttpServlet{
         
         try {
             cgpa = Float.parseFloat(cgpaStr);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+        try {
+            year = Integer.parseInt(yearStr);
         } catch (NumberFormatException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -128,7 +135,7 @@ public class AdminCreateStudentServlet extends HttpServlet{
         if(!MyUtils.isValidEmailAddress(email)){
             errorString = "Invalid e-mail format!";
         }
-        Student stu = new Student(id,password,level,name,gender,contact,email,matric,course,cgpa,"N",coId,"");
+        Student stu = new Student(id,password,level,name,gender,contact,email,matric,course,cgpa,"N",coId,"",year);
  
         try {
             DBUtils.insertStudent(conn, stu);

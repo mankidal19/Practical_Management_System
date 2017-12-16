@@ -23,11 +23,12 @@ public class Student extends UserAccount{
     private String std_status;
     private String co_id;
     private String app_id;
+    private int std_year;
 
     public Student() {
     }
 
-    public Student(String std_id, String std_pw, int std_level, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String std_status, String co_id, String app_id) {
+    public Student(String std_id, String std_pw, int std_level, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String std_status, String co_id, String app_id, int std_year) {
         this.std_id = std_id;
         this.std_pw = std_pw;
         this.std_level = std_level;
@@ -41,9 +42,10 @@ public class Student extends UserAccount{
         this.std_status = std_status;
         this.co_id = co_id;
         this.app_id = app_id;
+        this.std_year = std_year;
     }
 
-    public Student(String std_id, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String co_id) {
+    public Student(String std_id, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String co_id, int std_year) {
         this.std_id = std_id;
         this.std_name = std_name;
         this.std_gender = std_gender;
@@ -53,6 +55,15 @@ public class Student extends UserAccount{
         this.std_course = std_course;
         this.std_cgpa = std_cgpa;
         this.co_id = co_id;
+        this.std_year = std_year;
+    }
+
+    public int getStd_year() {
+        return std_year;
+    }
+
+    public void setStd_year(int std_year) {
+        this.std_year = std_year;
     }
 
     

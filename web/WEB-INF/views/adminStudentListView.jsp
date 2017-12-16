@@ -268,6 +268,7 @@
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
                     
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
+                    <th>Practical Year</th>
                     <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
                 </thead>
                 <tbody>
@@ -282,6 +283,7 @@
                   <td>${student.std_name}</td>
                   <td>${student.std_matric}</td>
                   <td>${student.std_course}</td>
+                  <td>${student.std_year}</td>
                   <td>
                       
                       <a role="button" class="btn btn-block bg-yellow btn-xs" href="viewStudent?id=${student.std_id}"><span class="fa fa-external-link"></span></a>
@@ -299,6 +301,7 @@
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Matric Number</th>
                     
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Course</th>
+                    <th>Practical Year</th>
                     <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 5%;">Action</th></tr>
                 </tfoot>
               </table></div></div>

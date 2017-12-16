@@ -91,7 +91,8 @@ public class AdminEditStudent  extends HttpServlet{
         String course = (String) request.getParameter("course");
         float cgpa = 0;
         String coId = (String) request.getParameter("coID");
-        
+        String yearStr =(String) request.getParameter("year");
+        int year=0;
         
         String errorString = null;
         
@@ -103,6 +104,14 @@ public class AdminEditStudent  extends HttpServlet{
             e.printStackTrace();
             errorString = e.getMessage();
         }
+        
+        try {
+            year = Integer.parseInt(yearStr);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+        
        //checks for valid coordinator ID
         try {
             if(DBUtils.findCoordinator(conn, coId)==null){
@@ -116,7 +125,7 @@ public class AdminEditStudent  extends HttpServlet{
         if(!MyUtils.isValidEmailAddress(email)){
             errorString = "Invalid e-mail format!";
         }
-        Student stu = new Student(id,name,gender,contact,email,matric,course,cgpa,coId);
+        Student stu = new Student(id,name,gender,contact,email,matric,course,cgpa,coId,year);
  
         try {
             DBUtils.updateStudent(conn, stu);

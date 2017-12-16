@@ -318,6 +318,13 @@
                                             </td>
                                         </tr>
                                         
+                                        <tr>
+                                            <th>Practical Year:</th>
+                                            <td>
+                                                <input type="number" min='2016' max='2050' step='1' name="year" required value="${student.std_year}"/>
+                                            </td>
+                                        </tr>
+                                        
                                          <tr>
                                              <th>Coordinator's ID: &nbsp;&nbsp;&nbsp;</th>
                                             <td><input type="text" name="coID" value="${student.co_id}" /></td>

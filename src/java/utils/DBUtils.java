@@ -90,10 +90,10 @@ public class DBUtils {
             String status = rs.getString("std_status");
             String coordinatorId = rs.getString("co_id");
             String appId = rs.getString("app_id");
-
+            int year = rs.getInt("std_year");
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, appId);
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, appId,year);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;
@@ -125,10 +125,10 @@ public class DBUtils {
             String status = rs.getString("std_status");
             String co = rs.getString("co_id");
             String app = rs.getString("app_id");
-
+            int year = rs.getInt("std_year");
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app);
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app,year);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;
@@ -533,11 +533,11 @@ public class DBUtils {
             String status = rs.getString("std_status");
             String coordinatorId = rs.getString("co_id");
             String applicationId = rs.getString("app_id");
-            
+            int year = rs.getInt("std_year");
             
             
            
-            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, applicationId);
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, applicationId,year);
             
             list.add(user);
         }
