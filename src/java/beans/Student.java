@@ -43,11 +43,25 @@ public class Student extends UserAccount{
         this.app_id = app_id;
     }
 
+    public Student(String std_id, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String co_id) {
+        this.std_id = std_id;
+        this.std_name = std_name;
+        this.std_gender = std_gender;
+        this.std_contact = std_contact;
+        this.std_email = std_email;
+        this.std_matric = std_matric;
+        this.std_course = std_course;
+        this.std_cgpa = std_cgpa;
+        this.co_id = co_id;
+    }
+
+    
+    
     public String getCo_id() {
         return co_id;
     }
 
-    public void setCo_id(String co_idd) {
+    public void setCo_id(String co_id) {
         this.co_id = co_id;
     }
 

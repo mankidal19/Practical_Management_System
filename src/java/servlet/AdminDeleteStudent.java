@@ -4,58 +4,82 @@
  * and open the template in the editor.
  */
 package servlet;
-import beans.*;
+
+/**
+ *
+ * @author NURUL AIMAN
+ */
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
+ 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.*;
-/**
- *
- * @author NURUL AIMAN
- */
-@WebServlet(urlPatterns = { "/studentList" })
-public class StudentListServlet extends HttpServlet{
-     private static final long serialVersionUID = 1L;
+ 
+import beans.*;
+import utils.DBUtils;
+import utils.MyUtils;
+ 
+@WebServlet(urlPatterns = { "/deleteStudent" })
 
-    public StudentListServlet() {
+public class AdminDeleteStudent extends HttpServlet {
+     private static final long serialVersionUID = 1L;
+     
+     
+    public AdminDeleteStudent() {
         super();
+    
     }
     
-    @Override
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
+        String stuId = (String) request.getParameter("id");
+ 
+        Student stu = null;
+ 
         String errorString = null;
-        List<Student> list = null;
+        
+        
+        
         try {
-            list = DBUtils.queryStudent(conn);
+           DBUtils.deleteStudent(conn, stuId);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
-        // Store info in request attribute, before forward to views
-        request.setAttribute("errorString", errorString);
-        request.setAttribute("studentList", list);
-         
-        // Forward to /WEB-INF/views/productListView.jsp
-        RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/adminStudentListView.jsp");
-        dispatcher.forward(request, response);
-    }
  
+        // If no error.
+        // The product does not exist to edit.
+        // Redirect to productList page.
+        if (errorString != null && stu == null) {
+            // Store errorString in request attribute, before forward to views.
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("student", stu);
+            response.sendRedirect(request.getContextPath() + "/studentList");
+            return;
+        }
+        
+        else{
+            response.sendRedirect(request.getContextPath() + "/studentList");
+        }
+ 
+        
+ 
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
     
-     
+    
 }

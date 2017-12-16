@@ -1,12 +1,14 @@
 <%-- 
-    Document   : adminAddCoordinator
-    Created on : Nov 28, 2017, 8:23:01 AM
+    Document   : adminViewStudentView
+    Created on : Dec 16, 2017, 4:35:06 AM
     Author     : NURUL AIMAN
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -186,8 +188,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <<li><a href=${pageContext.request.contextPath}/createStudent><i class="fa fa-circle-o"></i> Add New Student</a></li>
+                                <li class="active"><a href= ${pageContext.request.contextPath}/studentList><i class="fa fa-circle-o"></i> View Students List</a></li>
                             </ul>
                         </li>
 
@@ -200,8 +202,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href=${pageContext.request.contextPath}/createCoordinator><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
-                                <li><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/createCoordinator"><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorList"><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
                             </ul>
                         </li>
 
@@ -235,8 +237,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Manage Coordinator
-                        <small>Manage coordinator of UTM Practical Management System</small>
+                        Manage Student
+                        <small>Manage student of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -254,78 +256,88 @@
 
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
-                            <h3 class="box-title">CREATE NEW COORDINATOR ACCOUNT</h3>
+                            <h3 class="box-title">VIEW STUDENT'S DETAILS</h3>
                             
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
-                            <c:if test="${not empty newId}">
+                            <c:if test="${not empty student}">
 
-                                <form method="POST" action="${pageContext.request.contextPath}/createCoordinator">
-                                    
-                                    <table border="0">
-                                        <tr>
-                                            <td>Coordinator's ID</td>
-                                            <td>
-                                                <input type="text" style="color:red;" readonly name="co_id" value="${newId}">
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>Coordinator's Password (default password 123)</td>
-                                            <td> 
-                                        <input type="password" style="color:red;" readonly name="password" value="123">
-                                            </td>
-                                        </tr>
-
-                                        <div class="form-group" style="display:none;">
+                                <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
+                                  
+                                    <table border="0"><br> <br>  
+                                        <row class='col-md-4'></row>
+                                        <row class='col-md-8'>
                                             
-                                                <input type="number" name="level" value="2"/>
-                                            
-                                        </div>
-
+                                         <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')><span class="glyphicon glyphicon-trash"></span></a>
+                  
+                                        </row> 
+                      
                                         <tr>
-                                            <td>Name</td>
-                                            <td><input type="text" name="name" placeholder='Enter name' /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Department</td>
-                                            <!--<td><input type="text" name="department" placeholder='Enter department' /></td>-->
+                                            <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
                                             <td>
-                                                <select name='department'>
-                                                    <option value='SCSJ'>SCSJ</option>
-                                                    <option value='SCSR'>SCSR</option>
-                                                    <option value='SCSB'>SCSB</option>
-                                                    <option value='SCSV'>SCSV</option>
-                                                    <option value='SCSD'>SCSD</option>
-                                                </select>
+                                                ${student.std_id}
                                             </td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>Position</td>
-                                           <!-- <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>-->
-                                            <td>
-                                                <select name='position'>
-                                                    <option value='Lecturer'>Lecturer</option>
-                                                    <option value='Senior Lecturer'>Senior Lecturer</option>
-                                                    <option value='Associate Professor'>Associate Professor</option>
-                                                    <option value='Head of Department'>Head of Department</option>
-                                                    <option value='Deputy Dean'>Deputy Dean</option>
-                                                    <option value='Dean'>Dean</option>
-                                                </select>
-                                            </td> 
+                                            <th>Name: </th>
+                                            <td>${student.std_name}</td>
                                         </tr>
                                         
                                         <tr>
-                                            <td colspan = "2">
-                                                <input type="submit" value="Submit" />
-                                                <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
-                                            </td>
+                                            <th>Gender:</th>
+                                            <td>${gender}</td>
                                         </tr>
+                                        
+                                        <tr>
+                                            <th>Contact Number:</th>
+                                            <td>${student.std_contact}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Email:</th>
+                                            <td>${student.std_email}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Matric Number:</th>
+                                            <td>${student.std_matric}</td>
+                                        </tr>
+                                         
+                                        <tr>
+                                            <th>Course:</th>
+                                            <td>${student.std_course}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>CGPA:</th>
+                                            <td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${student.std_cgpa}"/>
+                                                </td>
+                                        </tr>
+                                        
+                                         <tr>
+                                            <th>Coordinator's ID:</th>
+                                            <td>${student.co_id}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Coordinator's Name: &nbsp;</th>
+                                            <td>${coordinator.coordinatorName}</td>
+                                        </tr>
+                                        
+                                        
+                                        <tr>
+                                            <th>Application Status:</th>
+                                            <td>${status}</td>
+                                        </tr>
+                                        
+                                        
+                                        
                                     </table>
-                                </form>
+                                
                             </c:if>
 
                         </div>
@@ -364,3 +376,4 @@
 
     </body>
 </html>
+

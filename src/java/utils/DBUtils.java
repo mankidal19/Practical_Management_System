@@ -374,7 +374,29 @@ public class DBUtils {
         out.println(pstm);
         
     }
-    
+   
+     public static void updateStudent(Connection conn, Student stu) throws SQLException {
+        String sql = "update student set std_name =?, std_gender=?, std_contact=?, std_email=?, std_course=?, std_cgpa=?, co_id=? where std_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, stu.getStd_name());
+        pstm.setString(2, stu.getStd_gender());
+        pstm.setString(3, stu.getStd_contact());
+        pstm.setString(4, stu.getStd_email());
+        pstm.setString(5, stu.getStd_course());
+        pstm.setFloat(6, stu.getStd_cgpa());
+        pstm.setString(7, stu.getCo_id());
+        pstm.setString(8, stu.getStd_id());
+        
+        
+        pstm.executeUpdate();
+        
+        out.println(conn);
+        out.println(pstm);
+        
+    }
+   
     public static void insertProduct(Connection conn, Product product) throws SQLException {
         String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
 
@@ -414,6 +436,16 @@ public class DBUtils {
     
     public static void deleteCoordinator(Connection conn, String id) throws SQLException {
         String sql = "Delete From Coordinator where co_id= ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, id);
+
+        pstm.executeUpdate();
+    }
+    
+    public static void deleteStudent(Connection conn, String id) throws SQLException {
+        String sql = "Delete From student where std_id= ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 

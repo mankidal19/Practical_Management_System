@@ -46,7 +46,9 @@ public class DeleteCoordinatorServlet extends HttpServlet {
         Coordinator co = null;
  
         String errorString = null;
- 
+        
+        
+        
         try {
            DBUtils.deleteCoordinator(conn, coId);
         } catch (SQLException e) {

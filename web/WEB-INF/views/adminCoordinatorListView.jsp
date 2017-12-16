@@ -216,7 +216,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
@@ -362,7 +362,7 @@
                   <td>${coordinator.coordinatorPosition}</td>
                   <td style="width: 5;">
                       <a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a role="button" class="btn btn-block btn-danger btn-xs" href="deleteCoordinator?id=${coordinator.coordinatorId}"><span class="glyphicon glyphicon-trash"></span></a>                      
+                      <a role="button" class="btn btn-block btn-danger btn-xs"  onclick="confirm_decision_co('${coordinator.coordinatorId}')"><span class="glyphicon glyphicon-trash"></span></a>                      
                       </td>
                 </tr>
        </c:forEach>

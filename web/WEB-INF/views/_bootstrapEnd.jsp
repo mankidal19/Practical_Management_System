@@ -53,4 +53,26 @@
   }
 
 });
+
+function confirm_decision_co(user_id){
+    if(confirm("Confirm delete the coordinator with ID " + user_id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteCoordinator?id="+user_id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
+ 
+ function confirm_decision_stu(user_id){
+    if(confirm("Confirm delete the student with ID " + user_id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteStudent?id="+user_id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
 </script>

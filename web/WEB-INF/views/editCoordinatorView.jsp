@@ -214,7 +214,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
@@ -236,7 +236,7 @@
                 <section class="content-header">
                     <h1>
                         Manage Coordinator
-                        <small>it all starts here</small>
+                        <small>Manage coordinator of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -266,7 +266,7 @@
                                     
                                     <table border="0">
                                         <tr>
-                                            <td>Coordinator's ID</td>
+                                            <th>Coordinator's ID:&nbsp;&nbsp;&nbsp;</th>
                                             <td>
                                                 <input type="text" style="color:red;" readonly name="co_id" value="${coordinator.coordinatorId}">
                                             </td>
@@ -278,22 +278,22 @@
                                         <input type="text" style="color:red;" readonly name="password" value="${coordinator.coordinatorPassword}">
                                             </td>
                                         </tr>
-                                        <div class="form-group" style="visibility: hidden;">
+                                        <div class="form-group" style="display: none;">
                                             
                                                 <input type="number" name="level" value="${coordinator.coordinatorLevel}" value="2"/>
                                             
                                         </div>
                                         <tr>
-                                            <td>Name</td>
+                                            <th>Name:</th>
                                             <td><input type="text" name="name" value="${coordinator.coordinatorName}" /></td>
                                         </tr>
                                         <tr>
-                                            <td>Department</td>
+                                            <th>Department:</th>
                                             <td><input type="text" name="department" value="${coordinator.coordinatorDepartment}" /></td>
                                         </tr>
                                         
                                         <tr>
-                                            <td>Position</td>
+                                            <th>Position:</th>
                                             <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>
                                         </tr>
                                         
