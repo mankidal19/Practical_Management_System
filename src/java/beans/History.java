@@ -5,57 +5,79 @@
  */
 package beans;
 
+import java.util.Date;
+
 /**
  *
  * @author Nurfarahin Nadhirah
  */
 public class History {
-      private String stdName;
-      private String stdMatric;
-      private String companyName;
-      private String stdStatus;
+      private String histID;
+      private String stdID;
+      private String appID;
+      private String appStatus;
+      private Date appDate;
     
 
     public History(){
     }
 
-    public History(String stdName, String stdMatric, String companyName, String stdStatus) {
-        this.stdName=stdName;
-        this.stdMatric=stdMatric;
-        this.companyName=companyName;
-        this.stdStatus=stdStatus;
+    public History(String histID, String stdID, String appID, Date appDate) {
+        this.histID = histID;
+        this.stdID = stdID;
+        this.appID = appID;
+        this.appDate = appDate;
+        this.appStatus = "P";
     }
 
-    public String getStdName() {
-        return stdName;
+    public History(String histID, String stdID, String appID, String appStatus, Date appDate) {
+        this.histID = histID;
+        this.stdID = stdID;
+        this.appID = appID;
+        this.appStatus = appStatus;
+        this.appDate = appDate;
     }
 
-    public void setStdName(String stdName) {
-        this.stdName = stdName;
+    public String getHistID() {
+        return histID;
     }
 
-    public String getStdMatric() {
-        return stdMatric;
+    public void setHistID(String histID) {
+        this.histID = histID;
     }
 
-    public void setStdMatric(String stdMatric) {
-        this.stdMatric = stdMatric;
+    public String getStdID() {
+        return stdID;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public void setStdID(String stdID) {
+        this.stdID = stdID;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public String getAppID() {
+        return appID;
     }
 
-    public String getStdStatus() {
-        return stdStatus;
+    public void setAppID(String appID) {
+        this.appID = appID;
     }
 
-    public void setStdStatus(String stdStatus) {
-        this.stdStatus = stdStatus;
+    public String getAppStatus() {
+        return appStatus;
     }
-          
+
+    public void setAppStatus(String appStatus) {
+        this.appStatus = appStatus;
+    }
+
+    public Date getAppDate() {
+        return appDate;
+    }
+
+    public void setAppDate(Date appDate) {
+        this.appDate = appDate;
+    }
+    
+    
+    
 }

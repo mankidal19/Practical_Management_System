@@ -1,41 +1,28 @@
 <%-- 
-    Document   : stdDashboard
-    Created on : Nov 23, 2017, 12:14:24 AM
-    Author     : Nurfarahin Nadhirah
+    Document   : studentApplicationListView
+    Created on : Dec 17, 2017, 2:45:09 PM
+    Author     : NURUL AIMAN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Student Main View</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-    </head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Application List</title>
+        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        </head>
+        
+     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="#" class="logo">
+                <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -171,7 +158,7 @@ and open the template in the editor.
                         </div>
                         <div class="pull-left info">
                             <p>Student</p>
-                            <a href=""><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
                     <!-- search form -->
@@ -189,7 +176,7 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/studentMain">
+                            <a href="#">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -202,9 +189,9 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -238,42 +225,90 @@ and open the template in the editor.
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
+                        Application Form
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home </a></li>
+                        <li><a href="#">Practical Training</a></li>
+                        <li class="active">Apply New Application</a></li>
                     </ol>
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
-
+ 
                     <!-- Default box -->
                     <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">APPLICATION LIST</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body container-fluid">
+                 <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
+                  <div class="row"><div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row">
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Contact Person</th>
+                    <th>Contact's Phone No</th>
+                    <th>Contact's Email</th>
+                    <th>Job Title</th>
+                    <th>No. of Job Vacancy</th>
+                    <th style="width: 5;">Action</th>
+                
+                
+                </thead>
+                <tbody>
+              
+          <c:forEach items="${companyList}" var="company">
+           <tr role="row" class="odd">
+                  <td class="sorting_1">${company.applicationCompany}</td>
+                  <td>${company.applicationAddress}</td>
+                  <td>${company.applicationName}</td>
+                  <td>${company.appplicationNumber}</td>
+                  <td>${company.applicationEmail}</td>
+                  <td>${company.applicationJobTitle}</td>
+                  <td>${company.applicationJob}</td>
+                  <td>
+                      <a role="button" class="btn btn-block btn-warning btn-xs" href="viewApplication?id=${company.applicationId}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                      <a role="button" class="btn btn-block btn-info btn-xs"  onclick="confirm_apply('${company.applicationId}')"><span class="glyphicon glyphicon-pencil"></span></a>                      
+                      </td>
+                </tr>
+       </c:forEach>
+               
+                
+                <tfoot>
+                <tr role="row"><th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Contact Person</th>
+                    <th>Contact's Phone No</th>
+                    <th>Contact's Email</th>
+                    <th>Job Title</th>
+                    <th>No. of Job Vacancy</th>
+                    <th>Action</th>
+                </tfoot>
+              </table></div></div>
+                  </div>
+            <!-- /.box-body -->
+          
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
-                        </div>
+            </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            Footer
+                            
                         </div>
                         <!-- /.box-footer-->
-                    </div>
-                    <!-- /.box -->
-
+                    
+                   
+                        
+                        
+                       
                 </section>
                 <!-- /.content -->
             </div>
@@ -289,29 +324,6 @@ and open the template in the editor.
 
 
 
-            <!-- ./wrapper -->
-
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
-
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
+            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
     </body>
 </html>

@@ -144,6 +144,10 @@ public class LoginServlet extends HttpServlet {
         // And redirect to userInfo page.
         else {
             HttpSession session = request.getSession();
+            
+            //set timeout to 15 minutes
+            session.setMaxInactiveInterval(15 * 60);
+            
             MyUtils.storeLoginedUser(session, user);
             RequestDispatcher dispatcher = null;
 
@@ -174,12 +178,15 @@ public class LoginServlet extends HttpServlet {
             switch (user.getUserLevel()) {
                 case 1:
                     response.sendRedirect(request.getContextPath() + "/adminMain");
+                    MyUtils.storeLoginedUser(session, userAdmin);
                     break;
                 case 2:
                     response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    MyUtils.storeLoginedUser(session, userCoordinator);
                     break;
                 case 3:
                     response.sendRedirect(request.getContextPath() + "/studentMain");
+                    MyUtils.storeLoginedUser(session, userStudent);
                     break;
                 default:
                     dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");

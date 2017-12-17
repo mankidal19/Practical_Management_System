@@ -86,4 +86,15 @@ function confirm_decision_co(user_id){
     }
    return true;
  }
+ 
+ function confirm_apply(id){
+    if(confirm("Confirm applying for application with ID " + id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="applyApplication?id="+id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
 </script>

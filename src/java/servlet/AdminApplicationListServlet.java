@@ -50,9 +50,39 @@ public class AdminApplicationListServlet extends HttpServlet{
             request.setAttribute("errorString", errorString);
             request.setAttribute("companyList", list);
 
-           // Forward to /WEB-INF/views/productListView.jsp
-            RequestDispatcher dispatcher = request.getServletContext()
+            
+            //Forwarding page based on user level
+            UserAccount user = null;
+        HttpSession session = request.getSession();
+        user = MyUtils.getLoginedUser(session);
+        RequestDispatcher dispatcher = null;
+        
+        if(user == null){
+            // Forward to /WEB-INF/views/loginView.jsp
+            // (Users can not access directly into JSP pages placed in WEB-INF)
+            dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            switch (user.getUserLevel()) {
+                case 1:
+                    dispatcher = request.getServletContext()
                     .getRequestDispatcher("/WEB-INF/views/adminApplicationListView.jsp");
+                    break;
+                case 2:
+                    //response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    break;
+                case 3:
+                     dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/views/studentApplicationListView.jsp");
+                    break;
+                default:
+                    dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                    
+                    break;
+            }
+        }
+           
+            
             dispatcher.forward(request, response);
             
         }
