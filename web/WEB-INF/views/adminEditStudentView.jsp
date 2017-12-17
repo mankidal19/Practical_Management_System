@@ -334,7 +334,7 @@
                                         
                                        <tr>
                                             <td colspan = "2">
-                                                <input type="submit" value="Submit" />
+                                                <input type="submit" name="submit" value="Update"/>
                                                 <a href="${pageContext.request.contextPath}/studentList">Cancel</a>
                                             </td>
                                         </tr>

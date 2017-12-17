@@ -41,7 +41,7 @@ public class AdminApplicationListServlet extends HttpServlet{
             String errorString = null;
             List<Application> list = null;
             try {
-                list = CoordinatorFunctionUtils.queryCompany(conn);
+                list = DBUtils.queryCompany(conn);
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorString = e.getMessage();

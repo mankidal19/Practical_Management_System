@@ -72,6 +72,10 @@ public class AdminCreateApplication extends HttpServlet {
             throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
+    String errorString = null;
+    
+    
+        Connection conn = MyUtils.getStoredConnection(request);
     
     int cid = Integer.parseInt(request.getParameter("cId"));
     String index = "AP" + String.format ("%03d", cid);
@@ -82,59 +86,61 @@ public class AdminCreateApplication extends HttpServlet {
     String cEmail = request.getParameter("cContactEmail");
     String job = request.getParameter("cJob");
     String jobtitle = request.getParameter("cJobTitle");
+    int jobNum=0;
     
-    ArrayList error  = new ArrayList();
+     try {
+            jobNum = Integer.parseInt(job);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+    
     if(cName == null || "".equals(cName)){
-        error.add("COMPANY NAME REQUIRED");
+         errorString = "COMPANY NAME REQUIRED";
     }
     if(cAddress == null || "".equals(cAddress)){
-        error.add("COMPANY ADDRESS REQUIRED");
+         errorString = "COMPANY ADDRESS REQUIRED";
     }
     if(cContact == null || "".equals(cContact)){
-        error.add("COMPANY CONTACT PERSON REQUIRED");
+        errorString = "COMPANY CONTACT PERSON REQUIRED";
     }
     if(cPhone == null || "".equals(cPhone)){
-        error.add("COMPANY PHONE REQUIRED");
+        errorString = "COMPANY PHONE REQUIRED";
     }
     if(cEmail == null || "".equals(cEmail)){
-        error.add("COMPANY EMAIL REQUIRED");
+         errorString = "COMPANY EMAIL REQUIRED";
     }
     if(job == null || "".equals(job)){
-        error.add("INCOMPLETE JOB DETAILS");
+        errorString = "INCOMPLETE JOB DETAILS";
     }
     if(jobtitle == null || "".equals(jobtitle)){
-        error.add("INCOMPLETE JOB DETAILS");
+         errorString = "INCOMPLETE JOB DETAILS";
     }
     
-    if (!error.isEmpty()) {
+    //checks for valid email
+        if(!MyUtils.isValidEmailAddress(cEmail)){
+            
+             errorString = "Invalid e-mail format!";
+        }
+        
+        request.setAttribute("errorString", errorString);
+        
+    
+    if (errorString != null) {
          RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/adminAddApplicationView.jsp");
         dispatcher.forward(request, response);   
     }else{    
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = MyUtils.getStoredConnection(request);
-
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO APPLICATION VALUES (?,?,?,?,?,?,?,?)");
-            
-            pstmt.setString(1, index);
-            pstmt.setString(2, cName);
-            pstmt.setString(3, cContact);
-            pstmt.setString(4, cAddress);
-            pstmt.setString(5, cPhone);
-            pstmt.setString(6, cEmail);
-            pstmt.setString(7, job);
-            pstmt.setString(8, jobtitle);
+             Application app = new Application(index, cName, cAddress, cContact, cPhone, cEmail, jobNum, jobtitle);
            
-
-            pstmt.executeUpdate();
+        try {
+            DBUtils.insertApplication(conn, app);
 
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        out.println("Your form has been submitted successfully!Directing you to Company List");
+        out.println("Your form has been submitted successfully!Directing you to Application List");
 
          response.sendRedirect(request.getContextPath() + "/applicationList");
         }

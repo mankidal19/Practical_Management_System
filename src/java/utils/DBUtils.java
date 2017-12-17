@@ -67,6 +67,32 @@ public class DBUtils {
         return null;
     }
 */
+    
+    public static List<Application> queryCompany(Connection conn) throws SQLException {
+        String sql = "Select * from Application ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        List<Application> list = new ArrayList<Application>();
+        while (rs.next()) {
+            String applicationId = rs.getString("app_id");
+            String applicationCompany = rs.getString("app_company");
+            String applicationAddress = rs.getString("app_address");
+            String applicationName = rs.getString("app_name");
+            String appplicationNumber = rs.getString("app_number");
+            String applicationEmail = rs.getString("app_email");
+            int applicationJob = rs.getInt("app_job");
+            String applicationJobTitle = rs.getString("app_jobtitle");
+            
+           
+            Application app = new Application(applicationId, applicationCompany, applicationAddress, applicationName,appplicationNumber, applicationEmail,applicationJob, applicationJobTitle);
+            
+            list.add(app);
+        }
+        return list;
+    }
+
     public static Student findStudent(Connection conn, String userName, String password) throws SQLException {
 
         String sql = "Select * from Student "//
@@ -190,6 +216,34 @@ public class DBUtils {
         return null;
     }
 
+    public static Application findApplication(Connection conn, String id) throws SQLException {
+
+        String sql = "Select * from Application where app_id = ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, id);
+
+        ResultSet rs = pstm.executeQuery();
+
+        if (rs.next()) {
+            String applicationId = rs.getString("app_id");
+            String applicationCompany = rs.getString("app_company");
+            String applicationAddress = rs.getString("app_address");
+            String applicationName = rs.getString("app_name");
+            String appplicationNumber = rs.getString("app_number");
+            String applicationEmail = rs.getString("app_email");
+            int applicationJob = rs.getInt("app_job");
+            String applicationJobTitle = rs.getString("app_jobtitle");
+            
+           
+            Application app = new Application(applicationId, applicationCompany, applicationAddress, applicationName,appplicationNumber, applicationEmail,applicationJob, applicationJobTitle);
+           
+            return app;
+        }
+        return null;
+    }
+
+    
     
     public static List<Product> queryProduct(Connection conn) throws SQLException {
         String sql = "Select a.Code, a.Name, a.Price from Product a ";
@@ -376,7 +430,7 @@ public class DBUtils {
     }
    
      public static void updateStudent(Connection conn, Student stu) throws SQLException {
-        String sql = "update student set std_name =?, std_gender=?, std_contact=?, std_email=?, std_course=?, std_cgpa=?, co_id=? where std_id=? ";
+        String sql = "update student set std_name =?, std_gender=?, std_contact=?, std_email=?, std_course=?, std_cgpa=?, co_id=?, std_year=?, std_matric=? where std_id=? ";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -387,7 +441,9 @@ public class DBUtils {
         pstm.setString(5, stu.getStd_course());
         pstm.setFloat(6, stu.getStd_cgpa());
         pstm.setString(7, stu.getCo_id());
-        pstm.setString(8, stu.getStd_id());
+        pstm.setInt(8, stu.getStd_year());
+        pstm.setString(9,stu.getStd_matric());
+        pstm.setString(10, stu.getStd_id());
         
         
         pstm.executeUpdate();
@@ -397,6 +453,29 @@ public class DBUtils {
         
     }
    
+     public static void updateApplication(Connection conn, Application app) throws SQLException {
+        String sql = "update application set app_company =?, app_name=?, app_address=?, app_number=?, app_email=?, app_job=?, app_jobtitle=? where app_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, app.getApplicationCompany());
+        pstm.setString(2, app.getApplicationName());
+        pstm.setString(3, app.getApplicationAddress());
+        pstm.setString(4, app.getAppplicationNumber());
+        pstm.setString(5, app.getApplicationEmail());
+        pstm.setInt(6, app.getApplicationJob());
+        pstm.setString(7, app.getApplicationJobTitle());
+        pstm.setString(8, app.getApplicationId());
+        
+        
+        pstm.executeUpdate();
+        
+        out.println(conn);
+        out.println(pstm);
+        
+    }
+   
+     
     public static void insertProduct(Connection conn, Product product) throws SQLException {
         String sql = "Insert into Product(Code, Name,Price) values (?,?,?)";
 
@@ -424,8 +503,26 @@ public class DBUtils {
         pstm.executeUpdate();
     }
 
+     public static void insertApplication(Connection conn, Application app) throws SQLException {
+        String sql = "INSERT INTO APPLICATION VALUES (?,?,?,?,?,?,?,?)";
+            
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+         pstm.setString(2, app.getApplicationCompany());
+        pstm.setString(3, app.getApplicationName());
+        pstm.setString(4, app.getApplicationAddress());
+        pstm.setString(5, app.getAppplicationNumber());
+        pstm.setString(6, app.getApplicationEmail());
+        pstm.setInt(7, app.getApplicationJob());
+        pstm.setString(8, app.getApplicationJobTitle());
+        pstm.setString(1, app.getApplicationId());
+
+        pstm.executeUpdate();
+    }
+
+    
     public static void insertStudent(Connection conn, Student stu) throws SQLException {
-        String sql = "Insert into Student(std_id,std_pw, std_level, std_name,std_gender,std_contact,std_email,std_course,std_cgpa,std_status,co_id,app_id,std_matric) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "Insert into Student(std_id,std_pw, std_level, std_name,std_gender,std_contact,std_email,std_course,std_cgpa,std_status,co_id,app_id,std_matric,std_year) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -442,7 +539,7 @@ public class DBUtils {
         pstm.setString(11, stu.getCo_id());
         pstm.setString(12, stu.getApp_id());
         pstm.setString(13, stu.getStd_matric());
-        
+        pstm.setInt(14, stu.getStd_year());
         
         
         
@@ -480,6 +577,17 @@ public class DBUtils {
 
         pstm.executeUpdate();
     }
+    
+    public static void deleteApplication(Connection conn, String id) throws SQLException {
+        String sql = "Delete From application where app_id= ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, id);
+
+        pstm.executeUpdate();
+    }
+    
     
      public static List<Coordinator> queryCoordinator(Connection conn) throws SQLException {
         String sql = "Select * from Coordinator ";

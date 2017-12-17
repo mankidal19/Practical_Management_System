@@ -262,7 +262,7 @@
                         <div class="box-body">
 
 
-                                <form method="POST" action="${pageContext.request.contextPath}/createApplication">
+                                <form id="editForm" method="POST" action="${pageContext.request.contextPath}/createApplication">
                                     
                                     <table>
                                         <tr>
@@ -276,7 +276,8 @@
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <th>Company Address:</th>
-                                    <td><input type="textarea" name="cAddress" size="25%"/></td>
+                                    <td><textarea rows="3" cols="30" name="cAddress" form="editForm">
+                                        </textarea></td>
                                 </tr>
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
@@ -296,7 +297,7 @@
                                     <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <th>Job Vacancy:</th>
-                                    <td><input type="number" name="cJob" value="" size="25%"/></td>
+                                    <td><input type="number" min="1" max="5" step="1" name="cJob" value="" size="25%"/></td>
                                 </tr>
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
@@ -306,13 +307,13 @@
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <td colspan="2">
-                                        <input type="submit" name="submit" />
+                                        <input type="submit" name="submit"  />
                                     <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
                                     </td>
                                     
                                 </tr>
                                                
-                                        </tr>
+                                        
                                     </table>
                                 </form>
 

@@ -300,7 +300,7 @@
                                         
                                         <tr>
                                             <td colspan = "2">
-                                                <input type="submit" value="Submit" />
+                                                <input type="submit" name="submit" value="Update"/>
                                                 <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
                                             </td>
                                         </tr>
