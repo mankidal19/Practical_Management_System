@@ -672,6 +672,41 @@ public class DBUtils {
         
      }
 
+      public static int getNumOfApplication(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from Application";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+       public static int getNumOfHistory(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from History";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+     
      public static int getNumOfStudent(Connection conn) throws SQLException{
       String sql = "Select count(*) as total from Student ";
 
@@ -690,5 +725,31 @@ public class DBUtils {
      }
      
 
+public static List<History> queryHistory(Connection conn) throws SQLException {
+        String sql = "Select * from History";
 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ;
+        
+        ResultSet rs = pstm.executeQuery();
+        List<History> list = new ArrayList<History>();
+        
+       
+        
+        while (rs.next()) {
+            String historyId = rs.getString("history_id");
+             String appId = rs.getString("app_id");
+            String status = rs.getString("std_status");
+            java.util.Date appDate = rs.getDate("app_date");
+            String stdId = rs.getString("std_id");
+            
+            History hist = new History(historyId, stdId, appId, status, appDate);
+            
+            list.add(hist);
+            
+        }
+        return list;
+    }
+
+    
 }

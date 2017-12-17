@@ -217,6 +217,7 @@
                             <ul class="treeview-menu">
                                 <li class="active"><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
                             </ul>
                         </li>
 
@@ -256,66 +257,66 @@
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
                             <h3 class="box-title">OPEN NEW APPLICATION</h3>
-                            
+
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
 
-                                <form id="editForm" method="POST" action="${pageContext.request.contextPath}/createApplication">
-                                    
-                                    <table>
-                                        <tr>
-                                    <td><input type="hidden" name="cId" value="${companyLastIndex + 1}" size="25%"/></td>
-                                </tr>
-                                
-                                <tr>
-                                    <th>Company Name:</th>
-                                    <td><input type="text" name="cName" value="" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Address:</th>
-                                    <td><textarea rows="3" cols="30" name="cAddress" form="editForm">
-                                        </textarea></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Person:</th>
-                                    <td><input type="text" name="cContactName" value="" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Phone No:&nbsp;&nbsp;&nbsp;</th>
-                                    <td><input type="text" name="cContactNumber" value="" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Email:</th>
-                                    <td><input type="mail" name="cContactEmail" value="" size="25%" /></td>
-                                </tr>
+                            <form id="editForm" method="POST" action="${pageContext.request.contextPath}/createApplication">
+
+                                <table>
+                                    <tr>
+                                        <td><input type="hidden" name="cId" value="${companyLastIndex + 1}" size="25%"/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Company Name:</th>
+                                        <td><input type="text" name="cName" value="" size="25%"/></td>
+                                    </tr>
                                     <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Job Vacancy:</th>
-                                    <td><input type="number" min="1" max="5" step="1" name="cJob" value="" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Job Title:</th>
-                                    <td><input type="text" name="cJobTitle" value="" size="25%" /></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="submit" name="submit"  />
-                                    <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
-                                    </td>
-                                    
-                                </tr>
-                                               
-                                        
-                                    </table>
-                                </form>
+                                    <tr>
+                                        <th>Company Address:</th>
+                                        <td><textarea rows="3" cols="30" name="cAddress" form="editForm">
+                                            </textarea></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Company Contact Person:</th>
+                                        <td><input type="text" name="cContactName" value="" size="25%"/></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Company Contact Phone No:&nbsp;&nbsp;&nbsp;</th>
+                                        <td><input type="text" name="cContactNumber" value="" size="25%"/></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Company Contact Email:</th>
+                                        <td><input type="mail" name="cContactEmail" value="" size="25%" /></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Job Vacancy:</th>
+                                        <td><input type="number" min="1" max="5" step="1" name="cJob" value="" size="25%"/></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Job Title:</th>
+                                        <td><input type="text" name="cJobTitle" value="" size="25%" /></td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="submit" name="submit"  />
+                                            <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
+                                        </td>
+
+                                    </tr>
+
+
+                                </table>
+                            </form>
 
                         </div>
                         <!-- /.box-body -->
@@ -323,7 +324,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        
+
                     </div>
                     <!-- /.box-footer-->
 

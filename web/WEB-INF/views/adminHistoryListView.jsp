@@ -1,12 +1,12 @@
 <%-- 
-    Document   : adminEditApplicationView
-    Created on : Dec 16, 2017, 11:14:17 PM
+    Document   : adminHistoryListView
+    Created on : Dec 18, 2017, 6:23:03 AM
     Author     : NURUL AIMAN
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
         <jsp:include page="_bootstrapHead.jsp"></jsp:include>
         </head>
         <body class="hold-transition skin-purple sidebar-mini">
-
+            
             <!-- Site wrapper -->
             <div class="wrapper">
 
@@ -169,6 +169,8 @@
                             </span>
                         </div>
                     </form>
+                    
+                    
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
@@ -216,8 +218,8 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
-                                <li class="active"><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
-                            <li><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
+                            <li class="active"><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
                             </ul>
                         </li>
 
@@ -233,12 +235,16 @@
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
+            
             <div class="content-wrapper">
+                
+                 
+                
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
                         Manage Application
-                        <small>Manage Application of UTM Practical Management System</small>
+                        <small>Manage application of UTM Practical Management System</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -249,92 +255,79 @@
 
                 <!-- Main content -->
                 <section class="content">
-
+ 
                     <!-- Default box -->
                     <div class="box">
-
-
-                        <div class="box-header">
-                            <p style="color: red;">${errorString}</p>
-                            <h3 class="box-title">EDIT APPLICATION DETAILS</h3>
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">APPLICATION LIST</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body container-fluid">
+                 <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
+                  <div class="row"><div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row">
+                    <th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student Matric Num</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                
+                
+                </thead>
+                <tbody>
+              
+          <c:forEach items="${historyList}" var="history" varStatus="status">
+           <tr role="row">
+                  <td>${history.histID}</td>
+                  <td>${history.appID}</td>
+                  <td>${studentList[status.index].std_matric}</td>
+                  <td>${studentList[status.index].std_name}</td>
+                  <td>${applicationList[status.index].applicationCompany}</td>
+                  <td>${applicationList[status.index].applicationAddress}</td>
+                  <td>${applicationList[status.index].applicationJobTitle}</td>
+                  <td>${history.appDate}</td>
+                  <td>${statusList[status.index]}</td>
+                </tr>
+       </c:forEach>
+               
+                
+                <tfoot>
+                <tr role="row"><th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                
+                </tfoot>
+              </table></div></div>
+                  </div>
+            <!-- /.box-body -->
+          
+                        </div>
+            </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
                             
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-
-                                <c:if test="${not empty application}">
-                                <form method="POST" action="${pageContext.request.contextPath}/editApplication" id="editForm">
-                                    
-                                    <table>
-                                        <tr>
-                                    <td><input type="hidden" name="cId" value="${application.applicationId}" size="25%"/></td>
-                                </tr>
-                                
-                                <tr>
-                                    <th>Company Name:</th>
-                                    <td><input type="text" name="cName" value="${application.applicationCompany}" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Address:</th>
-                                    <td>
-                                        <textarea  rows="3" cols="30" name="cAddress" form="editForm">${application.applicationAddress}
-                                        </textarea>
-                                    </td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Person:</th>
-                                    <td><input type="text" name="cContactName" value="${application.applicationName}" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Phone No:&nbsp;&nbsp;&nbsp;</th>
-                                    <td><input type="text" name="cContactNumber" value="${application.appplicationNumber}" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Company Contact Email:</th>
-                                    <td><input type="mail" name="cContactEmail" value="${application.applicationEmail}" size="25%" /></td>
-                                </tr>
-                                    <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Job Vacancy:</th>
-                                    <td><input type="number" min="1" max="5" step="1" name="cJob" value="${application.applicationJob}" size="25%"/></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <th>Job Title:</th>
-                                    <td><input type="text" name="cJobTitle" value="${application.applicationJobTitle}" size="25%" /></td>
-                                </tr>
-                                <tr><td>&nbsp;</td></tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="submit" name="submit" value="Update" class='btn-info'/>
-                                    <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
-                                    </td>
-                                    
-                                </tr>
-                                               
-                                        </tr>
-                                    </table>
-                                </form>
-                                </c:if>
-
-                        </div>
-                        <!-- /.box-body -->
-
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
+                        <!-- /.box-footer-->
+                    
+                   
                         
-                    </div>
-                    <!-- /.box-footer-->
-
-
-
-
-
+                        
+                       
                 </section>
                 <!-- /.content -->
             </div>
@@ -354,6 +347,6 @@
 
 
             <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
-
+           
     </body>
 </html>

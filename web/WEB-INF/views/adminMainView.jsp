@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -213,6 +215,7 @@
                             <ul class="treeview-menu">
                                 <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
                             </ul>
                         </li>
 
@@ -232,8 +235,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Blank page
-                        <small>it all starts here</small>
+                        Admin Dashboard
+                        <small>Overview current stats</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -248,18 +251,80 @@
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Overview</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
+
                         </div>
                         <div class="box-body">
-                            Start creating your amazing application!
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= ${pageContext.request.contextPath}/studentList>
+                                           <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Students</span>
+                                                <span class="info-box-number">${studentNum}</span>
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= ${pageContext.request.contextPath}/coordinatorList>
+                                           <span class="info-box-icon bg-teal"><i class="fa fa-users"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Coordinators</span>
+                                                <span class="info-box-number">${coordinatorNum}</span>
+                                            </div>
+                                        </a>
+
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= ${pageContext.request.contextPath}/applicationList>
+                                           <span class="info-box-icon bg-green"><i class="fa fa-address-card-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Applications<br> Posted</span>
+                                                <span class="info-box-number">${applicationNum}</span>
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= ${pageContext.request.contextPath}/historyList>
+                                           <span class="info-box-icon bg-yellow"><i class="fa fa-history"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Application<br>Histories</span>
+                                                <span class="info-box-number">${historyNum}</span>
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
