@@ -277,8 +277,8 @@
            <tr role="row" class="odd">
                   <td class="sorting_1">${student.std_id}</td>
                   <td>
-                      <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
-                                 
+                      <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" width='140px'>
+                            
                   </td>
                   <td>${student.std_name}</td>
                   <td>${student.std_matric}</td>

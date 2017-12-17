@@ -309,7 +309,7 @@
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <td colspan="2">
-                                        <input type="submit" name="submit" value="Update"/>
+                                        <input type="submit" name="submit" value="Update" class='btn-info'/>
                                     <a href="${pageContext.request.contextPath}/applicationList">Cancel</a>
                                     </td>
                                     

@@ -262,9 +262,15 @@
 
                             <c:if test="${not empty coordinator}">
 
-                                <form method="POST" action="${pageContext.request.contextPath}/editCoordinator">
+                                <form method="POST" action="${pageContext.request.contextPath}/editCoordinator" enctype="multipart/form-data">
                                     
                                     <table border="0">
+                                        <tr class="row row-centered">
+                                            <td colspan='2'>
+                                                <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" width='140px'>
+                                            </td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Coordinator's ID:&nbsp;&nbsp;&nbsp;</th>
                                             <td>
@@ -297,10 +303,17 @@
                                             <th>Position:</th>
                                             <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>
                                         </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                        <tr>
+                                            <th>Upload New Photo:&nbsp;</th>
+                                            <td><input type="file" name="photo" size="50"/></td>
+                                        </tr>
+                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         
                                         <tr>
                                             <td colspan = "2">
-                                                <input type="submit" name="submit" value="Update"/>
+                                                <input type="submit" name="submit" class='btn-info' value="Update"/>
                                                 <a href="${pageContext.request.contextPath}/coordinatorList">Cancel</a>
                                             </td>
                                         </tr>

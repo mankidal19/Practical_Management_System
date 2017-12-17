@@ -280,7 +280,9 @@
           <c:forEach items="${coordinatorList}" var="coordinator">
            <tr role="row" class="odd">
                   <td class="sorting_1">${coordinator.coordinatorId}</td>
-                  <td></td>
+                  <td>
+                     <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" width='140px'>
+                  </td>
                   <td>${coordinator.coordinatorName}</td>
                   <td>${coordinator.coordinatorDepartment}</td>
                   <td>${coordinator.coordinatorPosition}</td>

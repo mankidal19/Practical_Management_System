@@ -264,8 +264,10 @@
                         <div class="box-body">
 
                             <c:if test="${not empty student}">
-
-                                <form method="POST" action="">
+                                <row class='col-md-1'></row>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" width='140px'>
+                                    <br><br>
+                                <form method="POST" action="${pageContext.request.contextPath}/editStudent" enctype="multipart/form-data">
                                     
                                     <table border="0">
                                         <tr>
@@ -331,10 +333,16 @@
                                         </tr>
                                        <tr><td>&nbsp;</td></tr>
                                         
+                                       <tr>
+                                            <th>Upload New Photo:&nbsp;</th>
+                                            <td><input type="file" name="photo" size="50"/></td>
+                                        </tr>
+                                        
+                                        <tr><td>&nbsp;</td></tr>
                                         
                                        <tr>
                                             <td colspan = "2">
-                                                <input type="submit" name="submit" value="Update"/>
+                                                <input type="submit" name="submit" value="Update" class='btn-info'/>
                                                 <a href="${pageContext.request.contextPath}/studentList">Cancel</a>
                                             </td>
                                         </tr>

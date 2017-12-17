@@ -257,95 +257,99 @@
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
                             <h3 class="box-title">VIEW STUDENT'S DETAILS</h3>
-                            
+
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
                             <c:if test="${not empty student}">
+                                <row class='col-md-1'></row>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" width='140px'>
 
-                                <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
-                                  
-                                    <table border="0"><br> <br>  
-                                        <row class='col-md-4'></row>
-                                        <row class='col-md-8'>
-                                            
-                                         <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
-                  
-                                        </row> 
-                      
-                                        <tr>
-                                            <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
-                                            <td>
-                                                ${student.std_id}
-                                            </td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Name: </th>
-                                            <td>${student.std_name}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Gender:</th>
-                                            <td>${gender}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Contact Number:</th>
-                                            <td>${student.std_contact}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Email:</th>
-                                            <td>${student.std_email}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Matric Number:</th>
-                                            <td>${student.std_matric}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr> 
-                                        <tr>
-                                            <th>Course:</th>
-                                            <td>${student.std_course}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>CGPA:</th>
-                                            <td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${student.std_cgpa}"/>
-                                                </td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Practical Year:</th>
-                                            <td>${student.std_year}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                         <tr>
-                                            <th>Coordinator's ID:</th>
-                                            <td>${student.co_id}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Coordinator's Name: &nbsp;</th>
-                                            <td>${coordinator.coordinatorName}</td>
-                                        </tr>
-                                        
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Application Status:</th>
-                                            <td>${status}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Application ID:</th>
-                                            <td>${application}</td>
-                                        </tr>
-                                        
-                                    </table>
                                 
+                                
+                                <table border="0"><br> <br>  
+
+
+                                    <row class='col-md-4'></row>
+                                    <row class='col-md-8'>
+
+                                        <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
+
+                                    </row> 
+
+                                    <tr>
+                                        <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
+                                        <td>
+                                            ${student.std_id}
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Name: </th>
+                                        <td>${student.std_name}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Gender:</th>
+                                        <td>${gender}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Contact Number:</th>
+                                        <td>${student.std_contact}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>${student.std_email}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Matric Number:</th>
+                                        <td>${student.std_matric}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr> 
+                                    <tr>
+                                        <th>Course:</th>
+                                        <td>${student.std_course}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>CGPA:</th>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${student.std_cgpa}"/>
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Practical Year:</th>
+                                        <td>${student.std_year}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Coordinator's ID:</th>
+                                        <td>${student.co_id}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Coordinator's Name: &nbsp;</th>
+                                        <td>${coordinator.coordinatorName}</td>
+                                    </tr>
+
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Application Status:</th>
+                                        <td>${status}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Application ID:</th>
+                                        <td>${application}</td>
+                                    </tr>
+
+                                </table>
+
                             </c:if>
 
                         </div>
@@ -354,7 +358,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        
+
                     </div>
                     <!-- /.box-footer-->
 

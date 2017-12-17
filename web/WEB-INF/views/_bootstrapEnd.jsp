@@ -97,4 +97,5 @@ function confirm_decision_co(user_id){
     }
    return true;
  }
+ 
 </script>
