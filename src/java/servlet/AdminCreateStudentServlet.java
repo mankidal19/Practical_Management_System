@@ -23,12 +23,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 import beans.*;
+import java.io.InputStream;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 import utils.DBUtils;
 import utils.MyUtils;
+import utils.StudentFunctionsUtils;
 
 @WebServlet(urlPatterns = { "/createStudent" })
+@MultipartConfig
 
 public class AdminCreateStudentServlet extends HttpServlet{
 
@@ -137,15 +143,38 @@ public class AdminCreateStudentServlet extends HttpServlet{
         }
         Student stu = new Student(id,password,level,name,gender,contact,email,matric,course,cgpa,"N",coId,"",year);
  
-        try {
-            DBUtils.insertStudent(conn, stu);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            errorString = e.getMessage();
+        //upload photo features
+        InputStream inputStream = null; // input stream of the upload file
+
+        // obtains the upload file part in this multipart request
+        Part filePart = request.getPart("photo");
+        out.println(filePart);
+        
+        //update img blob if new image uploaded
+        if (filePart.getSize()!=0) {
+            // prints out some information for debugging
+            System.out.println(filePart.getName());
+            System.out.println(filePart.getSize());
+            System.out.println(filePart.getContentType());
+
+            // obtains input stream of the upload file
+            inputStream = filePart.getInputStream();
+
+            String message = null;  // message will be sent back to client
+
+            try {
+                // connects to the database
+                int row = StudentFunctionsUtils.uploadStudentPhoto(conn, stu.getStd_id(), inputStream);
+           if (row > 0) {
+                    message = "File uploaded and saved into database";
+                }
+            } catch (SQLException ex) {
+                message = "ERROR: " + ex.getMessage();
+                ex.printStackTrace();
+            }
+            // sets the message in request scope
+            request.setAttribute("Message", message);
         }
-        // Store infomation to request attribute, before forward to views.
-        request.setAttribute("errorString", errorString);
-        request.setAttribute("student", stu);
  
         // If error, forward to Edit page.
         if (errorString != null) {
@@ -156,6 +185,15 @@ public class AdminCreateStudentServlet extends HttpServlet{
         // If everything nice.
         // Redirect to the product listing page.
         else {
+            try {
+            DBUtils.insertStudent(conn, stu);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+        // Store infomation to request attribute, before forward to views.
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("student", stu);
             response.sendRedirect(request.getContextPath() + "/studentList");
         }
     }

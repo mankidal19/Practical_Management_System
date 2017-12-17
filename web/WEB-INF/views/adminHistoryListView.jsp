@@ -96,36 +96,21 @@
                                 </ul>
                             </li>
                             <!-- User Account: style can be found in dropdown.less -->
+                            <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs"><c:out value="${sessionScope.loginedUser.adminName}" /></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                                        
                                         <p>
-                                            Alexander Pierce - Web Developer
-                                            <small>Member since Nov. 2012</small>
+                                            <c:out value="${sessionScope.loginedUser.adminName}" />
+                                            <small><c:out value="${sessionScope.loginedUser.adminId}" /></small>
                                         </p>
                                     </li>
-                                    <!-- Menu Body -->
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </li>
+                                    
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                        <div class="pull-right">
@@ -146,16 +131,7 @@
             <aside class="main-sidebar">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Alexander Pierce</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
+                    
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -243,11 +219,7 @@
                         Manage Application
                         <small>Manage application of UTM Practical Management System</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Examples</a></li>
-                        <li class="active">Blank page</li>
-                    </ol>
+                   
                 </section>
 
                 <!-- Main content -->
@@ -258,7 +230,7 @@
                         
                         
             <div class="box-header">
-              <h3 class="box-title">APPLICATION LIST</h3>
+              <h3 class="box-title">APPLICATION HISTORY LIST</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body container-fluid">
@@ -285,9 +257,18 @@
           <c:forEach items="${historyList}" var="history" varStatus="status">
            <tr role="row">
                   <td>${history.histID}</td>
-                  <td>${history.appID}</td>
-                  <td>${studentList[status.index].std_matric}</td>
-                  <td>${studentList[status.index].std_name}</td>
+                  <td>
+                      
+                      ${history.appID}
+                  
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
+                  
+                  </td>
                   <td>${applicationList[status.index].applicationCompany}</td>
                   <td>${applicationList[status.index].applicationAddress}</td>
                   <td>${applicationList[status.index].applicationJobTitle}</td>

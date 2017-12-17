@@ -94,6 +94,33 @@ public class MyUtils {
         response.addCookie(cookieUserName);
     }
  
+     public static void storeUserCookie(HttpServletResponse response, Student user) {
+        System.out.println("Store user cookie");
+        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getStd_name());
+        
+        // 1 day (Converted to seconds)
+        cookieUserName.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookieUserName);
+    }
+     
+     public static void storeUserCookie(HttpServletResponse response, Coordinator user) {
+        System.out.println("Store user cookie");
+        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getCoordinatorName());
+        
+        // 1 day (Converted to seconds)
+        cookieUserName.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookieUserName);
+    }
+     
+     public static void storeUserCookie(HttpServletResponse response, Admin user) {
+        System.out.println("Store user cookie");
+        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getAdminName());
+        
+        // 1 day (Converted to seconds)
+        cookieUserName.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookieUserName);
+    }
+    
     public static String getUserNameInCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

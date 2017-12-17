@@ -77,6 +77,7 @@ public class AdminMainServlet extends HttpServlet {
         request.setAttribute("applicationNum", appNum);
         request.setAttribute("historyNum", histNum);
         
+        
         dispatcher.forward(request, response);
 
     }

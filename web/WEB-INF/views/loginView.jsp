@@ -42,7 +42,7 @@
                         <input type="password" class="form-control" placeholder="Password" name="password">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
-                    <div class="form-group has-feedback">
+                    <div class="form-group has-feedback" style='display: none;'>
                         <label for="usertype">Login as:</label><br>
                         <input type="radio" name="usertype" value="student"> Student<br>
                         <input type="radio" name="usertype" value="coordinator"> Coordinator<br>
