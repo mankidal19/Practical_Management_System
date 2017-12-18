@@ -7,6 +7,7 @@ package utils;
 
 import beans.Application;
 import beans.Coordinator;
+import beans.Student;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -96,6 +97,37 @@ public class CoordinatorFunctionUtils {
 //        pstm.close();
 
         return imgData ;
+    }
+
+    public static List<Student> queryStudent(Connection conn, String coID) throws SQLException {
+        String sql = "Select * from student Where co_id=?";
+        List<Student> list = new ArrayList<Student>();
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, coID);
+        ResultSet rs = pstm.executeQuery();
+        
+        while (rs.next()) { 
+            int level = rs.getInt("std_level");
+            float cgpa = rs.getFloat("std_cgpa");
+            String userName = rs.getString("std_id");
+            String name = rs.getString("std_name");
+            String password = rs.getString("std_pw");
+            String gender = rs.getString("std_gender");
+            String contact = rs.getString("std_contact");
+            String email = rs.getString("std_email");
+            String matric = rs.getString("std_matric");
+            String course = rs.getString("std_course");
+            String status = rs.getString("std_status");
+            String coordinatorId = rs.getString("co_id");
+            String applicationId = rs.getString("app_id");
+            int year = rs.getInt("std_year");
+
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, coordinatorId, applicationId,year);
+            
+            list.add(user);
+        }
+        return list;
     }
     
     
