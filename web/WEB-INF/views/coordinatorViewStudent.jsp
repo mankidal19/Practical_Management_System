@@ -270,13 +270,7 @@
                                 <table border="0"><br> <br>  
 
 
-                                    <row class='col-md-4'></row>
-                                    <row class='col-md-8'>
-
-                                        <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
-
-                                    </row> 
+                                    
 
                                     <tr>
                                         <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
