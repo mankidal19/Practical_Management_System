@@ -69,6 +69,7 @@ public class studentAddLogBookServlet extends HttpServlet {
            request.setAttribute("errorString", errorString);
            request.setAttribute("studentID", student.getStd_id());
            request.setAttribute("reportLastIndex", index);
+           request.setAttribute("student", student);
            RequestDispatcher dispatcher = request.getServletContext()
                    .getRequestDispatcher("/WEB-INF/views/studentAddLogBook.jsp");
            dispatcher.forward(request, response);

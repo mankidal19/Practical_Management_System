@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Report;
+import beans.Student;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.StudentFunctionsUtils;
 import utils.MyUtils;
 
@@ -32,7 +34,9 @@ public class studentDeleteLogBookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
- 
+        Student student = null;
+        HttpSession session = request.getSession();
+        student = MyUtils.getLoginedStudent(session);
         String reportID = (String) request.getParameter("id");
  
         Report report = null;
@@ -53,6 +57,7 @@ public class studentDeleteLogBookServlet extends HttpServlet {
             // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("report", report);
+        request.setAttribute("student", student);
             response.sendRedirect(request.getContextPath() + "/studentViewLogBookList");
             return;
         }

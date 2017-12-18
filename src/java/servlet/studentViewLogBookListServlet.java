@@ -66,7 +66,7 @@ public class studentViewLogBookListServlet extends HttpServlet {
             request.setAttribute("errorString", errorString);
             request.setAttribute("reportList", list);
             request.setAttribute("index", index);
-
+            request.setAttribute("student", student);
            // Forward to /WEB-INF/views/productListView.jsp
             RequestDispatcher dispatcher = request.getServletContext()
                     .getRequestDispatcher("/WEB-INF/views/studentViewLogBookList.jsp");

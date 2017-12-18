@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  
 import beans.*;
 import static java.lang.System.out;
+import javax.servlet.http.HttpSession;
 import utils.DBUtils;
 import utils.MyUtils;
 
@@ -38,11 +39,12 @@ public class StudentViewApplication extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
- 
+        HttpSession session = request.getSession();
         String id = (String) request.getParameter("id");
  
         Application app = null;
-        
+        Student student = null;
+        student = MyUtils.getLoginedStudent(session);
         String errorString = null;
  
         try {
@@ -68,7 +70,7 @@ public class StudentViewApplication extends HttpServlet{
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("application", app);
-      
+        request.setAttribute("student", student);
         
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/studentViewApplicationView.jsp");

@@ -51,7 +51,7 @@ public class imageServlet extends HttpServlet {
                 //imgData = co.getCoordinatorPhoto();
                 out.println(co.getCoordinatorId());
 
-                    out.println(co.getCoordinatorPhoto());
+                out.println(co.getCoordinatorPhoto());
                 try (BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream())) {
                     bos.write(co.getCoordinatorPhoto());
                     bos.flush();
@@ -63,6 +63,9 @@ public class imageServlet extends HttpServlet {
         } else if (userType == 'S') {
             try {
                 Student stu = DBUtils.findStudent(conn, userId);
+                out.println(stu.getStd_id());
+
+                out.println(stu.getStdPhoto());
                 //imgData = stu.getStdPhoto();
                 try (BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream())) {
                     bos.write(stu.getStdPhoto());
