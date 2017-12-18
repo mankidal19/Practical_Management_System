@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -35,11 +36,11 @@
 
                 <form action="${pageContext.request.contextPath}/login" method="post">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="${username}">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <input type="password" class="form-control" placeholder="Password" name="password" value="${password}">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback" style='display: none;'>
@@ -66,7 +67,7 @@
 
 
 
-                <a href="#">I forgot my password</a><br>
+                <a style="display: none;" href="#">I forgot my password</a><br>
 
             </div>
             <!-- /.login-box-body -->

@@ -45,12 +45,24 @@ public class LoginServlet extends HttpServlet {
         UserAccount user = null;
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
+        
+        String username = MyUtils.getUserNameInCookie(request);
+        String password = MyUtils.getUserPasswordInCookie(request);
+        
+        if(username!=null && password !=null){
+            out.println(username+" "+password);
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+        }
+        
         RequestDispatcher dispatcher = null;
         if (user == null) {
             // Forward to /WEB-INF/views/loginView.jsp
             // (Users can not access directly into JSP pages placed in WEB-INF)
+
             dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
             dispatcher.forward(request, response);
+
         } else {
             switch (user.getUserLevel()) {
                 case 1:
@@ -144,18 +156,20 @@ public class LoginServlet extends HttpServlet {
 
             switch (user.getUserLevel()) {
                 case 1:
-                    response.sendRedirect(request.getContextPath() + "/adminMain");
                     MyUtils.storeLoginedUser(session, userAdmin);
                     // If user checked "Remember me".
                     if (remember) {
                         MyUtils.storeUserCookie(response, userAdmin);
+                        out.println("remember you");
                     } // Else delete cookie.
                     else {
                         MyUtils.deleteUserCookie(response);
                     }
+                    
+                    response.sendRedirect(request.getContextPath() + "/adminMain");
+                    
                     break;
                 case 2:
-                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
                     MyUtils.storeLoginedUser(session, userCoordinator);
                     // If user checked "Remember me".
                     if (remember) {
@@ -164,9 +178,12 @@ public class LoginServlet extends HttpServlet {
                     else {
                         MyUtils.deleteUserCookie(response);
                     }
+                    
+                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    
                     break;
                 case 3:
-                    response.sendRedirect(request.getContextPath() + "/studentMain");
+                    
                     MyUtils.storeLoginedUser(session, userStudent);
                     // If user checked "Remember me".
                     if (remember) {
@@ -175,6 +192,8 @@ public class LoginServlet extends HttpServlet {
                     else {
                         MyUtils.deleteUserCookie(response);
                     }
+                    
+                    response.sendRedirect(request.getContextPath() + "/studentMain");
                     break;
                 default:
                     dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
