@@ -38,7 +38,7 @@ public class applyApplicationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+              
         Connection conn = MyUtils.getStoredConnection(request);
         String appId = (String) request.getParameter("id");
 
@@ -46,17 +46,17 @@ public class applyApplicationServlet extends HttpServlet {
         String historyID = null;
         String errorString = null;
         Application app = null;
-
+        Student stu = null;
         HttpSession session = request.getSession();
 
-        Student stu = MyUtils.getLoginedStudent(session);
+        stu = MyUtils.getLoginedStudent(session);
 
         try {
             app = DBUtils.findApplication(conn, appId);
         } catch (SQLException ex) {
             Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         History history = null;
 
         String stdId = stu.getStd_id();
@@ -121,7 +121,7 @@ public class applyApplicationServlet extends HttpServlet {
 
         if (errorString != null) {
 //         response.sendRedirect(request.getServletContext().getContextPath());
-            
+
             request.setAttribute("errorString", errorString);
             out.println(errorString);
             response.sendRedirect(request.getServletContext().getContextPath()+"/applicationList");
@@ -131,7 +131,7 @@ public class applyApplicationServlet extends HttpServlet {
 //            dispatcher.forward(request, response);
             return;
         }
-
+        
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/StudentViewApplicationHistory");
         dispatcher.forward(request, response);

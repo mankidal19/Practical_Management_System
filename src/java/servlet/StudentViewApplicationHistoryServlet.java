@@ -58,9 +58,9 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
         List<Application> appList = new ArrayList<Application>();
         List<History> historyList = new ArrayList<History>();
         List<String> statusList = new ArrayList<String>();
-        
+        Student student = null;
         //get logined student details
-        Student student = MyUtils.getLoginedStudent(session);
+        student = MyUtils.getLoginedStudent(session);
 
         //debug
 //        out.println(student.getStd_name());
@@ -108,7 +108,7 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
         request.setAttribute("historyList", historyList);
         request.setAttribute("applicationList", appList);
         request.setAttribute("statusList", statusList);
-        
+        request.setAttribute("student", student);
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/studentViewApplicationHistory.jsp");
         dispatcher.forward(request, response);

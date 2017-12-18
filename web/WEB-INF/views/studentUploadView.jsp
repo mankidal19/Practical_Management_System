@@ -29,6 +29,24 @@ and open the template in the editor.
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -112,17 +130,17 @@ and open the template in the editor.
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${student.std_name}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
-                                            <small>Member since Nov. 2012</small>
+                                            ${student.std_name}
+                                            <small>Member since Nov. 2017</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
@@ -166,15 +184,7 @@ and open the template in the editor.
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Student</p>
-                            <a href=""><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
+
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -256,11 +266,12 @@ and open the template in the editor.
                         <div class="box-header with-border">
                             <h3 class="box-title">Student Information</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                             <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                                         title="Collapse">
                                     <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
@@ -278,9 +289,9 @@ and open the template in the editor.
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
-                                            <td><img src="studentPhoto.jsp?stdID=${student.std_id}" width="115" border="0"></td>
+                                            <td><img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" width="115" border="0"></td>
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <th>Upload Photo</th>
                                             <td><input type="file" name="photo" size="50"/></td>
                                         </tr>
@@ -334,7 +345,7 @@ and open the template in the editor.
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
 
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $('.sidebar-menu').tree();
                 });
             </script>

@@ -110,17 +110,17 @@ and open the template in the editor.
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${student.std_name}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
-                                            <small>Member since Nov. 2012</small>
+                                            ${student.std_name}
+                                            <small>Member since Nov. 2017</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
@@ -188,7 +188,7 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -232,121 +232,121 @@ and open the template in the editor.
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
-                        
-                        <!-- Content Wrapper. Contains page content -->
-                         <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-                            <section class="content-header">
-                                <h1>
-                                    Text Editors
-                                <small>Universiti Teknologi Malaysia</small>
-                                </h1>
-                                <ol class="breadcrumb">
-                                    <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home</a></li>
-                                    <li><a href="#">Log Book</a></li>
-                                    <li class="active">Add New Log Book</li>
-                                </ol>
-                            </section>
-    <!-- Main content -->
-                            <section class="content">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="box box-info">
-                                            <div class="box-header">
-                                                    <h3 class="box-title">Log Book Editor</h3>
-                      <!-- tools box -->
-                                                <div class="pull-right box-tools">
-                                                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-                                                    title="Collapse">
-                                                    <i class="fa fa-minus"></i></button>
-                                                    <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                                                    title="Remove">
-                                                    <i class="fa fa-times"></i></button>
-                                                </div>
-                  <!-- /. tools -->
-                                            </div>
-                <!-- /.box-header -->
-                                            
-                                            <div class="box-body pad">
-                                                <form action="./studentAddLogBook" method="post">
-                                                    <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
-                                                    Title: <input type="text" name="title" value="" size="25%"/></input>
-                                                    &nbsp;&nbsp;&nbsp;Student ID: ${studentID}
-                                                    <br><br>
-                                                    <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
-                                                    <br>
-                                                    <input type="submit" value="Submit Report" name="submit" />
-                                                </form>
-                                            </div>
-                                        </div>
-      <!-- /.box -->
-                                    </div>
-                                </div>
-<!-- ./row -->
-                            </section>
-    <!-- /.content -->
-                        </div>
-                        
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            Footer
-                        </div>
-                        <!-- /.box-footer-->
-                    </div>
-                    <!-- /.box -->
 
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Text Editors
+                        <small>Universiti Teknologi Malaysia</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Log Book</a></li>
+                        <li class="active">Add New Log Book</li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">Log Book Editor</h3>
+                                    <!-- tools box -->
+                                    <div class="pull-right box-tools">
+                                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                                title="Collapse">
+                                            <i class="fa fa-minus"></i></button>
+                                        <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                                title="Remove">
+                                            <i class="fa fa-times"></i></button>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.box-header -->
+
+                                <div class="box-body pad">
+                                    <form action="./studentAddLogBook" method="post">
+                                        <input type="hidden" name="id" value="${reportLastIndex + 1}" size="25%"/><br>
+                                        Title: <input type="text" name="title" value="" size="25%"/></input>
+                                        &nbsp;&nbsp;&nbsp;Student ID: ${studentID}
+                                        <br><br>
+                                        <textarea id="CKEditor" name="content" rows="10" cols="80"></textarea>
+                                        <br>
+                                        <input type="submit" value="Submit Report" name="submit" />
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </div>
+                    <!-- ./row -->
                 </section>
                 <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
-            
-            <footer class="main-footer">
-                <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.4.0
-                </div>
-                <strong>Copyright &copy; 2017 <a href="https://adminlte.io">ASTF Dev.</a>.</strong> All rights
-                reserved.
-            </footer>
+
+            <!-- /.box-body -->
+            <div class="box-footer">
+                Footer
+            </div>
+            <!-- /.box-footer-->
+        </div>
+        <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">ASTF Dev.</a>.</strong> All rights
+    reserved.
+</footer>
 
 
 
-            <!-- ./wrapper -->
+<!-- ./wrapper -->
 
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
+<!-- jQuery 3 -->
+<script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-            <!-- CK Editor -->
-            <script src="Source_Files/bower_components/ckeditor/ckeditor.js"></script>
-            <!-- Bootstrap WYSIHTML5 -->
-            <!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
-            <script>
-              $(function () {
-                // Replace the <textarea id="CKEditor"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace('content')
+<!-- DataTables -->
+<script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="Source_Files/dist/js/adminlte.min.js"></script>
+<!-- CK Editor -->
+<script src="Source_Files/bower_components/ckeditor/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<!--<script src="Source_Files/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>-->
+<script>
+    $(function () {
+        // Replace the <textarea id="CKEditor"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('content')
 //                //bootstrap WYSIHTML5 - text editor
 //                $('.textarea').wysihtml5()
-              })
-            </script>
+    })
+</script>
 
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
-    </body>
+<script>
+    $(document).ready(function () {
+        $('.sidebar-menu').tree();
+    });
+</script>
+</body>
 </html>
 

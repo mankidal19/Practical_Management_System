@@ -28,26 +28,31 @@ import utils.StudentFunctionsUtils;
 @WebServlet(urlPatterns = {"/studentUpdateLogBook"})
 public class studentUpdateLogBookServlet extends HttpServlet {
 
-    public studentUpdateLogBookServlet(){
+    public studentUpdateLogBookServlet() {
         super();
     }
-@Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
+
+        Student student = null;
+        HttpSession session = request.getSession();
+        student = MyUtils.getLoginedStudent(session);
 
         String reportID = (String) request.getParameter("id");
         Report report = null;
 
         String errorString = null;
- 
+
         try {
             report = StudentFunctionsUtils.findReport(conn, reportID);
         } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
- 
+
         // If no error.
         // The product does not exist to edit.
         // Redirect to productList page.
@@ -55,17 +60,17 @@ public class studentUpdateLogBookServlet extends HttpServlet {
             response.sendRedirect(request.getServletPath() + "/studentViewLogBookList");
             return;
         }
- 
+
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("report", report);
- 
+        request.setAttribute("student", student);
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/studentUpdateLogBook.jsp");
         dispatcher.forward(request, response);
- 
+
     }
- 
+
     // After the user modifies the product information, and click Submit.
     // This method will be executed.
     @Override
@@ -78,8 +83,7 @@ public class studentUpdateLogBookServlet extends HttpServlet {
         String content = (String) request.getParameter("content");
 //        HttpSession session = request.getSession();
         String errorString = null;
-        
-        
+
 //        try {
 //            report = MyUtils.getLoginedStudent(session);
 //            
@@ -87,28 +91,27 @@ public class studentUpdateLogBookServlet extends HttpServlet {
 //        catch (Exception e) {
 //            errorString = e.getMessage();
 //        }
-        
         try {
-            if(title != null && content != null )
-            StudentFunctionsUtils.updateReport(conn, reportID, title, content);
+            if (title != null && content != null) {
+                StudentFunctionsUtils.updateReport(conn, reportID, title, content);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
- 
+
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
                     .getRequestDispatcher("/WEB-INF/views/studentUpdateLogBook.jsp");
             dispatcher.forward(request, response);
-        }
-        // If everything nice.
+        } // If everything nice.
         // Redirect to the product listing page.
         else {
             response.sendRedirect(request.getContextPath() + "/studentViewLogBookList");
         }
     }
- 
+
 }
