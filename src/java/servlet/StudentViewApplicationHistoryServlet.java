@@ -8,7 +8,6 @@ package servlet;
 import java.io.IOException;
 import beans.Application;
 import beans.History;
-import beans.Report;
 import beans.Student;
 import static java.lang.System.out;
 import java.sql.Connection;

@@ -77,44 +77,63 @@ public class applyApplicationServlet extends HttpServlet {
             errorString = "exceed server's limit of creating new history reached";
         }
 
+        if (app.getApplicationJob() == 0) {
+            errorString = "Job already full!";
+        } else {
+            try {
+                if (StudentFunctionsUtils.applyExist(conn, stdId)) {
+                    errorString = "Duplicate Application!";
+                } else if (StudentFunctionsUtils.approveExist(conn, stdId)) {
+                    errorString = "Your previous application has been approved!";
+                } else {
+                    java.util.Date utilDate = new java.util.Date();
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                    history = new History(historyID, stdId, appId, sqlDate);
+
+                    //update number of job available
+                    /* try {
+                StudentFunctionsUtils.updateApplication(conn, app.getApplicationJob() - 1, appId);
+                } catch (SQLException ex) {
+                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
+                    try {
+                        //insert history
+                        StudentFunctionsUtils.insertHistory(conn, history);
+                        StudentFunctionsUtils.updateStudentStatus(conn, "P", stdId);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    //update student details
+                    stu.setApp_id(appId);
+                    stu.setStd_status(stdId);
+
+                    try {
+                        DBUtils.updateStudent(conn, stu);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         if (errorString != null) {
-            response.sendRedirect(request.getServletPath() + "/studentMain");
+//         response.sendRedirect(request.getServletContext().getContextPath());
+            
+            request.setAttribute("errorString", errorString);
+            out.println(errorString);
+            response.sendRedirect(request.getServletContext().getContextPath()+"/applicationList");
+            
+//            RequestDispatcher dispatcher = request.getServletContext()
+//                    .getRequestDispatcher("/applicationList");
+//            dispatcher.forward(request, response);
             return;
         }
 
-        if (app.getApplicationJob() != 0) {
-            
-            java.util.Date utilDate = new java.util.Date();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            history = new History(historyID, stdId, appId, sqlDate);
-            
-            //update number of job available
-           /* try {
-                StudentFunctionsUtils.updateApplication(conn, app.getApplicationJob() - 1, appId);
-            } catch (SQLException ex) {
-                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            
-            try {
-                //insert history
-                StudentFunctionsUtils.insertHistory(conn, history);
-            } catch (SQLException ex) {
-                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            //update student details
-            stu.setApp_id(appId);
-            stu.setStd_status(stdId);
-            
-            try {
-                DBUtils.updateStudent(conn, stu);
-            } catch (SQLException ex) {
-                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/studentMainView.jsp");
+                .getRequestDispatcher("/StudentViewApplicationHistory");
         dispatcher.forward(request, response);
     }
 

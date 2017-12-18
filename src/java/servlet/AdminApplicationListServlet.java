@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package servlet;
+
 import beans.Application;
 import beans.UserAccount;
 import java.io.IOException;
@@ -21,73 +22,89 @@ import javax.servlet.http.HttpSession;
 import utils.CoordinatorFunctionUtils;
 import utils.DBUtils;
 import utils.MyUtils;
+import utils.StudentFunctionsUtils;
+
 /**
  *
  * @author NURUL AIMAN
  */
-
-@WebServlet(urlPatterns = { "/applicationList" })
-public class AdminApplicationListServlet extends HttpServlet{
+@WebServlet(urlPatterns = {"/applicationList"})
+public class AdminApplicationListServlet extends HttpServlet {
 
     public AdminApplicationListServlet() {
         super();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-           throws ServletException, IOException {
-        
-            Connection conn = MyUtils.getStoredConnection(request);
-            String errorString = null;
-            List<Application> list = null;
-            try {
-                list = DBUtils.queryCompany(conn);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                errorString = e.getMessage();
-            }
-            // Store info in request attribute, before forward to views
-            request.setAttribute("errorString", errorString);
-            request.setAttribute("companyList", list);
+            throws ServletException, IOException {
 
-            
-            //Forwarding page based on user level
-            UserAccount user = null;
+        Connection conn = MyUtils.getStoredConnection(request);
+        String errorString = null;
+        List<Application> list = null;
+
+        //Forwarding page based on user level
+        UserAccount user = null;
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
         RequestDispatcher dispatcher = null;
-        
-        if(user == null){
+
+        if (user == null) {
             // Forward to /WEB-INF/views/loginView.jsp
             // (Users can not access directly into JSP pages placed in WEB-INF)
             dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
             dispatcher.forward(request, response);
-        }else{
+        } else {
             switch (user.getUserLevel()) {
                 case 1:
+                    try {
+                        list = DBUtils.queryCompany(conn);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        errorString = e.getMessage();
+                    }
+                    // Store info in request attribute, before forward to views
+                    request.setAttribute("errorString", errorString);
+                    request.setAttribute("companyList", list);
+
                     dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/adminApplicationListView.jsp");
+                            .getRequestDispatcher("/WEB-INF/views/adminApplicationListView.jsp");
                     break;
                 case 2:
                     //response.sendRedirect(request.getContextPath() + "/coordinatorMain");
                     break;
                 case 3:
-                     dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/studentApplicationListView.jsp");
+
+                    try {
+                        list = StudentFunctionsUtils.queryApplyCompany(conn);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        errorString = e.getMessage();
+                    }
+                    // Store info in request attribute, before forward to views
+                    //request.setAttribute("errorString", errorString);
+                    request.setAttribute("companyList", list);
+
+                    if (MyUtils.getLoginedStudent(session).getStd_status().equals("P")) {
+                        dispatcher = request.getServletContext()
+                                .getRequestDispatcher("/WEB-INF/views/studentNewApplyError.jsp");
+                    } else {
+                        dispatcher = request.getServletContext()
+                                .getRequestDispatcher("/WEB-INF/views/studentApplicationListView.jsp");
+                    }
+
                     break;
                 default:
                     dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-                    
+
                     break;
             }
         }
-           
-            
-            dispatcher.forward(request, response);
-            
-        }
-       
-    
+
+        dispatcher.forward(request, response);
+
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
