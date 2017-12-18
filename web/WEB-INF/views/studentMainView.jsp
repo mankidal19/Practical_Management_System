@@ -252,23 +252,23 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            <h3 class="box-title">Welcome Message</h3>
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                                         title="Collapse">
                                     <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
-                            Start creating your amazing application!
+                            <h1>Welcome to <b><i>UTM Practical Management System!</i></b></h1>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
+<!--                        <div class="box-footer">
                             Footer
-                        </div>
+                        </div>-->
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -308,7 +308,7 @@ and open the template in the editor.
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
 
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $('.sidebar-menu').tree();
                 });
             </script>
