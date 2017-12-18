@@ -226,14 +226,14 @@
 
 
                         <div class="box-header">
-                            <p style="color: red;">${errorString}</p>
+                            
                             <h3 class="box-title">CREATE NEW STUDENT ACCOUNT</h3>
                             
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
-                            
+                            <p style="color: red;">${errorString}</p>
 
                                 <form method="POST" action="${pageContext.request.contextPath}/createStudent" enctype="multipart/form-data">
                                     
