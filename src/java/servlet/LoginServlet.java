@@ -147,9 +147,9 @@ public class LoginServlet extends HttpServlet {
         // And redirect to userInfo page.
         else {
             HttpSession session = request.getSession();
-
+            MyUtils.storeLoginedUser(session, user);
             //set timeout to 15 minutes
-            session.setMaxInactiveInterval(15 * 60);
+            session.setMaxInactiveInterval(15 * 60 * 60);
 
             MyUtils.storeLoginedUser(session, user);
             RequestDispatcher dispatcher = null;

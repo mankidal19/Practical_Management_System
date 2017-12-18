@@ -42,7 +42,7 @@ public class MyUtils {
     // Store user info in Session.
     public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
         // On the JSP can access via ${loginedUser}
-        session.setAttribute("loginedUser", loginedUser);
+        session.setAttribute("user", loginedUser);
     }
     
     // Store user student info in Session.
@@ -65,7 +65,7 @@ public class MyUtils {
  
     // Get the user information stored in the session.
     public static UserAccount getLoginedUser(HttpSession session) {
-        UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
+        UserAccount loginedUser = (UserAccount) session.getAttribute("user");
         return loginedUser;
     }
     

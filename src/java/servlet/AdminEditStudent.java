@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import beans.*;
 import java.io.InputStream;
 import static java.lang.System.out;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.MultipartConfig;
@@ -54,6 +56,15 @@ public class AdminEditStudent  extends HttpServlet{
         Student stu = null;
  
         String errorString = null;
+        
+        List<Coordinator> coList = new ArrayList<Coordinator>();
+
+        try {
+            coList = DBUtils.queryCoordinator(conn);
+        } catch (SQLException e) {
+            Logger.getLogger(AdminCreateStudentServlet.class.getName()).log(Level.SEVERE, null, e);
+            errorString = e.getMessage();
+        }
  
         try {
             stu = DBUtils.findStudent(conn, id);
@@ -65,7 +76,7 @@ public class AdminEditStudent  extends HttpServlet{
         // If no error.
         // The product does not exist to edit.
         // Redirect to productList page.
-        if (errorString != null && stu == null) {
+        if (errorString != null || stu == null) {
             response.sendRedirect(request.getServletPath() + "/studentList");
             return;
         }
@@ -73,6 +84,8 @@ public class AdminEditStudent  extends HttpServlet{
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("student", stu);
+        
+        request.setAttribute("coordinatorList", coList);
  
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/adminEditStudentView.jsp");

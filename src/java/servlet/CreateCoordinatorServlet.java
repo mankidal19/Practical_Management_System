@@ -109,7 +109,24 @@ public class CreateCoordinatorServlet extends HttpServlet {
         Part filePart = request.getPart("photo");
         out.println(filePart);
         
-        //update img blob if new image uploaded
+       
+        
+        // Store infomation to request attribute, before forward to views.
+        request.setAttribute("errorString", errorString);
+        request.setAttribute("coordinator", c);
+        request.setAttribute("newId", id);
+
+        // If error, forward to Edit page.
+        if (errorString != null) {
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/views/adminAddCoordinatorView.jsp");
+            dispatcher.forward(request, response);
+        } // If everything nice.
+        // Redirect to the product listing page.
+        else {
+            try {
+                DBUtils.insertCoordinator(conn, c);
+                 //update img blob if new image uploaded
         if (filePart.getSize()!=0) {
             // prints out some information for debugging
             System.out.println(filePart.getName());
@@ -134,21 +151,6 @@ public class CreateCoordinatorServlet extends HttpServlet {
             // sets the message in request scope
             request.setAttribute("Message", message);
         }
-        
-        // Store infomation to request attribute, before forward to views.
-        request.setAttribute("errorString", errorString);
-        request.setAttribute("coordinator", c);
-
-        // If error, forward to Edit page.
-        if (errorString != null) {
-            RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/adminAddCoordinatorView.jsp");
-            dispatcher.forward(request, response);
-        } // If everything nice.
-        // Redirect to the product listing page.
-        else {
-            try {
-                DBUtils.insertCoordinator(conn, c);
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorString = e.getMessage();

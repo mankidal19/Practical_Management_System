@@ -86,6 +86,9 @@ public class CoordinatorViewStudent extends HttpServlet {
         else if(stu.getStd_status().equals("P")){
             status="Pending";
         }
+        else if(stu.getStd_status().equals("R")){
+            status="Rejected";
+        }
         else{
             status="Unavailable";
         }

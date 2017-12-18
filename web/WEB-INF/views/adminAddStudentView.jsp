@@ -304,13 +304,20 @@
                                         </tr>
                                         <tr><td>&nbsp;</td></tr>
                                          <tr>
-                                             <th>Coordinator's ID: &nbsp;&nbsp;&nbsp;</th>
-                                            <td><input type="text" name="coID" required /></td>
+                                             <th>Coordinator's Name: &nbsp;&nbsp;&nbsp;</th>
+                                            
+                                            <td>
+                                                <select  name="coID" required>
+                                                    <c:forEach items="${coordinatorList}" var="coordinator">
+                                                        <option value="${coordinator.coordinatorId}">${coordinator.coordinatorId} - ${coordinator.coordinatorName}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </td>
                                         </tr>
                                        <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Upload Photo:&nbsp;</th>
-                                            <td><input type="file" name="photo" size="50"/></td>
+                                            <td><input type="file" name="photo" size="50" required></td>
                                         </tr>
                                         
                                         <tr><td>&nbsp;</td></tr>

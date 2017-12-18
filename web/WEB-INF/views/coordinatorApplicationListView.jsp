@@ -270,8 +270,11 @@
               <h3 class="box-title">STUDENT APPLICATION LIST</h3>
             </div>
             <!-- /.box-header -->
-            ${errorString}
+            <p style="color: red;">
+                ${errorString}
             ${successString}
+                
+            </p>
             <div class="box-body container-fluid">
                  <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
                   <div class="row"><div class="row">
@@ -315,8 +318,8 @@
                   <td>${history.appDate}</td>
                   <td>${statusList[status.index]}</td>
                   <td>
-                      <a role="button" class="btn btn-block btn-primary btn-xs" href="coordinatorApprove?id=${history.histID}">accept</a>
-                      <a role="button" class="btn btn-block btn-primary btn-xs" href="coordinatorReject?id=${history.histID}">reject</a>
+                      <a role="button" class="btn btn-block btn-primary btn-xs" href="coordinatorApprove?id=${history.histID}">Accept</a>
+                      <a role="button" class="btn btn-block btn-danger btn-xs" href="coordinatorReject?id=${history.histID}">Reject</a>
                   </td>
                 </tr>
        </c:forEach>

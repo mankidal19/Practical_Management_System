@@ -265,12 +265,28 @@
                                         <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Department:</th>
-                                            <td><input type="text" name="department" value="${coordinator.coordinatorDepartment}" /></td>
-                                        </tr>
+                                            <td>
+                                                <select name='department'>
+                                                    <option value='SCSJ'>SCSJ</option>
+                                                    <option value='SCSR'>SCSR</option>
+                                                    <option value='SCSB'>SCSB</option>
+                                                    <option value='SCSV'>SCSV</option>
+                                                    <option value='SCSD'>SCSD</option>
+                                                </select>
+                                            </td>
+                                            
+                                    </tr>
                                         <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Position:</th>
-                                            <td><input type="text" name="position" value="${coordinator.coordinatorPosition}" /></td>
+                                            <td><select name='position'>
+                                                    <option value='Lecturer'>Lecturer</option>
+                                                    <option value='Senior Lecturer'>Senior Lecturer</option>
+                                                    <option value='Associate Professor'>Associate Professor</option>
+                                                    <option value='Head of Department'>Head of Department</option>
+                                                    <option value='Deputy Dean'>Deputy Dean</option>
+                                                    <option value='Dean'>Dean</option>
+                                                </select></td>
                                         </tr>
                                         <tr><td>&nbsp;</td></tr>
                                         <tr>

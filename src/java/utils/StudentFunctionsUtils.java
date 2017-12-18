@@ -80,6 +80,7 @@ public class StudentFunctionsUtils {
 
     public static void updateStudent(Connection conn, String appID, String stdID) throws SQLException {
         String sql = "Insert into History values(?,?,?,?)";
+        
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -87,6 +88,8 @@ public class StudentFunctionsUtils {
         pstm.setString(2, stdID);
         pstm.executeUpdate();
     }
+    
+    
     
     public static void insertHistory(Connection conn, History history) throws SQLException {
         String sql = "Insert into History values(?,?,?,?,?)";

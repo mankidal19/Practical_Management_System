@@ -289,7 +289,7 @@
                                         <tr><td>&nbsp;</td></tr>
                                         <tr>
                                             <th>Upload Photo:&nbsp;</th>
-                                            <td><input type="file" name="photo" size="50"/></td>
+                                            <td><input type="file" name="photo" size="50" required/></td>
                                         </tr>
                                         
                                         <tr><td>&nbsp;</td></tr>

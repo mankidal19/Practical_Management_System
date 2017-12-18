@@ -62,6 +62,18 @@ public class CoordinatorFunctionUtils {
         return index;
     }
     
+    public static void updateStudent(Connection conn, String stdID, String status) throws SQLException {
+       String sql2 = "update student set std_status = ? where std_id=?";
+
+        PreparedStatement pstm2 = conn.prepareStatement(sql2);
+        
+       
+        
+        pstm2.setString(1, status);
+        pstm2.setString(2, stdID);
+        pstm2.executeUpdate();
+    }
+    
     public static int uploadCoordinatorPhoto(Connection conn, String coID, InputStream inputStream) throws SQLException{
         // constructs SQL statement
             String sql = "UPDATE coordinator SET co_photo=? WHERE co_id=?";
@@ -149,7 +161,7 @@ public class CoordinatorFunctionUtils {
      }
 
      public static int getNumOfHistory(Connection conn, String coID) throws SQLException{
-      String sql = "Select count(*) as total from history as a join student as b where b.co_id=?";
+      String sql = "Select count(*) as total from history as a join student as b where b.co_id=? and a.std_id=b.std_id";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, coID);
@@ -174,7 +186,7 @@ public class CoordinatorFunctionUtils {
         ResultSet rs = pstm.executeQuery();
         int count=0;
         
-        while (rs.next()) {
+        if (rs.next()) {
             count=rs.getInt("total");
         }
         
