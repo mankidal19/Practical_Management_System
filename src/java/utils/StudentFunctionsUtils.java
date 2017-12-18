@@ -120,7 +120,9 @@ public class StudentFunctionsUtils {
 
             Application user = new Application(appId, appCompany, appAddress, appName, appNumber, appEmail, appJob, appJobTitle);
 
-            list.add(user);
+            if (appJob > 0) {
+                list.add(user);
+            }
         }
         return list;
     }
