@@ -270,7 +270,7 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="box-body">
-                            Sorry! Your previous application status is <h1><b>Pending</b></h1>. You may only re-apply after your application has been <h1><b>Rejected</b></h1>.
+                            Sorry! Your previous application status is <h3 h3 style="color:blueviolet;"><b>Pending</b></h3>. You may only re-apply after your application has been <h3 style="color:red;"><b>Rejected</b></h3>.
                         </div>
                         <!-- /.box-body -->
 <!--                        <div class="box-footer">
