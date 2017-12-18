@@ -99,42 +99,23 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs"><c:out value="${sessionScope.loginedUser.adminName}" /></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                                        
                                         <p>
-                                            Alexander Pierce - Web Developer
-                                            <small>Member since Nov. 2012</small>
+                                            <c:out value="${sessionScope.loginedUser.adminName}" />
+                                            <small><c:out value="${sessionScope.loginedUser.adminId}" /></small>
                                         </p>
                                     </li>
-                                    <!-- Menu Body -->
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </li>
+                                    
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                        </div>
+                                       <div class="pull-right">
+                                            <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-default btn-flat">Sign out</a>
+                                             </div>
                                     </li>
                                 </ul>
                             </li>
@@ -150,16 +131,7 @@
             <aside class="main-sidebar">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Alexander Pierce</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
+                    
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -210,7 +182,7 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-address-card"></i>
-                                <span> Manage Companies</span>
+                                <span> Manage Application</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -218,6 +190,7 @@
                             <ul class="treeview-menu">
                                 <li><a href= ${pageContext.request.contextPath}/createCompany><i class="fa fa-circle-o"></i> Add New Company</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/companyList><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                            <li><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
                             </ul>
                         </li>
 
@@ -240,11 +213,7 @@
                         Manage Student
                         <small>Manage student of UTM Practical Management System</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Examples</a></li>
-                        <li class="active">Blank page</li>
-                    </ol>
+                   
                 </section>
 
                 <!-- Main content -->
@@ -257,95 +226,99 @@
                         <div class="box-header">
                             <p style="color: red;">${errorString}</p>
                             <h3 class="box-title">VIEW STUDENT'S DETAILS</h3>
-                            
+
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
                             <c:if test="${not empty student}">
+                                <row class='col-md-1'></row>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" width='140px'>
 
-                                <img src="${pageContext.request.contextPath}/Source_Files/images/avatar3.png" width="200px">
-                                  
-                                    <table border="0"><br> <br>  
-                                        <row class='col-md-4'></row>
-                                        <row class='col-md-8'>
-                                            
-                                         <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
-                  
-                                        </row> 
-                      
-                                        <tr>
-                                            <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
-                                            <td>
-                                                ${student.std_id}
-                                            </td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Name: </th>
-                                            <td>${student.std_name}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Gender:</th>
-                                            <td>${gender}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Contact Number:</th>
-                                            <td>${student.std_contact}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Email:</th>
-                                            <td>${student.std_email}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Matric Number:</th>
-                                            <td>${student.std_matric}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr> 
-                                        <tr>
-                                            <th>Course:</th>
-                                            <td>${student.std_course}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>CGPA:</th>
-                                            <td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${student.std_cgpa}"/>
-                                                </td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Practical Year:</th>
-                                            <td>${student.std_year}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                         <tr>
-                                            <th>Coordinator's ID:</th>
-                                            <td>${student.co_id}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Coordinator's Name: &nbsp;</th>
-                                            <td>${coordinator.coordinatorName}</td>
-                                        </tr>
-                                        
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Application Status:</th>
-                                            <td>${status}</td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <th>Application ID:</th>
-                                            <td>${application}</td>
-                                        </tr>
-                                        
-                                    </table>
                                 
+                                
+                                <table border="0"><br> <br>  
+
+
+                                    <row class='col-md-4'></row>
+                                    <row class='col-md-8'>
+
+                                        <a role="button" class="btn btn-block btn-primary btn-sm" style='width: 30px;' href="editStudent?id=${student.std_id}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a role="button" class="btn btn-block btn-danger btn-sm" style='width: 30px;'  onclick="confirm_decision_stu('${student.std_id}')"><span class="glyphicon glyphicon-trash"></span></a>
+
+                                    </row> 
+
+                                    <tr>
+                                        <th>Student's ID:   &nbsp;&nbsp;&nbsp;</th>
+                                        <td>
+                                            ${student.std_id}
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Name: </th>
+                                        <td>${student.std_name}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Gender:</th>
+                                        <td>${gender}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Contact Number:</th>
+                                        <td>${student.std_contact}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>${student.std_email}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Matric Number:</th>
+                                        <td>${student.std_matric}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr> 
+                                    <tr>
+                                        <th>Course:</th>
+                                        <td>${student.std_course}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>CGPA:</th>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${student.std_cgpa}"/>
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Practical Year:</th>
+                                        <td>${student.std_year}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Coordinator's ID:</th>
+                                        <td>${student.co_id}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Coordinator's Name: &nbsp;</th>
+                                        <td>${coordinator.coordinatorName}</td>
+                                    </tr>
+
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Latest Application Status:&nbsp;</th>
+                                        <td>${status}</td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <th>Latest Application ID:&nbsp;</th>
+                                        <td>${application}</td>
+                                    </tr>
+
+                                </table>
+
                             </c:if>
 
                         </div>
@@ -354,7 +327,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        
+
                     </div>
                     <!-- /.box-footer-->
 

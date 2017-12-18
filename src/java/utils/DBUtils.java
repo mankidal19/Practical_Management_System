@@ -152,9 +152,11 @@ public class DBUtils {
             String co = rs.getString("co_id");
             String app = rs.getString("app_id");
             int year = rs.getInt("std_year");
+            byte[] imgData = rs.getBytes("std_photo");
+            
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app,year);
+            Student user = new Student(userName, password, level, name, gender, contact, email, matric, course, cgpa, status, co, app,year,imgData);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;
@@ -205,10 +207,11 @@ public class DBUtils {
             String password = rs.getString("co_pw");
             String department = rs.getString("co_department");
             String position = rs.getString("co_position");
+            byte[] imgData = rs.getBytes("co_photo");
             
             //String password = rs.getString("std_pw");
             //String password = rs.getString("std_pw");
-            Coordinator user = new Coordinator(userName, password, level, name, department, position);
+            Coordinator user = new Coordinator(userName, password, level, name, department, position, imgData);
             //user.setUserName(userName);
             //user.setPassword(password);
             return user;
@@ -607,9 +610,9 @@ public class DBUtils {
             String password = rs.getString("co_pw");
             String department = rs.getString("co_department");
             String position = rs.getString("co_position");
-            
+            byte[] imgData = rs.getBytes("co_photo");
            
-            Coordinator user = new Coordinator(userName, password, level, name, department, position);
+            Coordinator user = new Coordinator(userName, password, level, name, department, position,imgData);
             
             list.add(user);
         }
@@ -669,6 +672,41 @@ public class DBUtils {
         
      }
 
+      public static int getNumOfApplication(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from Application";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+       public static int getNumOfHistory(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from History";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+     
      public static int getNumOfStudent(Connection conn) throws SQLException{
       String sql = "Select count(*) as total from Student ";
 
@@ -687,5 +725,31 @@ public class DBUtils {
      }
      
 
+public static List<History> queryHistory(Connection conn) throws SQLException {
+        String sql = "Select * from History";
 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ;
+        
+        ResultSet rs = pstm.executeQuery();
+        List<History> list = new ArrayList<History>();
+        
+       
+        
+        while (rs.next()) {
+            String historyId = rs.getString("history_id");
+             String appId = rs.getString("app_id");
+            String status = rs.getString("std_status");
+            java.util.Date appDate = rs.getDate("app_date");
+            String stdId = rs.getString("std_id");
+            
+            History hist = new History(historyId, stdId, appId, status, appDate);
+            
+            list.add(hist);
+            
+        }
+        return list;
+    }
+
+    
 }

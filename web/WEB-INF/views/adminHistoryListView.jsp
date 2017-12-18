@@ -1,10 +1,11 @@
 <%-- 
-    Document   : adminCoordinatorListView
-    Created on : Nov 23, 2017, 9:39:31 AM
+    Document   : adminHistoryListView
+    Created on : Dec 18, 2017, 6:23:03 AM
     Author     : NURUL AIMAN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -95,6 +96,7 @@
                                 </ul>
                             </li>
                             <!-- User Account: style can be found in dropdown.less -->
+                            <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="hidden-xs"><c:out value="${sessionScope.loginedUser.adminName}" /></span>
@@ -175,7 +177,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href=${pageContext.request.contextPath}/createCoordinator><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
-                                <li class="active"><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
                             </ul>
                         </li>
 
@@ -190,7 +192,7 @@
                             <ul class="treeview-menu">
                                 <li><a href= ${pageContext.request.contextPath}/createApplication><i class="fa fa-circle-o"></i>Open New Application</a></li>
                                 <li><a href= ${pageContext.request.contextPath}/applicationList><i class="fa fa-circle-o"></i> View Application List</a></li>
-                            <li><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
+                            <li class="active"><a href= ${pageContext.request.contextPath}/historyList><i class="fa fa-circle-o"></i>Application History</a></li>
                             </ul>
                         </li>
 
@@ -214,10 +216,10 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Manage Coordinator
-                        <small>Manage coordinator of UTM Practical Management System</small>
+                        Manage Application
+                        <small>Manage application of UTM Practical Management System</small>
                     </h1>
-                    
+                   
                 </section>
 
                 <!-- Main content -->
@@ -228,7 +230,7 @@
                         
                         
             <div class="box-header">
-              <h3 class="box-title">COORDINATORS LIST</h3>
+              <h3 class="box-title">APPLICATION HISTORY LIST</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body container-fluid">
@@ -237,41 +239,56 @@
                               <div class="col-sm-12">
                                   <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Coordinator ID</th>
-                    <th>Photo</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Action" style="width: 10%;">Action</th></tr>
+                <tr role="row">
+                    <th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student Matric Num</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                
+                
                 </thead>
                 <tbody>
               
-          <c:forEach items="${coordinatorList}" var="coordinator">
-           <tr role="row" class="odd">
-                  <td class="sorting_1">${coordinator.coordinatorId}</td>
+          <c:forEach items="${historyList}" var="history" varStatus="status">
+           <tr role="row">
+                  <td>${history.histID}</td>
                   <td>
-                     <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" width='140px'>
+                      
+                      ${history.appID}
+                  
                   </td>
-                  <td>${coordinator.coordinatorName}</td>
-                  <td>${coordinator.coordinatorDepartment}</td>
-                  <td>${coordinator.coordinatorPosition}</td>
-                  <td style="width: 5;">
-                      <a role="button" class="btn btn-block btn-primary btn-xs" href="editCoordinator?id=${coordinator.coordinatorId}"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a role="button" class="btn btn-block btn-danger btn-xs"  onclick="confirm_decision_co('${coordinator.coordinatorId}')"><span class="glyphicon glyphicon-trash"></span></a>                      
-                      </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
+                  
+                  </td>
+                  <td>${applicationList[status.index].applicationCompany}</td>
+                  <td>${applicationList[status.index].applicationAddress}</td>
+                  <td>${applicationList[status.index].applicationJobTitle}</td>
+                  <td>${history.appDate}</td>
+                  <td>${statusList[status.index]}</td>
                 </tr>
        </c:forEach>
                
                 
                 <tfoot>
-                <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 10%;">Coordinator ID</th>
-                    <th>Photo</th>
-                     
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 25%;">Coordinator's Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 20%;">Department</th>
-                    
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Max Passengers: activate to sort column ascending" style="width: 15%;">Position</th>
-                    <th class=" text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="2" aria-label="Action" style="width: 25%;">Action</th></tr>
+                <tr role="row"><th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                
                 </tfoot>
               </table></div></div>
                   </div>

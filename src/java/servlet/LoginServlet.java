@@ -41,17 +41,29 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         UserAccount user = null;
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
+        
+        String username = MyUtils.getUserNameInCookie(request);
+        String password = MyUtils.getUserPasswordInCookie(request);
+        
+        if(username!=null && password !=null){
+            out.println(username+" "+password);
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+        }
+        
         RequestDispatcher dispatcher = null;
-        if(user == null){
+        if (user == null) {
             // Forward to /WEB-INF/views/loginView.jsp
             // (Users can not access directly into JSP pages placed in WEB-INF)
+
             dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
             dispatcher.forward(request, response);
-        }else{
+
+        } else {
             switch (user.getUserLevel()) {
                 case 1:
                     response.sendRedirect(request.getContextPath() + "/adminMain");
@@ -78,7 +90,7 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         String rememberMeStr = request.getParameter("rememberMe");
-        String userType = request.getParameter("usertype");
+        //String userType = request.getParameter("usertype");
         boolean remember = "Y".equals(rememberMeStr);
 
         UserAccount user = null;
@@ -88,38 +100,29 @@ public class LoginServlet extends HttpServlet {
 
         boolean hasError = false;
         String errorString = null;
-       
+
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
             hasError = true;
             errorString = "Required username and password!";
-        } else if (userType == null) {
-
-            hasError = true;
-            errorString = "Choose user type!";
         } else {
             Connection conn = MyUtils.getStoredConnection(request);
             try {
                 // Find the user in the DB.
 
-                if (userType.equals("student")) {
+                if (userName.charAt(0) == 'S') {
                     userStudent = DBUtils.findStudent(conn, userName, password);
                     user = userStudent;
-                    if(user != null)
-                        user.setUserLevel(userStudent.getStd_level());
-                } else if (userType.equals("coordinator")) {
+                    user.setUserLevel(userStudent.getStd_level());
+
+                } else if (userName.charAt(0) == 'C') {
                     userCoordinator = DBUtils.findCoordinator(conn, userName, password);
                     user = userCoordinator;
-                    if(user != null)
-                        user.setUserLevel(userCoordinator.getCoordinatorLevel());
-                } else if (userType.equals("admin")) {
+                    user.setUserLevel(userCoordinator.getCoordinatorLevel());
+                } else if (userName.charAt(0) == 'A') {
                     userAdmin = DBUtils.findAdmin(conn, userName, password);
                     user = userAdmin;
-                    if(user != null)
-                        user.setUserLevel(userAdmin.getAdminLevel());
-                }
-
-                //user = DBUtils.findUser(conn, userName, password);
-                if (userAdmin == null && userStudent == null && userCoordinator == null) {
+                    user.setUserLevel(userAdmin.getAdminLevel());
+                } else {
                     hasError = true;
                     errorString = "Username or password invalid";
                 }
@@ -133,7 +136,7 @@ public class LoginServlet extends HttpServlet {
         if (hasError) {
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
-            
+
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
@@ -144,49 +147,53 @@ public class LoginServlet extends HttpServlet {
         // And redirect to userInfo page.
         else {
             HttpSession session = request.getSession();
-            
+
             //set timeout to 15 minutes
             session.setMaxInactiveInterval(15 * 60);
-            
+
             MyUtils.storeLoginedUser(session, user);
             RequestDispatcher dispatcher = null;
 
-            // If user checked "Remember me".
-            if (remember) {
-                MyUtils.storeUserCookie(response, user);
-            } // Else delete cookie.
-            else {
-                MyUtils.deleteUserCookie(response);
-            }
-
-            // Redirect to userInfo page.
-            //response.sendRedirect(request.getContextPath() + "/userInfo");
-            
-//            switch (userType) {
-//                case "student":
-//                    response.sendRedirect(request.getContextPath() + "/studentMain");
-//                    break;
-//                case "coordinator":
-//                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
-//                    break;
-//                case "admin":
-//                    response.sendRedirect(request.getContextPath() + "/adminMain");
-//                    break;
-//                default:
-//                    break;
-//            }
             switch (user.getUserLevel()) {
                 case 1:
-                    response.sendRedirect(request.getContextPath() + "/adminMain");
                     MyUtils.storeLoginedUser(session, userAdmin);
+                    // If user checked "Remember me".
+                    if (remember) {
+                        MyUtils.storeUserCookie(response, userAdmin);
+                        out.println("remember you");
+                    } // Else delete cookie.
+                    else {
+                        MyUtils.deleteUserCookie(response);
+                    }
+                    
+                    response.sendRedirect(request.getContextPath() + "/adminMain");
+                    
                     break;
                 case 2:
-                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
                     MyUtils.storeLoginedUser(session, userCoordinator);
+                    // If user checked "Remember me".
+                    if (remember) {
+                        MyUtils.storeUserCookie(response, userCoordinator);
+                    } // Else delete cookie.
+                    else {
+                        MyUtils.deleteUserCookie(response);
+                    }
+                    
+                    response.sendRedirect(request.getContextPath() + "/coordinatorMain");
+                    
                     break;
                 case 3:
-                    response.sendRedirect(request.getContextPath() + "/studentMain");
+                    
                     MyUtils.storeLoginedUser(session, userStudent);
+                    // If user checked "Remember me".
+                    if (remember) {
+                        MyUtils.storeUserCookie(response, userStudent);
+                    } // Else delete cookie.
+                    else {
+                        MyUtils.deleteUserCookie(response);
+                    }
+                    
+                    response.sendRedirect(request.getContextPath() + "/studentMain");
                     break;
                 default:
                     dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
@@ -194,7 +201,7 @@ public class LoginServlet extends HttpServlet {
                     break;
             }
         }
-        
+
     }
 
 }

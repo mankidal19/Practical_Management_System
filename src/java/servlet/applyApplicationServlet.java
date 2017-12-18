@@ -89,11 +89,11 @@ public class applyApplicationServlet extends HttpServlet {
             history = new History(historyID, stdId, appId, sqlDate);
             
             //update number of job available
-            try {
+           /* try {
                 StudentFunctionsUtils.updateApplication(conn, app.getApplicationJob() - 1, appId);
             } catch (SQLException ex) {
                 Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
             
             try {
                 //insert history
