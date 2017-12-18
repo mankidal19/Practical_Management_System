@@ -256,6 +256,9 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                <form action="CoordinatorReportServlet">
+                    <input type="submit" value="Generate PDF report">
+                </form>
               <div id="studentList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
                   <div class="row"><div class="row">
                               <div class="col-sm-12">
