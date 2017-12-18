@@ -7,9 +7,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Student Profile</title>
+        <title>Student Main View</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -24,26 +29,6 @@
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        
-        
-        
-        <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -51,7 +36,7 @@ tr:nth-child(even) {
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -187,33 +172,7 @@ tr:nth-child(even) {
                         </div>
                         <div class="pull-left info">
                             <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
-                    <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-           <!-- =============================================== -->
-
-            <!-- Left side column. contains the sidebar -->
-            <aside class="main-sidebar">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href=""><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
                     <!-- search form -->
@@ -231,7 +190,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -244,10 +203,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
-
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -260,8 +217,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -273,6 +230,7 @@ tr:nth-child(even) {
                 </section>
                 <!-- /.sidebar -->
             </aside>
+
             <!-- =============================================== -->
 
             <!-- Content Wrapper. Contains page content -->
@@ -280,12 +238,12 @@ tr:nth-child(even) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        User Profile
+                        Dashboard
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Dashboard</a></li>
                     </ol>
                 </section>
 
@@ -310,16 +268,16 @@ tr:nth-child(even) {
                                 <table>
                                     <c:forEach items="${student}" var="student">
                                         <tr>
-                                            <th>student ID</th>
-                                            <td>${student.studendId}</td>
+                                            <th>Student ID</th>
+                                            <td>${student.std_id}</td>
                                         </tr>
                                         <tr>
-                                            <th>student Name</th>
-                                            <td>${student.studentName}</td>
+                                            <th>Student Name</th>
+                                            <td>${student.std_name}</td>
                                         </tr>
                                         <tr>
                                             <th>Portrait Photo</th>
-                                            <td><img src="studentPhoto.jsp?stdID=${studendId.std_id}" width="115" border="0"></td>
+                                            <td><img src="studentPhoto.jsp?stdID=${student.std_id}" width="115" border="0"></td>
                                         </tr>
                                          <tr>
                                             <th>Upload Photo</th>
@@ -343,6 +301,7 @@ tr:nth-child(even) {
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
+
 
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">

@@ -1,29 +1,47 @@
 <%-- 
-    Document   : studentViewApplicationStatus
-    Created on : Dec 15, 2017, 3:33:10 PM
+    Document   : studentNewApplyError
+    Created on : Dec 18, 2017, 1:27:32 PM
     Author     : Nurfarahin Nadhirah
 --%>
 
-<%@page import="beans.History"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- 
+    Document   : stdDashboard
+    Created on : Nov 23, 2017, 12:14:24 AM
+    Author     : Nurfarahin Nadhirah
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Application Status</title>
-        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
-        </head>
-        <body class="hold-transition skin-purple sidebar-mini">
-            
-            <!-- Site wrapper -->
-            <div class="wrapper">
+        <title>Apply New Application</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
+    </head>
+    <body class="hold-transition skin-purple sidebar-mini">
+        <!-- Site wrapper -->
+        <div class="wrapper">
 
-                <header class="main-header">
-                    <!-- Logo -->
-                    <a href="${pageContext.request.contextPath}/" class="logo">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -100,7 +118,7 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs">Student</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -108,7 +126,7 @@
                                         <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Alexander Pierce - Web Developer
+                                            Name - Software Engineering
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -159,7 +177,7 @@
                         </div>
                         <div class="pull-left info">
                             <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href=""><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
                     <!-- search form -->
@@ -177,7 +195,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -190,8 +208,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
@@ -206,7 +223,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li class="active"><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -226,13 +243,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Application Status
+                        Application Field
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Practical Training</a></li>
-                        <li class="active">View Application Status</li>
+                         <li class="active">Apply New Application</a></li>
                     </ol>
                 </section>
 
@@ -241,48 +258,28 @@
 
                     <!-- Default box -->
                     <div class="box">
-                        
-                        
-            <div class="box-header">
-              <h3 class="box-title">Application Status</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-<!--                <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:&nbsp;&nbsp;<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12">-->
-                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-               
-                <thead>
-           <tr role="row">
-               <!--<th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 20%;">Application Date</th>-->
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 20%;">Student Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" a<ria-label="Car Model: activate to sort column ascending" style="width: 15%;">Matric No.</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 30%;">Company Name</th>
-                    <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Model: activate to sort column ascending" style="width: 20%;">Application Status</th>
-           </tr>
-                </thead>
-                <tbody>
-                <tr align="center" role="row" class="odd">
-               
-                  <td>${status[0].stdName}</td>
-                  <td>${status[0].stdMatric}</td>
-                  <td>${status[0].companyName}</td>
-                  <td>
-                      <% List<History> status = new ArrayList();
-                      status = (List)request.getAttribute("status");
-                          if(status.get(1).getStdStatus().equals("P")){
-                          out.println("Pending");}
-                          else if(status.get(1).getStdStatus().equals("A")){
-                          out.println("Accepted");}
-                          else if(status.get(1).getStdStatus().equals("R")){
-                          out.println("Rejected");}
-                      %></td>
-                </tr></tbody>
-              </table></div></div>
-                  
-            </div>
-            <!-- /.box-body -->
-          
-                        </div>       
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Title</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fa fa-minus"></i></button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                    <i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            Sorry! Your previous application status is <h1><b>Pending</b></h1>. You may only re-apply after your application has been <h1><b>Rejected</b></h1>.
+                        </div>
+                        <!-- /.box-body -->
+<!--                        <div class="box-footer">
+                            Footer
+                        </div>-->
+                        <!-- /.box-footer-->
+                    </div>
+                    <!-- /.box -->
+
                 </section>
                 <!-- /.content -->
             </div>
@@ -300,9 +297,28 @@
 
             <!-- ./wrapper -->
 
+            <!-- jQuery 3 -->
+            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- iCheck -->
+            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
-           
+            <!-- DataTables -->
+            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="Source_Files/dist/js/adminlte.min.js"></script>
+
+            <script>
+                $(document).ready(function(){
+                    $('.sidebar-menu').tree();
+                });
+            </script>
     </body>
 </html>
 

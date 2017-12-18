@@ -21,50 +21,61 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import utils.MyUtils;
 import utils.StudentFunctionsUtils;
+import utils.MyUtils;
 
 /**
  *
- * @author Nurfarahin Nadhirah
+ * @author Yong Keong
  */
-@WebServlet(urlPatterns = {"/UploadStudentPhoto"})
-@MultipartConfig(maxFileSize = 16177215)
+@WebServlet(name = "UploadStudentPhotoServlet", urlPatterns = {"/UploadStudentPhoto"})
+@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 public class UploadStudentPhotoServlet extends HttpServlet {
 
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
-        
+ 
         String errorString = null;
         Student student = null;
         HttpSession session = request.getSession();
         
-        try{
+         try {
             student = MyUtils.getLoginedStudent(session);
-        } catch(Exception e){
-            errorString=e.getMessage();
+            
         }
-        
-        //byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,student.getStd_id());
+        catch (Exception e) {
+            errorString = e.getMessage();
+        }
+//        byte[] imgData = CoordinatorFunctionUtils.queryCoordinatorPhoto(conn,coordinator.getCoordinatorId());
         request.setAttribute("errorString", errorString);
         request.setAttribute("student", student);
-        //request.setAttribute("studentPhoto", imgData);
+//        request.setAttribute("coordinatorPhoto", imgData);
        
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/studentUploadView.jsp");
-        dispatcher.forward(request, response);   
-    }   
+        dispatcher.forward(request, response);
+    }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -97,9 +108,9 @@ public class UploadStudentPhotoServlet extends HttpServlet {
             if (row > 0) {
                 message = "File uploaded and saved into database";
             }
-        } catch (SQLException e) {
-            message = "ERROR: " + e.getMessage();
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            message = "ERROR: " + ex.getMessage();
+            ex.printStackTrace();
         } 
         // sets the message in request scope
         request.setAttribute("Message", message);
@@ -108,4 +119,7 @@ public class UploadStudentPhotoServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/studentProfile").forward(request, response);
         
     }
+
+ 
+
 }

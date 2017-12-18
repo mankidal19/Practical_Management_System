@@ -247,6 +247,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body container-fluid">
+                ${errorString}
                  <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
                   <div class="row"><div class="row">
                               <div class="col-sm-12">
