@@ -39,6 +39,14 @@ public class Coordinator  extends UserAccount{
         this.coordinatorPosition = coordinatorPosition;
         this.coordinatorPhoto = coordinatorPhoto;
     }
+
+    public Coordinator(String id, String password, String name, String department, String position) {
+        this.coordinatorId = id;
+        this.coordinatorPassword = password;
+        this.coordinatorName = name;
+        this.coordinatorDepartment = department;
+        this.coordinatorPosition = position;
+    }
     
     
 

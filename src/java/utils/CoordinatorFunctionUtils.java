@@ -9,6 +9,7 @@ import beans.Application;
 import beans.Coordinator;
 import beans.Student;
 import java.io.InputStream;
+import static java.lang.System.out;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,5 +131,39 @@ public class CoordinatorFunctionUtils {
         return list;
     }
     
+    public static int getNumOfApplication(Connection conn) throws SQLException{
+      String sql = "Select count(*) as total from Application";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
+     
+     public static int getNumOfStudent(Connection conn, String coID) throws SQLException{
+      String sql = "Select count(*) as total from Student Where co_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, coID);
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+        
+        while (rs.next()) {
+            count=rs.getInt("total");
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
     
 }

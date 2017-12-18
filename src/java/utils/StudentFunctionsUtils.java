@@ -120,7 +120,9 @@ public class StudentFunctionsUtils {
 
             Application user = new Application(appId, appCompany, appAddress, appName, appNumber, appEmail, appJob, appJobTitle);
 
-            list.add(user);
+            if (appJob > 0) {
+                list.add(user);
+            }
         }
         return list;
     }
@@ -232,7 +234,42 @@ public class StudentFunctionsUtils {
         return list;
     }
 
+     public static boolean approveExist(Connection conn, String stdId) throws SQLException{
+         String sql = "Select * from History where std_id=? and std_status=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, stdId);
+        pstm.setString(2, "A");
+        
+        ResultSet rs = pstm.executeQuery();
+       boolean status = false;
+        while (rs.next()) {
+            status = true;
+        }
+        return status;
+     }
     
+     public static void updateHistory(Connection conn, History history, String status) throws SQLException {
+        String sql = "Update History set std_status =? where history_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, status);
+        pstm.setString(2, history.getHistID());
+        pstm.executeUpdate();
+    }
+     
+     public static void updateApplication(Connection conn, Application application) throws SQLException {
+        String sql = "Update Application set app_job =? where app_id=? ";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setInt(1, application.getApplicationJob()-1);
+        pstm.setString(2, application.getApplicationId());
+        pstm.executeUpdate();
+    }
+     
+     
     public static String queryReportIndex(Connection conn) throws SQLException {
         String sql = "Select * from Report";
 
@@ -355,6 +392,29 @@ public class StudentFunctionsUtils {
         
     }
    
-    
-    
+    public static boolean applyExist(Connection conn, String stdID) throws SQLException {
+        String sql = "SELECT * FROM history where std_id=? and std_status=?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        boolean status = false;
+        pstm.setString(1, stdID);
+        pstm.setString(2, "P");
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            status = true;
+            return status;
+        }
+
+        return status;
+    }
+
+    public static void updateStudentStatus(Connection conn, String p, String stdId) throws SQLException {
+        String sql = "UPDATE student set std_status='P' where std_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, p);
+        pstm.setString(2, stdId);
+        pstm.executeUpdate();
+    }
+
 }

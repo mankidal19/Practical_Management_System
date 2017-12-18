@@ -24,26 +24,26 @@
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        
-        
-        
+
+
+
         <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 50%;
+            }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -218,10 +218,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewApplicationStatus"><i class="fa fa-circle-o"></i> View Application Status</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
                                 <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
-
                             </ul>
                         </li>
 
@@ -235,7 +233,7 @@ tr:nth-child(even) {
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentupdateLogBook"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -272,57 +270,58 @@ tr:nth-child(even) {
                         <div class="box-header with-border">
                             <h3 class="box-title">Student Information</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                                         title="Collapse">
                                     <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <div class="box-body">  
                             <form method="post" action="./studentProfile">
-                            <table>
-                                <c:forEach items="${profileStudent}" var="student">
-                                    <tr>
-                                        <th>Student ID</th>
-                                        <td>${profileStudent.std_id}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Matric Number</th>
-                                        <td>${profileStudent.std_matric}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Number</th>
-                                        <td><input type="text" name="contact" value="${profileStudent.std_contact}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Contact Email</th>
-                                        <td><input type="email" name="email" value="${profileStudent.std_email}" size="25%"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Student Name</th>
-                                        <td>${profileStudent.std_name}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gender</th>
-                                        <td>${profileStudent.std_gender}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CGPA</th>
-                                        <td>${profileStudent.std_cgpa}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Course</th>
-                                        <td>${profileStudent.std_course}</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2"></td>
-                                        <td><input type="submit" value="Update" name="Update" /></td>
-                                    </tr>
-                                </c:forEach>
-                            </table> 
-                        </form>
+                                <table>
+                                    <c:forEach items="${profileStudent}" var="student">
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <td>${profileStudent.std_id}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Matric Number</th>
+                                            <td>${profileStudent.std_matric}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Contact Number</th>
+                                            <td><input type="text" name="contact" value="${profileStudent.std_contact}" size="25%"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Contact Email</th>
+                                            <td><input type="email" name="email" value="${profileStudent.std_email}" size="25%"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Student Name</th>
+                                            <td>${profileStudent.std_name}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <td>${profileStudent.std_gender}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>CGPA</th>
+                                            <td>${profileStudent.std_cgpa}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Course</th>
+                                            <td>${profileStudent.std_course}</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"></td>
+                                            <td><input type="submit" value="Update" name="Update" /></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table> 
+                            </form>
                         </div>
                         <!-- /.box-body -->
 
@@ -365,7 +364,7 @@ tr:nth-child(even) {
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
 
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $('.sidebar-menu').tree();
                 });
             </script>

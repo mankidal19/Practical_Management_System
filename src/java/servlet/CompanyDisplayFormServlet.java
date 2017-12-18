@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Application;
+import beans.Coordinator;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.CoordinatorFunctionUtils;
 import utils.MyUtils;
 
@@ -39,7 +41,9 @@ public class CompanyDisplayFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
-
+        HttpSession session = request.getSession();
+        Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
         String errorString = null;
         List<Application> list = null;
         try {
@@ -51,6 +55,7 @@ public class CompanyDisplayFormServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("companyDisplay", list);
+        request.setAttribute("coordinator", coordinator);
 
        // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()

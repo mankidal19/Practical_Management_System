@@ -1,114 +1,21 @@
-<%-- 
-    Document   : applyApplication
-    Created on : Nov 25, 2017, 8:33:24 PM
-    Author     : Nurfarahin Nadhirah
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.ArrayList"%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Apply New Application</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="Source_Files/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="Source_Files/bower_components/font-awesome/css/font-awesome.min.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="Source_Files/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="Source_Files/dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        <script type="text/javascript">
-function validateForm()
-{
-var n=document.forms["myForm"]["name"].value;
-if (n==null || n=="")
-{
-alert("Company name must be filled out!");
-document.myForm.name.focus();
-return false;
-}
-var a=document.forms["myForm"]["adress"].value;
-if (a==null || a=="")
-{
-alert("Company address must be filled out!");
-document.myForm.address.focus();
-return false;
-}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Coordinator Dashboard</title>
+        <jsp:include page="_bootstrapHead.jsp"></jsp:include>
+        </head>
+        <body class="hold-transition skin-purple sidebar-mini">
+            <!-- Site wrapper -->
+            <div class="wrapper">
 
-var p=document.forms["myForm"]["person"].value;
-if (p==null || p=="")
-{
-alert("Company contact person must be filled out!");
-document.myForm.person.focus();
-return false;
-}
-var o=document.forms["myForm"]["phone"].value;
-if (o==null || o=="")
-{
-alert("Company contact phone number must be filled out!");
-document.myForm.phone.focus();
-return false;
-}
-
-var e=document.forms["myForm"]["email"].value;
-var atpos=e.indexOf("@");
-var dotpos=e.lastIndexOf(".");
-
-if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
-{
-alert("Enter a valid e-mail address!");
-document.myForm.email.focus();
-return false;
-}
-
-var v=document.forms["myForm"]["vacancy"].value;
-if (v==null || v=="")
-{
-document.myForm.vacancy.focus();
-return false;
-}
-var t=document.forms["myForm"]["jobtitle"].value;
-if (t==null || t=="")
-{
-alert("Job title must be filled out");
-document.myForm.jobtitle.focus();
-return false;
-}
-}
-</script>
-        <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-    </head>
-    <body class="hold-transition skin-purple sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
-
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <header class="main-header">
+                    <!-- Logo -->
+                    <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -184,16 +91,16 @@ tr:nth-child(even) {
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${coordinator.coordinatorName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
+                                            ${coordinator.coordinatorName}
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -215,8 +122,8 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
-                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="get">
+                                                <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
@@ -239,13 +146,13 @@ tr:nth-child(even) {
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <div class="pull-left image">
+<!--                        <div class="pull-left image">
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Student</p>
+                        </div>-->
+<!--                        <div class="pull-left info">
+                            <p>Coordinator</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
@@ -262,36 +169,51 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/coordinatorMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-user-circle"></i>
-                                <span> Practical Training </span>
+                                <span> Manage Students</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
+                                <li><a href="${pageContext.request.contextPath}/coStudentList"><i class="fa fa-circle-o"></i> Students List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationList"><i class="fa fa-circle-o"></i> Students Application List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationHistory"><i class="fa fa-circle-o"></i> Students Application History</a></li>
                             </ul>
                         </li>
 
-                        <li class="treeview">
+                        <!--li class="treeview">
                             <a href="#">
                                 <i class="fa fa-files-o"></i>
-                                <span> Log Book</span>
+                                <span> Manage Coordinators</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                            </ul>
+                        </li-->
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-address-card"></i>
+                                <span> Manage Companies</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="${pageContext.request.contextPath}/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="${pageContext.request.contextPath}/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -311,14 +233,14 @@ tr:nth-child(even) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Application Form
-                        <small>Universiti Teknologi Malaysia</small>
+                        Manage Student
+                        <small>Manage student of UTM Practical Management System</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="${pageContext.request.contextPath}/studentMain"><i class="fa fa-dashboard"></i> Home </a></li>
-                        <li><a href="#">Practical Training</a></li>
-                        <li class="active">Apply New Application</a></li>
-                    </ol>
+<!--                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Examples</a></li>
+                        <li class="active">Blank page</li>
+                    </ol>-->
                 </section>
 
                 <!-- Main content -->
@@ -327,7 +249,7 @@ tr:nth-child(even) {
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Application Form</h3>
+                            <h3 class="box-title">Title</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -337,83 +259,92 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
-                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
-                                <fieldset>
-                                    
-                                <table cellpadding="5">
-                                
-                                    <tr>
-                                    <th>Company Name</th>
-                                    <td><select id="name">
-                                        <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationCompany}">${company.applicationCompany}</option>
-                                        </c:forEach>
-                                    </select></td>
-                                </tr>
-                                <tr><select id="id">
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                        <option type="hidden" value="${company.applicationId}"/>${company.applicationId}</option>
-                                    </c:forEach></select>
-                                </tr>
-                                <tr>
-                                    <th>Company Address</th>
-                                    <td><select id="address" >    
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationAddress}">${company.applicationAddress}</option>
-                                        </c:forEach>    
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Contact Person</th>
-                                 <td><select id="person">    
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationName}">${company.applicationName}</option>
-                                        </c:forEach>    
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Contact Phone Number</th>
-                                 <td><select id="phone">    
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.appplicationNumber}">${company.appplicationNumber}</option>
-                                        </c:forEach>     
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Contact Email</th>
-                                 <td><select id="email">    
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationEmail}">${company.applicationEmail}</option>
-                                        </c:forEach>     
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Job Vacancy</th>
-                                 <td><select id="vacancy">    
-                                    <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationJob}">${company.applicationJob}</option>
-                                        </c:forEach>    
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Job Title</th>
-                                 <td><select id="title">    
-                                     <c:forEach items="${companyDisplay}" var="company">
-                                            <option value="${company.applicationJobTitle}">${company.applicationJobTitle}</option>
-                                        </c:forEach>    
-                                     </select></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2"></td>
-                                    <td><input type="submit" name="submit" /></td>
-                                </tr>
-                                </fieldset>
-                                            
-                                </table></form>
+                          <!-- Main content -->
+                <section class="content">
+ 
+                    <!-- Default box -->
+                    <div class="box">
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">STUDENT APPLICATION LIST</h3>
+            </div>
+            <!-- /.box-header -->
+            ${errorString}
+            ${successString}
+            <div class="box-body container-fluid">
+                 <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
+                  <div class="row"><div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row">
+                    <th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student Matric Num</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                
+                
+                </thead>
+                <tbody>
+              
+          <c:forEach items="${historyList}" var="history" varStatus="status">
+           <tr role="row">
+                  <td>${history.histID}</td>
+                  <td>
+                      
+                      ${history.appID}
+                  
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
+                  
+                  </td>
+                  <td>${applicationList[status.index].applicationCompany}</td>
+                  <td>${applicationList[status.index].applicationAddress}</td>
+                  <td>${applicationList[status.index].applicationJobTitle}</td>
+                  <td>${history.appDate}</td>
+                  <td>${statusList[status.index]}</td>
+                  <td>
+                      <a role="button" class="btn btn-block btn-primary btn-xs" href="coordinatorApprove?id=${history.histID}">accept</a>
+                      <a role="button" class="btn btn-block btn-primary btn-xs" href="coordinatorReject?id=${history.histID}">reject</a>
+                  </td>
+                </tr>
+       </c:forEach>
+               
+                
+                <tfoot>
+                <tr role="row"><th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                
+                </tfoot>
+              </table></div></div>
+                  </div>
+            <!-- /.box-body -->
+          
                         </div>
+            </div>
                         <!-- /.box-body -->
-
+                        <div class="box-footer">
+                            Footer
+                        </div>
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -435,27 +366,7 @@ tr:nth-child(even) {
 
             <!-- ./wrapper -->
 
-            <!-- jQuery 3 -->
-            <script src="Source_Files/bower_components/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap 3.3.7 -->
-            <script src="Source_Files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-            <!-- iCheck -->
-            <script src="Source_Files/plugins/iCheck/icheck.min.js"></script>
 
-            <!-- DataTables -->
-            <script src="Source_Files/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="Source_Files/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <!-- SlimScroll -->
-            <script src="Source_Files/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-            <!-- FastClick -->
-            <script src="Source_Files/bower_components/fastclick/lib/fastclick.js"></script>
-            <!-- AdminLTE App -->
-            <script src="Source_Files/dist/js/adminlte.min.js"></script>
-
-            <script>
-                $(document).ready(function(){
-                    $('.sidebar-menu').tree();
-                });
-            </script>
+            <jsp:include page="_bootstrapEnd.jsp"></jsp:include>
     </body>
 </html>

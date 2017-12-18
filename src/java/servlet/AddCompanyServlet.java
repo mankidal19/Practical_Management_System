@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import beans.Application;
+import beans.Coordinator;
 import beans.UserAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +46,8 @@ public class AddCompanyServlet extends HttpServlet {
         UserAccount user = null;
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
+        Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
         out.println(user.getUserLevel());
         if(user.getUserLevel() == 3){
             RequestDispatcher dispatcher = request.getServletContext()
@@ -71,6 +69,7 @@ public class AddCompanyServlet extends HttpServlet {
            // Store info in request attribute, before forward to views
            request.setAttribute("errorString", errorString);
            request.setAttribute("companyLastIndex", index);
+           request.setAttribute("coordinator", coordinator);
 
            RequestDispatcher dispatcher = request.getServletContext()
                    .getRequestDispatcher("/WEB-INF/views/addCompanyView.jsp");

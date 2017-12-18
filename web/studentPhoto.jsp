@@ -1,7 +1,7 @@
 <%-- 
-    Document   : coordinatorPhoto
-    Created on : Dec 14, 2017, 11:35:35 PM
-    Author     : Yong Keong
+    Document   : studentPhoto
+    Created on : Dec 15, 2017, 3:16:38 PM
+    Author     : Nurfarahin Nadhirah
 --%>
 
 <%@page import="db_conn.ConnectionUtils"%>
@@ -9,18 +9,18 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.io.OutputStream"%>
-<%@page import="utils.CoordinatorFunctionUtils"%>
+<%@page import="utils.StudentFunctionsUtils"%>
 <%
   
-  if ( request.getParameter("coID") != null )
+  if ( request.getParameter("stdID") != null )
   {
-    String coordinatorId;
-    coordinatorId = request.getParameter("coID") ;   
+    String studentId;
+    studentId = request.getParameter("stdID") ;   
     try
     {  
        Connection conn = ConnectionUtils.getConnection();
        // get the image from the database
-       byte[] imgData = CoordinatorFunctionUtils.queryCoordinatorPhoto(conn,coordinatorId); 
+       byte[] imgData = StudentFunctionsUtils.queryStudentPhoto(conn,studentId); 
        // display the image
        response.setContentType("image/jpg");
        OutputStream o = response.getOutputStream();
@@ -35,3 +35,4 @@
     } 
   }
 %>
+

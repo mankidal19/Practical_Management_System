@@ -7,7 +7,9 @@ package servlet;
 
 import java.io.IOException;
 import beans.Application;
+import beans.Coordinator;
 import beans.History;
+import beans.Report;
 import beans.Student;
 import static java.lang.System.out;
 import java.sql.Connection;
@@ -23,31 +25,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utils.DBUtils;
-import utils.StudentFunctionsUtils;
-import utils.MyUtils;
+import utils.*;
+
+
 
 /**
  *
- * @author Nurfarahin Nadhirah
+ * @author USER
  */
-@WebServlet(urlPatterns = {"/StudentViewApplicationHistory"})
-public class StudentViewApplicationHistoryServlet extends HttpServlet {
+@WebServlet(name = "coordinatorApplicationHistory", urlPatterns = {"/coordinatorApplicationHistory"})
+public class coordinatorApplicationHistory extends HttpServlet {
 
-    public StudentViewApplicationHistoryServlet() {
+    public coordinatorApplicationHistory(){
         super();
-    }
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+}
+  
+    
+     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -57,15 +51,16 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
         String errorString = null;
         List<Application> appList = new ArrayList<Application>();
         List<History> historyList = new ArrayList<History>();
+        List<Student> studentList = new ArrayList<Student>();
         List<String> statusList = new ArrayList<String>();
+        String coId = MyUtils.getLoginedCoordinator(session).getCoordinatorId();
+        Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
         
-        //get logined student details
-        Student student = MyUtils.getLoginedStudent(session);
-
         //debug
-//        out.println(student.getStd_name());
+       out.println(coId);
         try {
-            historyList = StudentFunctionsUtils.queryHistory(conn, student);
+            historyList = CoordinatorUtils.queryHistoryNotPending(conn,coId);
         } catch (SQLException ex) {
             Logger.getLogger(StudentViewApplicationHistoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,14 +70,17 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
             //System.out.println(elem);
 
             Application app = null;
+            Student std = null;
 
             try {
                 app = DBUtils.findApplication(conn, elem.getAppID());
+                std = DBUtils.findStudent(conn, elem.getStdID());
 
                 //debug
                 out.println(app.getApplicationId());
 
                 appList.add(app);
+                studentList.add(std);
                 
                 //set status list string
                 if(elem.getAppStatus().equals("P")){
@@ -108,9 +106,11 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
         request.setAttribute("historyList", historyList);
         request.setAttribute("applicationList", appList);
         request.setAttribute("statusList", statusList);
+        request.setAttribute("studentList", studentList);
+        request.setAttribute("coordinator", coordinator);
         
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/studentViewApplicationHistory.jsp");
+                .getRequestDispatcher("/WEB-INF/views/coordinatorApplicationHistoryView.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -120,4 +120,4 @@ public class StudentViewApplicationHistoryServlet extends HttpServlet {
         doGet(request, response);
     }
 
-}
+    }
