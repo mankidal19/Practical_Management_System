@@ -164,6 +164,7 @@ public class MyUtils {
         cookieUserName.setMaxAge(0);
         response.addCookie(cookieUserName);
         response.addCookie(cookieUserPassword);
+        
     }
     
      public static boolean isValidEmailAddress(String email) {
