@@ -90,16 +90,16 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Coordinator</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${coordinator.coordinatorName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Coordinator
+                                            ${coordinator.coordinatorName}
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -232,14 +232,14 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Blank page
-                        <small>it all starts here</small>
+                        Coordinator Main Page
+                        
                     </h1>
-                    <ol class="breadcrumb">
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Examples</a></li>
                         <li class="active">Blank page</li>
-                    </ol>
+                    </ol>-->
                 </section>
 
                 <!-- Main content -->
@@ -248,22 +248,68 @@
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
+                            <h3 class="box-title">Overview</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                        title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
+
                         </div>
                         <div class="box-body">
-                            Start creating your amazing application!
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= "${pageContext.request.contextPath}/coStudentList">
+                                           <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Students</span>
+                                                <span class="info-box-number">${studentNum}</span>
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                               
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= "${pageContext.request.contextPath}/coordinatorApplicationList">
+                                           <span class="info-box-icon bg-green"><i class="fa fa-address-card-o"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Applications<br> Posted</span>
+                                                <span class="info-box-number">${applicationNum}</span>
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= "${pageContext.request.contextPath}/coordinatorApplicationHistory">
+                                           <span class="info-box-icon bg-yellow"><i class="fa fa-history"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Application<br>Histories</span>
+                                                
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            Footer
+                            
                         </div>
                         <!-- /.box-footer-->
                     </div>

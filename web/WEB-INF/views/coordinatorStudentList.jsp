@@ -94,16 +94,16 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Coordinator</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${coordinator.coordinatorName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Coordinator
+                                            ${coordinator.coordinatorName}
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -239,11 +239,11 @@
                         Manage Student
                         <small>Manage student of UTM Practical Management System</small>
                     </h1>
-                    <ol class="breadcrumb">
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Examples</a></li>
                         <li class="active">Blank page</li>
-                    </ol>
+                    </ol>-->
                 </section>
 
                 <!-- Main content -->
@@ -290,7 +290,7 @@
                   <td>${student.std_year}</td>
                   <td>
                       
-                      <a role="button" class="btn btn-block bg-yellow btn-xs" href="viewStudent?id=${student.std_id}"><span class="fa fa-external-link"></span></a>
+                      <a role="button" class="btn btn-block bg-yellow btn-xs" href="CoordinatorViewStudent?id=${student.std_id}"><span class="fa fa-external-link"></span></a>
                   </td>
                 </tr>
        </c:forEach>
