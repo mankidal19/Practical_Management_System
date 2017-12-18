@@ -110,7 +110,7 @@ public class MyUtils {
      
      public static void storeUserCookie(HttpServletResponse response, Coordinator user) {
         System.out.println("Store user cookie");
-        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getCoordinatorName());
+        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getCoordinatorId());
         Cookie cookieUserPassword = new Cookie(ATT_NAME_USER_LEVEL, user.getCoordinatorPassword());
         
         // 1 day (Converted to seconds)

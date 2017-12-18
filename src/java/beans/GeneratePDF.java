@@ -33,6 +33,7 @@ import utils.MyUtils;
 public class GeneratePDF {
     private static Font TIME_ROMAN = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD);
     private static Font TIME_ROMAN_SMALL = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+     private static Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 
     /**
      * @param args
@@ -97,35 +98,35 @@ public class GeneratePDF {
             document.add(paragraph);
             PdfPTable table = new PdfPTable(8);
 
-            PdfPCell c1 = new PdfPCell(new Phrase("Student Matric No"));
+            PdfPCell c1 = new PdfPCell(new Phrase("Student Matric No", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
 
-            c1 = new PdfPCell(new Phrase("Student Name"));
+            c1 = new PdfPCell(new Phrase("Student Name", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student Gender"));
+            c1 = new PdfPCell(new Phrase("Student Gender", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student Contact"));
+            c1 = new PdfPCell(new Phrase("Student Contact", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student Email"));
+            c1 = new PdfPCell(new Phrase("Student Email", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student Course"));
+            c1 = new PdfPCell(new Phrase("Student Course", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student CGPA"));
+            c1 = new PdfPCell(new Phrase("Student CGPA", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
             
-            c1 = new PdfPCell(new Phrase("Student Internship Status"));
+            c1 = new PdfPCell(new Phrase("Student Internship Status", boldFont));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(c1);
 
