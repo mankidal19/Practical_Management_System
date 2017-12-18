@@ -390,6 +390,29 @@ public class StudentFunctionsUtils {
         
     }
    
-    
-    
+    public static boolean applyExist(Connection conn, String stdID) throws SQLException {
+        String sql = "SELECT * FROM history where std_id=? and std_status=?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        boolean status = false;
+        pstm.setString(1, stdID);
+        pstm.setString(2, "P");
+        ResultSet rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            status = true;
+            return status;
+        }
+
+        return status;
+    }
+
+    public static void updateStudentStatus(Connection conn, String p, String stdId) throws SQLException {
+        String sql = "UPDATE student set std_status='P' where std_id=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, p);
+        pstm.setString(2, stdId);
+        pstm.executeUpdate();
+    }
+
 }
