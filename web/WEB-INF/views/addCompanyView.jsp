@@ -16,7 +16,7 @@
         </head>
         <body class="hold-transition skin-purple sidebar-mini">
             
-            <!-- Site wrapper -->
+           <!-- Site wrapper -->
             <div class="wrapper">
 
                 <header class="main-header">
@@ -97,16 +97,16 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">Coordinator</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="coordinatorPhoto.jsp?coID=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Alexander Pierce - Web Developer
+                                            Coordinator
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -128,7 +128,8 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="get">
+                                                <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
@@ -151,13 +152,13 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <div class="pull-left image">
+<!--                        <div class="pull-left image">
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                        </div>-->
+<!--                        <div class="pull-left info">
+                            <p>Coordinator</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
@@ -174,7 +175,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/coordinatorMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -187,10 +188,26 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
+                                <li><a href="${pageContext.request.contextPath}/coStudentList"><i class="fa fa-circle-o"></i> Students List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationList"><i class="fa fa-circle-o"></i> Students Application List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationHistory"><i class="fa fa-circle-o"></i> Students Application History</a></li>
                             </ul>
                         </li>
+
+                        <!--li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span> Manage Coordinators</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                            </ul>
+                        </li-->
 
                         <li class="treeview">
                             <a href="#">
@@ -201,8 +218,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Practical_Management_System/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href="/Practical_Management_System/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="${pageContext.request.contextPath}/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 

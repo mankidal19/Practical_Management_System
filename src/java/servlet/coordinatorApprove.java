@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Application;
+import beans.Coordinator;
 import beans.History;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +51,9 @@ public class coordinatorApprove extends HttpServlet {
       String historyId = request.getParameter("id");
       History history = null;
       Application app = null;
-      
+       Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
+      request.setAttribute("coordinator", coordinator);
         try {
             history = CoordinatorUtils.findHistory(conn, historyId);
         } catch (SQLException ex) {

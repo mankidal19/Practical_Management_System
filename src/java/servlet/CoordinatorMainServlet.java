@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import beans.Coordinator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import utils.MyUtils;
 
 /**
  *
@@ -30,12 +33,13 @@ public class CoordinatorMainServlet extends HttpServlet {
     @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
- 
-        
+        Coordinator coordinator = null;
+        HttpSession session = request.getSession();
+        coordinator = MyUtils.getLoginedCoordinator(session);
        // Forward to /WEB-INF/views/homeView.jsp
        // (Users can not access directly into JSP pages placed in WEB-INF)
        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/coordinatorMainView.jsp");
-        
+       request.setAttribute("coordinator", coordinator);
        dispatcher.forward(request, response);
         
    }

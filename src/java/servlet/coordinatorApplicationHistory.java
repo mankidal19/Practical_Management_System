@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import beans.Application;
+import beans.Coordinator;
 import beans.History;
 import beans.Report;
 import beans.Student;
@@ -53,6 +54,8 @@ public class coordinatorApplicationHistory extends HttpServlet {
         List<Student> studentList = new ArrayList<Student>();
         List<String> statusList = new ArrayList<String>();
         String coId = MyUtils.getLoginedCoordinator(session).getCoordinatorId();
+        Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
         
         //debug
        out.println(coId);
@@ -104,6 +107,7 @@ public class coordinatorApplicationHistory extends HttpServlet {
         request.setAttribute("applicationList", appList);
         request.setAttribute("statusList", statusList);
         request.setAttribute("studentList", studentList);
+        request.setAttribute("coordinator", coordinator);
         
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/coordinatorApplicationHistoryView.jsp");

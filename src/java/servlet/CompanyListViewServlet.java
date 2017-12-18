@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Application;
+import beans.Coordinator;
 import beans.UserAccount;
 import java.io.IOException;
 import static java.lang.System.out;
@@ -52,6 +53,8 @@ public class CompanyListViewServlet extends HttpServlet {
         HttpSession session = request.getSession();
         user = MyUtils.getLoginedUser(session);
         out.println(user.getUserLevel());
+        Coordinator coordinator = null;
+        coordinator = MyUtils.getLoginedCoordinator(session);
         if(user.getUserLevel() == 3){
             RequestDispatcher dispatcher = request.getServletContext()
                     .getRequestDispatcher("/studentMain");
@@ -69,6 +72,7 @@ public class CompanyListViewServlet extends HttpServlet {
             // Store info in request attribute, before forward to views
             request.setAttribute("errorString", errorString);
             request.setAttribute("companyList", list);
+            request.setAttribute("coordinator", coordinator);
 
            // Forward to /WEB-INF/views/productListView.jsp
             RequestDispatcher dispatcher = request.getServletContext()

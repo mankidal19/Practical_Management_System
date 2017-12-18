@@ -47,6 +47,7 @@ public class CoordinatorDisplayServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("displayCoordinator", coordinator);
+        request.setAttribute("coordinator", coordinator);
          
        
         RequestDispatcher dispatcher = request.getServletContext()
