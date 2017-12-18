@@ -81,25 +81,24 @@ public class applyApplicationServlet extends HttpServlet {
             errorString = "Job already full!";
         } else {
             try {
+                //if pending application exist
                 if (StudentFunctionsUtils.applyExist(conn, stdId)) {
-                    errorString = "Duplicate Application!";
-                } else if (StudentFunctionsUtils.approveExist(conn, stdId)) {
+                    errorString = "Previous application haven't been processed!";
+                } 
+                //if previos application approved
+                else if (StudentFunctionsUtils.approveExist(conn, stdId)) {
                     errorString = "Your previous application has been approved!";
-                } else {
+                }
+                else {
                     java.util.Date utilDate = new java.util.Date();
                     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                     history = new History(historyID, stdId, appId, sqlDate);
 
-                    //update number of job available
-                    /* try {
-                StudentFunctionsUtils.updateApplication(conn, app.getApplicationJob() - 1, appId);
-                } catch (SQLException ex) {
-                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
+                   
                     try {
                         //insert history
                         StudentFunctionsUtils.insertHistory(conn, history);
-                        StudentFunctionsUtils.updateStudentStatus(conn, "P", stdId);
+                        StudentFunctionsUtils.updateStudentStatus(conn, "P", stdId,appId);
                     } catch (SQLException ex) {
                         Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -124,7 +123,7 @@ public class applyApplicationServlet extends HttpServlet {
 
             request.setAttribute("errorString", errorString);
             out.println(errorString);
-            response.sendRedirect(request.getServletContext().getContextPath()+"/applicationList");
+            response.sendRedirect(request.getServletContext().getContextPath()+"/applicationList?errorString="+errorString);
             
 //            RequestDispatcher dispatcher = request.getServletContext()
 //                    .getRequestDispatcher("/applicationList");

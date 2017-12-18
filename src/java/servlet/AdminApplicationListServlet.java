@@ -41,8 +41,9 @@ public class AdminApplicationListServlet extends HttpServlet {
 
         Connection conn = MyUtils.getStoredConnection(request);
         String errorString = null;
+        errorString = (String) request.getParameter("errorString");
         List<Application> list = null;
-
+        request.setAttribute("errorString", errorString);
         //Forwarding page based on user level
         UserAccount user = null;
         HttpSession session = request.getSession();

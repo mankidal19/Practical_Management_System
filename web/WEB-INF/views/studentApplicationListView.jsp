@@ -97,20 +97,20 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">${student.std_name}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
+                                <span class="hidden-xs">${student.std_name}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
 
-                                        <p>
-                                            ${student.std_name}
-                                            <small>Member since Nov. 2017</small>
-                                        </p>
-                                    </li>
+                                    <p>
+                                        ${student.std_name}
+                                        <small>Member since Nov. 2017</small>
+                                    </p>
+                                </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
@@ -152,7 +152,7 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
-               
+
                 <!-- search form -->
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
@@ -234,6 +234,11 @@
 
 
                     <div class="box-header">
+                        <p style="color: red;">
+                            ${errorString}
+                            ${successString}
+
+                        </p>
                         <h3 class="box-title">Application List</h3>
                         <div class="pull-right box-tools">
                             <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
@@ -246,7 +251,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body container-fluid">
-                        ${errorString}
+                        
                         <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
                             <div class="row"><div class="row">
                                     <div class="col-sm-12">

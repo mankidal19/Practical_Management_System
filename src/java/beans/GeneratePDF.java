@@ -157,6 +157,9 @@ public class GeneratePDF {
                     }else if ("R".equals(list.get(i).getStd_status())){
                         table.addCell("Rejected");
                     }
+                    else if ("N".equals(list.get(i).getStd_status())){
+                        table.addCell("No Application");
+                    }
                     
                     
             }

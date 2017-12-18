@@ -411,12 +411,13 @@ public class StudentFunctionsUtils {
         return status;
     }
 
-    public static void updateStudentStatus(Connection conn, String p, String stdId) throws SQLException {
-        String sql = "UPDATE student set std_status='P' where std_id=?";
+    public static void updateStudentStatus(Connection conn, String p, String stdId, String appId) throws SQLException {
+        String sql = "UPDATE student set std_status=?, app_id=? where std_id=?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, p);
-        pstm.setString(2, stdId);
+        pstm.setString(2, appId);
+        pstm.setString(3, stdId);
         pstm.executeUpdate();
     }
 

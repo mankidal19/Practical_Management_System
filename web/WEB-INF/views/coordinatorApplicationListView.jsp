@@ -306,10 +306,10 @@
                   
                   </td>
                   <td>
-                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
+                      <a href="CoordinatorViewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
                   </td>
                   <td>
-                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
+                      <a href="CoordinatorViewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
                   
                   </td>
                   <td>${applicationList[status.index].applicationCompany}</td>
