@@ -93,6 +93,9 @@ public class LoginServlet extends HttpServlet {
         //String userType = request.getParameter("usertype");
         boolean remember = "Y".equals(rememberMeStr);
 
+        HttpSession session = request.getSession();
+        
+        
         UserAccount user = null;
         Student userStudent = null;
         Coordinator userCoordinator = null;
@@ -146,7 +149,7 @@ public class LoginServlet extends HttpServlet {
         // Store user information in Session
         // And redirect to userInfo page.
         else {
-            HttpSession session = request.getSession();
+            //HttpSession session = request.getSession();
             MyUtils.storeLoginedUser(session, user);
             //set timeout to 60 minutes
             session.setMaxInactiveInterval(60 * 60);

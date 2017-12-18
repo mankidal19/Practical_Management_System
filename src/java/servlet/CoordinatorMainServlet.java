@@ -52,7 +52,7 @@ public class CoordinatorMainServlet extends HttpServlet {
             // (Users can not access directly into JSP pages placed in WEB-INF)
             stdNum = CoordinatorFunctionUtils.getNumOfStudent(conn, coordinator.getCoordinatorId());
             appNum = CoordinatorFunctionUtils.getNumOfApplication(conn);
-            histNum = CoordinatorFunctionUtils.getNumOfHistory(conn, coordinator.getCoordinatorId());
+            histNum = CoordinatorFunctionUtils.getNumOfHistory(conn, coordinator.getCoordinatorId(),"P");
         } catch (SQLException ex) {
             Logger.getLogger(CoordinatorMainServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -167,9 +167,9 @@ public class CoordinatorFunctionUtils {
         pstm.setString(1, coID);
         ResultSet rs = pstm.executeQuery();
         int count=0;
-        
         while (rs.next()) {
             count=rs.getInt("total");
+         
         }
         
         out.println("num of rows:" + count);
@@ -177,7 +177,28 @@ public class CoordinatorFunctionUtils {
         
      }
 
-     
+      public static int getNumOfHistory(Connection conn, String coID, String status) throws SQLException{
+      String sql = "Select count(*) as total from history as a join student as b where b.co_id=? and a.std_id=b.std_id and a.std_status!=?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, coID);
+        pstm.setString(2, status);
+        
+        ResultSet rs = pstm.executeQuery();
+        int count=0;
+       // int pending=0;
+        while (rs.next()) {
+            count=rs.getInt("total");
+//            if(rs.getString("a.std_status").equals("P")){
+//                pending++;
+//            }
+        }
+        
+        out.println("num of rows:" + count);
+        return count;
+        
+     }
+
      public static int getNumOfStudent(Connection conn, String coID) throws SQLException{
       String sql = "Select count(*) as total from Student Where co_id=?";
 
