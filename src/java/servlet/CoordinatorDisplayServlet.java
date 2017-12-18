@@ -4,23 +4,16 @@
  * and open the template in the editor.
  */
 package servlet;
-
 import beans.*;
+import utils.*;
 import java.io.IOException;
 import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import utils.*;
+import javax.servlet.http.*;
 
-/**
- *
- * @author Nurfarahin Nadhirah
- */
+
 @WebServlet(name = "CoordinatorDisplayServlet", urlPatterns = {"/coordinatorDisplay"})
 public class CoordinatorDisplayServlet extends HttpServlet {
 
@@ -42,7 +35,9 @@ public class CoordinatorDisplayServlet extends HttpServlet {
         
         try {
             coordinator = MyUtils.getLoginedCoordinator(session);
-            
+            coordinator = CoordinatorUtils.findCoordinator(conn, coordinator.getCoordinatorId());
+//            MyUtils.storeLoginedUser(session, coordinator);
+               
         }
         catch (Exception e) {
             errorString = e.getMessage();
@@ -62,7 +57,50 @@ public class CoordinatorDisplayServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        
+        Connection conn = MyUtils.getStoredConnection(request);
+        String coordinatorDepartment = (String) request.getParameter("department");
+        String coordinatorPosition = (String) request.getParameter("position");
+        
+        Coordinator coordinator =  null;
+        HttpSession session = request.getSession();
+        String errorString = null;
+        
+        try {
+            coordinator = MyUtils.getLoginedCoordinator(session);
+            
+        }
+        catch (Exception e) {
+            errorString = e.getMessage();
+        }
+        
+        try {
+            if(coordinatorDepartment != null && coordinatorPosition != null && coordinator != null)
+                CoordinatorUtils.updateCoordinator(conn, coordinator.getCoordinatorId(), coordinatorDepartment, coordinatorPosition);
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        }
+        
+        // Store infomation to request attribute, before forward to views.
+        request.setAttribute("errorString", errorString);
+        
+        // If error, forward to Edit page.
+        if (errorString != null) {
+            RequestDispatcher dispatcher = request.getServletContext()
+                    .getRequestDispatcher("/WEB-INF/views/coordinatorProfile.jsp");
+            dispatcher.forward(request, response);
+        }
+        // If everything nice.
+        // Redirect to the product listing page.
+        else {
+            System.out.println("haha");
+            response.sendRedirect(request.getContextPath() + "/coordinatorDisplay");
+   }
+        
+//        RequestDispatcher dispatcher = request.getServletContext()
+//                .getRequestDispatcher("/coordinatorEditDetails");
+//        dispatcher.forward(request, response);
     }   
 
     

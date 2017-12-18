@@ -729,7 +729,7 @@ public static List<History> queryHistory(Connection conn) throws SQLException {
         String sql = "Select * from History";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-        ;
+        
         
         ResultSet rs = pstm.executeQuery();
         List<History> list = new ArrayList<History>();

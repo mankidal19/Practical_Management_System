@@ -1,6 +1,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -257,9 +258,85 @@
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">
-                            Start creating your amazing application!
+                          <!-- Main content -->
+                <section class="content">
+ 
+                    <!-- Default box -->
+                    <div class="box">
+                        
+                        
+            <div class="box-header">
+              <h3 class="box-title">STUDENT APPLICATION HISTORY</h3>
+            </div>
+            <!-- /.box-header -->
+            ${errorString}
+            ${successString}
+            <div class="box-body container-fluid">
+                 <div id="coordinatorList" class="dataTables_wrapper form-inline dt-bootstrap col-lg-12">
+                  <div class="row"><div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row">
+                    <th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student Matric Num</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    
+                
+                
+                </thead>
+                <tbody>
+              
+          <c:forEach items="${historyList}" var="history" varStatus="status">
+           <tr role="row">
+                  <td>${history.histID}</td>
+                  <td>
+                      
+                      ${history.appID}
+                  
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_matric}</a>
+                  </td>
+                  <td>
+                      <a href="viewStudent?id=${studentList[status.index].std_id}">${studentList[status.index].std_name}</a>
+                  
+                  </td>
+                  <td>${applicationList[status.index].applicationCompany}</td>
+                  <td>${applicationList[status.index].applicationAddress}</td>
+                  <td>${applicationList[status.index].applicationJobTitle}</td>
+                  <td>${history.appDate}</td>
+                  <td>${statusList[status.index]}</td>
+                  
+                </tr>
+       </c:forEach>
+               
+                
+                <tfoot>
+                <tr role="row"><th>History ID</th>
+                    <th>Application ID</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Job Title</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    
+                
+                </tfoot>
+              </table></div></div>
+                  </div>
+            <!-- /.box-body -->
+          
                         </div>
+            </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             Footer

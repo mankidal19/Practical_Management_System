@@ -155,7 +155,7 @@ tr:nth-child(even) {
                                                 <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -212,7 +212,8 @@ tr:nth-child(even) {
                             </a>
                             <ul class="treeview-menu">
                                 <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> Students Application</a></li>
+                                <li><a href=${pageContext.request.contextPath}/coordinatorApplicationList><i class="fa fa-circle-o"></i> Students Application List</a></li>
+                                <li><a href=${pageContext.request.contextPath}/coordinatorApplicationHistory><i class="fa fa-circle-o"></i> Students Application History</a></li>
                             </ul>
                         </li>
 
@@ -285,7 +286,8 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
+                        <div class="box-body">  
+                        <form method="post" action="./coordinatorDisplay">
                         <table>
                             <c:forEach items="${coordinatorDisplay}" var="coordinator">
                                 <tr>
@@ -299,10 +301,13 @@ tr:nth-child(even) {
                                 <tr>
                                     <th>Position</th>
                                     <td><input type="text" name="position" value="${displayCoordinator.coordinatorPosition}" size="25%"/></td>
+                                    <!--<td>${displayCoordinator.coordinatorPosition}</td>-->
                                 </tr> 
                                 <tr>
                                     <th>Department</th>
                                     <td><input type="text" name="department" value="${displayCoordinator.coordinatorDepartment}" size="25%"/></td>
+
+                                    <!--<td>${displayCoordinator.coordinatorDepartment}</td>-->
                                 </tr>
 
     
@@ -311,8 +316,11 @@ tr:nth-child(even) {
                                     <td rowspan="2"></td>
                                     <td><input type="submit" value="Update" name="Update" /></td>
                                 </tr>
+                             </c:forEach>   
                         </table>
-                            </c:forEach>         
+                        </form>
+                                
+                        
                         </div>
                         <!-- /.box-body -->
 
