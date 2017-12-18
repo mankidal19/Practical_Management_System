@@ -158,9 +158,12 @@ public class MyUtils {
     // Delete cookie.
     public static void deleteUserCookie(HttpServletResponse response) {
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, null);
+        Cookie cookieUserPassword = new Cookie(ATT_NAME_USER_LEVEL, null);
+        
         // 0 seconds (This cookie will expire immediately)
         cookieUserName.setMaxAge(0);
         response.addCookie(cookieUserName);
+        response.addCookie(cookieUserPassword);
     }
     
      public static boolean isValidEmailAddress(String email) {
