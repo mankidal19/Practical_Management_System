@@ -189,9 +189,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 

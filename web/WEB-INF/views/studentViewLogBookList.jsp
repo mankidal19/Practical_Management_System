@@ -188,9 +188,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -204,7 +203,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li class="active"><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
