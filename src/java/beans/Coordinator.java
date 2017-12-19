@@ -16,6 +16,7 @@ public class Coordinator  extends UserAccount{
     private String coordinatorName;
     private String coordinatorDepartment;
     private String coordinatorPosition;
+    private byte[] coordinatorPhoto;
 
     public Coordinator() {
     }
@@ -27,6 +28,34 @@ public class Coordinator  extends UserAccount{
         this.coordinatorName = coordinatorName;
         this.coordinatorDepartment = coordinatorDepartment;
         this.coordinatorPosition = coordinatorPosition;
+    }
+
+    public Coordinator(String coordinatorId, String coordinatorPassword, int coordinatorLevel, String coordinatorName, String coordinatorDepartment, String coordinatorPosition, byte[] coordinatorPhoto) {
+        this.coordinatorId = coordinatorId;
+        this.coordinatorPassword = coordinatorPassword;
+        this.coordinatorLevel = coordinatorLevel;
+        this.coordinatorName = coordinatorName;
+        this.coordinatorDepartment = coordinatorDepartment;
+        this.coordinatorPosition = coordinatorPosition;
+        this.coordinatorPhoto = coordinatorPhoto;
+    }
+
+    public Coordinator(String id, String password, String name, String department, String position) {
+        this.coordinatorId = id;
+        this.coordinatorPassword = password;
+        this.coordinatorName = name;
+        this.coordinatorDepartment = department;
+        this.coordinatorPosition = position;
+    }
+    
+    
+
+    public byte[] getCoordinatorPhoto() {
+        return coordinatorPhoto;
+    }
+
+    public void setCoordinatorPhoto(byte[] coordinatorPhoto) {
+        this.coordinatorPhoto = coordinatorPhoto;
     }
     
 

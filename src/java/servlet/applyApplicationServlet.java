@@ -5,6 +5,9 @@
  */
 package servlet;
 
+import beans.Application;
+import beans.History;
+import beans.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,9 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.util.List;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
+import utils.DBUtils;
 import utils.MyUtils;
+import utils.StudentFunctionsUtils;
 
 /**
  *
@@ -22,50 +32,113 @@ import utils.MyUtils;
  */
 @WebServlet(urlPatterns = {"/applyApplication"})
 public class applyApplicationServlet extends HttpServlet {
-  public void doGet(HttpServletRequest request,
-                     HttpServletResponse response)
-      throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    String cname = request.getParameter("cname");
-    String caddress = request.getParameter("caddress");
-    String ccontact = request.getParameter("ccontact");
-    String sname = request.getParameter("sname");
-    String semail = request.getParameter("semail");
-    String joblevel = request.getParameter("joblevel");
-    String jobtitle = request.getParameter("jobtitle");
-    
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
+
+    public void doGet(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+              
         Connection conn = MyUtils.getStoredConnection(request);
+        String appId = (String) request.getParameter("id");
+
+        int count = 0;
+        String historyID = null;
+        String errorString = null;
+        Application app = null;
+        Student stu = null;
+        HttpSession session = request.getSession();
+
+        stu = MyUtils.getLoginedStudent(session);
+
+        try {
+            app = DBUtils.findApplication(conn, appId);
+        } catch (SQLException ex) {
+            Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        PreparedStatement pstmt = conn.prepareStatement("insert into application values (?,?,?,?,?,?,?)");
+        History history = null;
+
+        String stdId = stu.getStd_id();
+
+        try {
+            count = StudentFunctionsUtils.getNumOfHistory(conn) + 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (count < 10) {
+            historyID = "H00" + count;
+        } else if (count < 99) {
+            historyID = "H0" + count;
+        } else if (count < 999) {
+            historyID = "H" + count;
+        } else {
+            errorString = "exceed server's limit of creating new history reached";
+        }
+
+        if (app.getApplicationJob() == 0) {
+            errorString = "Job already full!";
+        } else {
+            try {
+                //if pending application exist
+                if (StudentFunctionsUtils.applyExist(conn, stdId)) {
+                    errorString = "Previous application haven't been processed!";
+                } 
+                //if previos application approved
+                else if (StudentFunctionsUtils.approveExist(conn, stdId)) {
+                    errorString = "Your previous application has been approved!";
+                }
+                else {
+                    java.util.Date utilDate = new java.util.Date();
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                    history = new History(historyID, stdId, appId, sqlDate);
+
+                   
+                    try {
+                        //insert history
+                        StudentFunctionsUtils.insertHistory(conn, history);
+                        StudentFunctionsUtils.updateStudentStatus(conn, "P", stdId,appId);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    //update student details
+                    stu.setApp_id(appId);
+                    stu.setStd_status(stdId);
+
+                    try {
+                        DBUtils.updateStudent(conn, stu);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(applyApplicationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (errorString != null) {
+//         response.sendRedirect(request.getServletContext().getContextPath());
+
+            request.setAttribute("errorString", errorString);
+            out.println(errorString);
+            response.sendRedirect(request.getServletContext().getContextPath()+"/applicationList?errorString="+errorString);
+            
+//            RequestDispatcher dispatcher = request.getServletContext()
+//                    .getRequestDispatcher("/applicationList");
+//            dispatcher.forward(request, response);
+            return;
+        }
         
-        pstmt.setString(1, cname);
-        pstmt.setString(2, caddress);
-        pstmt.setString(3, ccontact);
-        pstmt.setString(4, sname);
-        pstmt.setString(5, semail);
-        pstmt.setString(6, joblevel);
-        pstmt.setString(7, jobtitle);
-        
-        pstmt.executeUpdate();
-        
-    }
-    catch (Exception e) {
-        e.printStackTrace();
-    }
-    out.println("Your form has been submitted successfully!");
-    
-     RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/applyApplication.jsp");
+        RequestDispatcher dispatcher = request.getServletContext()
+                .getRequestDispatcher("/StudentViewApplicationHistory");
         dispatcher.forward(request, response);
     }
-  
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                doGet(request, response);
-            } 
+        doGet(request, response);
+    }
 }

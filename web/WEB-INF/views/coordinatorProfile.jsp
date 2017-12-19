@@ -39,12 +39,12 @@ tr:nth-child(even) {
 </style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
-        <!-- Site wrapper -->
-        <div class="wrapper">
+       <!-- Site wrapper -->
+            <div class="wrapper">
 
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <header class="main-header">
+                    <!-- Logo -->
+                    <a href="${pageContext.request.contextPath}/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -120,16 +120,16 @@ tr:nth-child(even) {
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Cordinator</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${coordinator.coordinatorName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
+                                            ${coordinator.coordinatorName}
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -151,11 +151,11 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="post">
+                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="get">
                                                 <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -175,13 +175,13 @@ tr:nth-child(even) {
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <div class="pull-left image">
+<!--                        <div class="pull-left image">
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
+                        </div>-->
+<!--                        <div class="pull-left info">
                             <p>Coordinator</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
@@ -198,7 +198,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="${pageContext.request.contextPath}/coordinatorMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -212,7 +212,9 @@ tr:nth-child(even) {
                             </a>
                             <ul class="treeview-menu">
                                 <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> Students Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coStudentList"><i class="fa fa-circle-o"></i> Students List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationList"><i class="fa fa-circle-o"></i> Students Application List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationHistory"><i class="fa fa-circle-o"></i> Students Application History</a></li>
                             </ul>
                         </li>
 
@@ -239,8 +241,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Company</a></li-->
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="${pageContext.request.contextPath}/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -263,10 +265,10 @@ tr:nth-child(even) {
                         User Profile
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
-                    <ol class="breadcrumb">
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Profile</a></li>
-                    </ol>
+                    </ol>-->
                 </section>
 
                 <!-- Main content -->
@@ -285,7 +287,8 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
+                        <div class="box-body">  
+                        <form method="post" action="./coordinatorDisplay">
                         <table>
                             <c:forEach items="${coordinatorDisplay}" var="coordinator">
                                 <tr>
@@ -299,20 +302,29 @@ tr:nth-child(even) {
                                 <tr>
                                     <th>Position</th>
                                     <td><input type="text" name="position" value="${displayCoordinator.coordinatorPosition}" size="25%"/></td>
+                                    <!--<td>${displayCoordinator.coordinatorPosition}</td>-->
                                 </tr> 
                                 <tr>
                                     <th>Department</th>
                                     <td><input type="text" name="department" value="${displayCoordinator.coordinatorDepartment}" size="25%"/></td>
-                                </tr>
 
+                                    <!--<td>${displayCoordinator.coordinatorDepartment}</td>-->
+                                </tr>
+                                <tr>
+                                    <th>Upload Photo</th>
+                                    <td><button><a href="${pageContext.request.contextPath}/UploadCoordinatorPhotoServlet">Upload</a></button></td>
+                                </tr>
     
 
                                 <tr>
                                     <td rowspan="2"></td>
                                     <td><input type="submit" value="Update" name="Update" /></td>
                                 </tr>
+                             </c:forEach>   
                         </table>
-                            </c:forEach>         
+                        </form>
+                                
+                        
                         </div>
                         <!-- /.box-body -->
 

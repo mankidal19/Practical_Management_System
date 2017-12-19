@@ -97,16 +97,16 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${coordinator.coordinatorName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${coordinator.coordinatorId}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Alexander Pierce - Web Developer
+                                            ${coordinator.coordinatorName}
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -128,7 +128,8 @@
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <form action="${pageContext.request.contextPath}/coordinatorDisplay" method="get">
+                                                <button name="viewcoordinator" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
                                             <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
@@ -151,13 +152,13 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <div class="pull-left image">
+<!--                        <div class="pull-left image">
                             <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                        </div>-->
+<!--                        <div class="pull-left info">
+                            <p>Coordinator</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
@@ -174,7 +175,7 @@
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/coordinatorMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -187,10 +188,26 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Students List</a></li>
+                                <!--li><a href=""><i class="fa fa-circle-o"></i> Add New Student</a></li-->
+                                <li><a href="${pageContext.request.contextPath}/coStudentList"><i class="fa fa-circle-o"></i> Students List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationList"><i class="fa fa-circle-o"></i> Students Application List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/coordinatorApplicationHistory"><i class="fa fa-circle-o"></i> Students Application History</a></li>
                             </ul>
                         </li>
+
+                        <!--li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-files-o"></i>
+                                <span> Manage Coordinators</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Coordinator</a></li>
+                                <li><a href= ${pageContext.request.contextPath}/coordinatorList><i class="fa fa-circle-o"></i> View Coordinators List</a></li>
+                            </ul>
+                        </li-->
 
                         <li class="treeview">
                             <a href="#">
@@ -201,8 +218,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Practical_Management_System/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
-                                <li><a href="/Practical_Management_System/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/addCompanyServlet"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                                <li><a href="${pageContext.request.contextPath}/companyListViewServlet"><i class="fa fa-circle-o"></i> View Companies List</a></li>
                             </ul>
                         </li>
 
@@ -223,13 +240,13 @@
                 <section class="content-header">
                     <h1>
                         Manage Company
-                        <small>it all starts here</small>
+                        <small>Manage Company of UTM Practical Management System</small>
                     </h1>
-                    <ol class="breadcrumb">
+<!--                    <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Examples</a></li>
                         <li class="active">Blank page</li>
-                    </ol>
+                    </ol>-->
                 </section>
 
                 <!-- Main content -->
@@ -244,7 +261,23 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+              <div id="carList" class="dataTables_wrapper form-inline dt-bootstrap">
+<!--                  <div class="row">
+                      <div class="col-sm-6">
+                          <div class="dataTables_length" id="example1_length">
+                              <label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm">
+                                      <option value="10">10</option>
+                                      <option value="25">25</option>
+                                      <option value="50">50</option>
+                                      <option value="100">100</option>
+                                  </select> entries</label></div>
+                      </div>
+                      <div class="col-sm-6">
+                          <div id="example1_filter" class="dataTables_filter">
+                              <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label></div>
+                      </div></div>-->
+                  <div class="row">
+                          <div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
                 <tr role="row"><th class="sorting_asc text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Car ID: activate to sort column descending" style="width: 5%;">Company Name</th>
                     <th class="sorting text-center" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Car Make: activate to sort column ascending" style="width: 45%;">Company Address</th>
@@ -280,7 +313,24 @@
                    
                 </tfoot>
               </table></div></div>
-                  <div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+<!--                  <div class="row">
+                      <div class="col-sm-5">
+                          <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div>
+                      </div>
+                          <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                  <ul class="pagination">
+                                      <li class="paginate_button previous disabled" id="example1_previous">
+                                          <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                      <li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li>
+                                      <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li>
+                                      <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li>
+                                      <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li>
+                                      <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li>
+                                      <li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li>
+                                      <li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
+                                  </ul></div></div>
+                  </div>-->
+              </div>
             </div>
             <!-- /.box-body -->
           

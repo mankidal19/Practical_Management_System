@@ -4,54 +4,50 @@
  * and open the template in the editor.
  */
 package servlet;
-
 import beans.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import utils.*;
 /**
  *
  * @author NURUL AIMAN
  */
-@WebServlet(urlPatterns = { "/studentDisplay" })
-public class StudentDisplayServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet(urlPatterns = { "/studentList" })
+public class StudentListServlet extends HttpServlet{
+     private static final long serialVersionUID = 1L;
 
-    public StudentDisplayServlet() {
+    public StudentListServlet() {
         super();
     }
     
-     @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
         String errorString = null;
-        Student student = null;
-        HttpSession session = request.getSession();
-        
-        
+        List<Student> list = null;
         try {
-            student = MyUtils.getLoginedStudent(session);
-            
-        }
-        catch (Exception e) {
+            list = DBUtils.queryStudent(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("displayStudent", student);
+        request.setAttribute("studentList", list);
          
-       
+        // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/studentProfile.jsp");
+                .getRequestDispatcher("/WEB-INF/views/adminStudentListView.jsp");
         dispatcher.forward(request, response);
     }
  
@@ -59,5 +55,7 @@ public class StudentDisplayServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
-    }   
+    }
+    
+     
 }

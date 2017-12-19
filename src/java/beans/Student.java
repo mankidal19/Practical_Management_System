@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package beans;
-import java.sql.*;
+
 /**
  *
  * @author NURUL AIMAN
@@ -23,11 +23,14 @@ public class Student extends UserAccount{
     private String std_status;
     private String co_id;
     private String app_id;
+    private int std_year;
+    private byte[] stdPhoto;
+
 
     public Student() {
     }
 
-    public Student(String std_id, String std_pw, int std_level, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String std_status, String co_id, String app_id) {
+    public Student(String std_id, String std_pw, int std_level, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String std_status, String co_id, String app_id, int std_year, byte[] stdPhoto) {
         this.std_id = std_id;
         this.std_pw = std_pw;
         this.std_level = std_level;
@@ -41,13 +44,67 @@ public class Student extends UserAccount{
         this.std_status = std_status;
         this.co_id = co_id;
         this.app_id = app_id;
+        this.std_year = std_year;
+        this.stdPhoto = stdPhoto;
+    }
+    
+    
+
+    public Student(String std_id, String std_pw, int std_level, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String std_status, String co_id, String app_id, int std_year) {
+        this.std_id = std_id;
+        this.std_pw = std_pw;
+        this.std_level = std_level;
+        this.std_name = std_name;
+        this.std_gender = std_gender;
+        this.std_contact = std_contact;
+        this.std_email = std_email;
+        this.std_matric = std_matric;
+        this.std_course = std_course;
+        this.std_cgpa = std_cgpa;
+        this.std_status = std_status;
+        this.co_id = co_id;
+        this.app_id = app_id;
+        this.std_year = std_year;
     }
 
+    public Student(String std_id, String std_name, String std_gender, String std_contact, String std_email, String std_matric, String std_course, float std_cgpa, String co_id, int std_year) {
+        this.std_id = std_id;
+        this.std_name = std_name;
+        this.std_gender = std_gender;
+        this.std_contact = std_contact;
+        this.std_email = std_email;
+        this.std_matric = std_matric;
+        this.std_course = std_course;
+        this.std_cgpa = std_cgpa;
+        this.co_id = co_id;
+        this.std_year = std_year;
+    }
+
+    public byte[] getStdPhoto() {
+        return stdPhoto;
+    }
+
+    public void setStdPhoto(byte[] stdPhoto) {
+        this.stdPhoto = stdPhoto;
+    }
+
+    
+    
+    public int getStd_year() {
+        return std_year;
+    }
+
+    public void setStd_year(int std_year) {
+        this.std_year = std_year;
+    }
+
+    
+    
     public String getCo_id() {
         return co_id;
     }
 
-    public void setCo_id(String co_idd) {
+    public void setCo_id(String co_id) {
         this.co_id = co_id;
     }
 
@@ -145,24 +202,5 @@ public class Student extends UserAccount{
 
     public void setStd_status(String std_status) {
         this.std_status = std_status;
-    }
-
-public Student (ResultSet resultSet) throws SQLException
-    {
-        this.std_id = resultSet.getString("std_id");
-        this.std_pw = resultSet.getString("std_pw");
-        this.std_level = resultSet.getInt("std_level");
-        this.std_name = resultSet.getString("std_name");
-        this.std_gender = resultSet.getString("std_gender");
-        this.std_contact = resultSet.getString("std_contact");
-        this.std_email = resultSet.getString("std_email");
-        this.std_matric = resultSet.getString("std_matric");
-        this.std_course = resultSet.getString("std_course");
-        this.std_cgpa = resultSet.getFloat("std_cgpa");
-        this.std_status = resultSet.getString("std_status");
-        this.co_id = resultSet.getString("co_id");
-        this.app_id = resultSet.getString("app_id");
-        
-    }
-   
+    }   
 }

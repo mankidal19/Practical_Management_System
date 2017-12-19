@@ -1,12 +1,22 @@
 <%-- 
-    Document   : applyApplication
-    Created on : Nov 25, 2017, 8:33:24 PM
+    Document   : studentNewApplyError
+    Created on : Dec 18, 2017, 1:27:32 PM
+    Author     : Nurfarahin Nadhirah
+--%>
+
+<%-- 
+    Document   : stdDashboard
+    Created on : Nov 23, 2017, 12:14:24 AM
     Author     : Nurfarahin Nadhirah
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
         <title>Apply New Application</title>
@@ -24,86 +34,6 @@
         <link rel="stylesheet" href="Source_Files/dist/css/skins/_all-skins.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="Source_Files/plugins/iCheck/square/blue.css">
-        <script type="text/javascript">
-function validateForm()
-{
-var x=document.forms["myForm"]["cname"].value;
-if (x==null || x=="")
-{
-alert("Company name must be filled out!");
-document.myForm.cname.focus();
-return false;
-}
-var a=document.forms["myForm"]["caddress"].value;
-if (a==null || a=="")
-{
-alert("Company address must be filled out!");
-document.myForm.caddress.focus();
-return false;
-}
-
-var c=document.forms["myForm"]["ccontact"].value;
-if (c==null || c=="")
-{
-alert("Company contact number must be filled out!");
-document.myForm.ccontact.focus();
-return false;
-}
-var s=document.forms["myForm"]["sname"].value;
-if (s==null || s=="")
-{
-alert("Student name must be filled out!");
-document.myForm.sname.focus();
-return false;
-}
-
-var e=document.forms["myForm"]["semail"].value;
-var atpos=e.indexOf("@");
-var dotpos=e.lastIndexOf(".");
-
-if (atpos<1 || dotpos<atpos+2 || dotpos+2>=e.length)
-{
-alert("Enter a valid e-mail address!");
-document.myForm.semail.focus();
-return false;
-}
-
-var l=document.forms["myForm"]["job level"].value;
-if (l==null || l=="")
-{
-alert("Please choose one!");
-document.myForm.joblevel.focus();
-return false;
-}
-var t=document.forms["myForm"]["jobtitle"].value;
-if (t==null || t=="")
-{
-alert("Job title must be filled out");
-document.myForm.jobtitle.focus();
-return false;
-}
-}
-
-</script>
-        
-        
-        <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
     </head>
     <body class="hold-transition skin-purple sidebar-mini">
         <!-- Site wrapper -->
@@ -111,7 +41,7 @@ tr:nth-child(even) {
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -187,17 +117,17 @@ tr:nth-child(even) {
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${student.std_name}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
-                                            <small>Member since Nov. 2012</small>
+                                            ${student.std_name}
+                                            <small>Member since Nov. 2017</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
@@ -218,11 +148,11 @@ tr:nth-child(even) {
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/ViewStudent" method="post">
-                                                <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
+                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -241,15 +171,7 @@ tr:nth-child(even) {
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
+                    
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -265,7 +187,7 @@ tr:nth-child(even) {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="studentMainView.jsp">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -278,9 +200,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="./applyApplicationServlet"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -293,8 +214,8 @@ tr:nth-child(even) {
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -314,13 +235,13 @@ tr:nth-child(even) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        User Profile
+                        Application Status
                         <small>Universiti Teknologi Malaysia</small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home </a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href="#">Practical Training</a></li>
-                        <li><a href="#">Apply New Application</a></li>
+                         <li class="active">Apply New Application</a></li>
                     </ol>
                 </section>
 
@@ -330,7 +251,7 @@ tr:nth-child(even) {
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Application Form</h3>
+                            <h3 class="box-title">Message</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -340,53 +261,13 @@ tr:nth-child(even) {
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="box-body">                   
-                            <form name="myForm" onsubmit="return validateForm()" action="./applyApplication" method="post">
-                                <fieldset>
-                                    
-                                <table cellpadding="5">
-                                <tr>
-                                    <th>Company Name</th>
-                                    <td><input type="text" name="cname" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Address</th>
-                                    <td><input type="textarea" name="caddress" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Company Contact Number</th>
-                                    <td><input type="text" name="ccontact" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <td><input type="text" name="sname" value="" size="25%"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Student Email</th>
-                                    <td><input type="mail" name="semail" value="" size="25%" /></td>
-                                </tr>
-
-                                <tr>
-                                    <th>Job Level</th>
-                                    <td><select name="joblevel" >
-                                            <option value="one">1</option>
-                                            <option value="two">2</option>
-                                            <option value="three">3</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <th>Job Title</th>
-                                    <td><input type="text" name="jobtitle" value="" size="25%" /></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2"></td>
-                                    <td><input type="submit" name="submit" /></td>
-                                </tr>
-                                </fieldset>
-                                </table></form>
+                        <div class="box-body">
+                            Sorry! Your previous application status is in <h3 h3 style="color:blueviolet;"><b>Pending.</b></h3> You may only re-apply after your application has been <h3 style="color:red;"><b>Rejected.</b></h3>
                         </div>
                         <!-- /.box-body -->
-
+<!--                        <div class="box-footer">
+                            Footer
+                        </div>-->
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -432,3 +313,4 @@ tr:nth-child(even) {
             </script>
     </body>
 </html>
+

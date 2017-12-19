@@ -33,6 +33,69 @@
       increaseArea: '20%' // optional
     });
   });
-  
 
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  });
+  
+  $(document).ready(function() {
+
+  if(window.location.href.indexOf('#modal-edit') != -1) {
+    $('#modal-edit').modal('show');
+  }
+
+});
+
+function confirm_decision_co(user_id){
+    if(confirm("Confirm delete the coordinator with ID " + user_id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteCoordinator?id="+user_id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
+ 
+ function confirm_decision_stu(user_id){
+    if(confirm("Confirm delete the student with ID " + user_id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteStudent?id="+user_id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
+ 
+ function confirm_decision_app(id){
+    if(confirm("Confirm delete the application with ID " + id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="deleteApplication?id="+id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
+ 
+ function confirm_apply(id){
+    if(confirm("Confirm applying for application with ID " + id +"?")) // this will pop up confirmation box and if yes is clicked it call servlet else return to page
+     {
+       window.location="applyApplication?id="+id; 
+       
+     }else{
+       return false;
+    }
+   return true;
+ }
+ 
 </script>

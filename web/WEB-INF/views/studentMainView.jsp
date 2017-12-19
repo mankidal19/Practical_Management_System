@@ -35,7 +35,7 @@ and open the template in the editor.
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="${pageContext.request.contextPath}/" class="logo">
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>UTM</b>P</span>
                     <!-- logo for regular state and mobile devices -->
@@ -111,17 +111,17 @@ and open the template in the editor.
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Student</span>
+                                    <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">${student.std_name}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <img src="${pageContext.request.contextPath}/ImageServlet?id=${student.std_id}" class="img-circle" alt="User Image">
 
                                         <p>
-                                            Name - Software Engineering
-                                            <small>Member since Nov. 2012</small>
+                                            ${student.std_name}
+                                            <small>Member since Nov. 2017</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
@@ -142,11 +142,11 @@ and open the template in the editor.
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <form action="${pageContext.request.contextPath}/studentDisplay" method="post">
-                                                <button name="viewstudent" class="btn btn-default btn-flat">Profile</button></form>
+                                            <form action="${pageContext.request.contextPath}/studentProfile" method="post">
+                                                <button name="studentProfile" class="btn btn-default btn-flat">Profile</button></form>
                                         </div>
                                         <div class="pull-right">
-                                            <form action="${pageContext.request.contextPath}/login" method="get">
+                                            <form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
                                                 <button name="logout" class="btn btn-default btn-flat">Sign Out</button></form>
                                         </div>
                                     </li>
@@ -165,15 +165,7 @@ and open the template in the editor.
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p>Student</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
+                    
                     <!-- search form -->
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
@@ -189,7 +181,7 @@ and open the template in the editor.
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/studentMain">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
@@ -202,9 +194,8 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li class="active"><a href="${pageContext.request.contextPath}/applyApplication"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application Status</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Application History</a></li>
+                                <li><a href="${pageContext.request.contextPath}/applicationList"><i class="fa fa-circle-o"></i> Apply New Application</a></li>
+                                <li><a href="${pageContext.request.contextPath}/StudentViewApplicationHistory"><i class="fa fa-circle-o"></i> View Application History</a></li>
                             </ul>
                         </li>
 
@@ -217,8 +208,8 @@ and open the template in the editor.
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
-                                <li><a href=""><i class="fa fa-circle-o"></i> View Log Book List</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentAddLogBook"><i class="fa fa-circle-o"></i> Add New Log Book</a></li>
+                                <li><a href="${pageContext.request.contextPath}/studentViewLogBookList"><i class="fa fa-circle-o"></i> View Log Book List</a></li>
                             </ul>
                         </li>
 
@@ -253,23 +244,23 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Title</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            <h3 class="box-title">Welcome Message</h3>
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                                         title="Collapse">
                                     <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
                                     <i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
-                            Start creating your amazing application!
+                            <h1>Welcome to <b><i>UTM Practical Management System!</i></b></h1>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
+<!--                        <div class="box-footer">
                             Footer
-                        </div>
+                        </div>-->
                         <!-- /.box-footer-->
                     </div>
                     <!-- /.box -->
@@ -309,7 +300,7 @@ and open the template in the editor.
             <script src="Source_Files/dist/js/adminlte.min.js"></script>
 
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $('.sidebar-menu').tree();
                 });
             </script>

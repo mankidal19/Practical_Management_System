@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utils.*;
 /**
  *
@@ -33,7 +34,9 @@ public class CoordinatorListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
- 
+        Coordinator coordinator = null;
+        HttpSession session = request.getSession();
+        coordinator = MyUtils.getLoginedCoordinator(session);
         String errorString = null;
         List<Coordinator> list = null;
         try {
@@ -45,6 +48,7 @@ public class CoordinatorListServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("coordinatorList", list);
+        request.setAttribute("coordinator", coordinator);
          
         // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
