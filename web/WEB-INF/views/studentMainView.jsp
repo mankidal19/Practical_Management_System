@@ -244,7 +244,7 @@ and open the template in the editor.
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Welcome Message</h3>
+                            <h3 class="box-title">Student Main Page</h3>
                             <div class="pull-right box-tools">
                                 <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
                                         title="Collapse">
@@ -256,6 +256,33 @@ and open the template in the editor.
                         </div>
                         <div class="box-body">
                             <h1>Welcome to <b><i>UTM Practical Management System!</i></b></h1>
+                            <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box">
+                                        <a href= "${pageContext.request.contextPath}/studentViewLogBookList">
+                                           <span class="info-box-icon bg-aqua"><i class="fa fa-book"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Report</span>
+<!--                                                <span class="info-box-number">${studentNum}</span>-->
+                                            </div>
+                                        </a>
+
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                               
+                                
+
+                                <!-- /.col -->
+                                
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
                         </div>
                         <!-- /.box-body -->
 <!--                        <div class="box-footer">
