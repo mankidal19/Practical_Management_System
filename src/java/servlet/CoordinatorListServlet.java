@@ -36,7 +36,7 @@ public class CoordinatorListServlet extends HttpServlet {
         Connection conn = MyUtils.getStoredConnection(request);
         Coordinator coordinator = null;
         HttpSession session = request.getSession();
-        coordinator = MyUtils.getLoginedCoordinator(session);
+        //admin = MyUtils.getLoginedAdmin(session);
         String errorString = null;
         List<Coordinator> list = null;
         try {
@@ -48,7 +48,7 @@ public class CoordinatorListServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("coordinatorList", list);
-        request.setAttribute("coordinator", coordinator);
+       // request.setAttribute("coordinator", coordinator);
          
         // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
